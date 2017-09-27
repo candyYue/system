@@ -1,0 +1,126 @@
+@media only screen and (min-width: 1920px), only screen and (min-device-width:1920px) {
+    html,body {
+        font-size:16px;
+    }
+}
+@media (min-width: 1680px) and (max-width: 1920px) {
+    html,body {
+        font-size:15px;
+    }
+}
+@media (min-width: 1440px) and (max-width: 1680px) {
+    html,body {
+        font-size:14px;
+    }
+}
+@media (min-width: 1280px) and (max-width: 1440px) {
+    html,body {
+        font-size:13px;
+    }
+}
+@media (min-width: 1080px) and (max-width: 1280px) {
+    html,body {
+        font-size:12px;
+    }
+}
+@media (min-width: 960px) and (max-width: 1080px) {
+    html,body {
+         font-size:11px;
+    }
+}
+@media only screen and (max-width: 960px), only screen and (max-device-width:960px) {
+    html,body {
+        font-size:10px;
+    }
+}
+*{margin:0;padding:0;}
+
+html,body,#app,.wrapper{
+    width:100%;
+    height:100%;
+    overflow: hidden;
+}
+body{
+    font-family:"Helvetica Neue",Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif;
+}
+a{color:#ccc;text-decoration:none} 
+
+ul{
+    overflow: hidden;
+    list-style: none;
+}
+h3{
+    font-size: 18px;
+    line-height: 50px;
+    font-weight: 500;
+}
+
+input,button,select,textarea{
+    outline: none;
+    background:none;    
+    border:1px solid #ccc;
+    border-radius: 2px;
+    filter:chroma(color=#000000);
+    transition: color .2s linear,background-color .2s linear,border .2s linear;
+    cursor: pointer;
+    font-size: 12px;
+}
+input{
+    cursor: text;
+}
+/* placeholder颜色 */
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+    color:    #BBBEC7;
+}
+input:-moz-placeholder, textarea:-moz-placeholder { 
+    color:    #BBBEC7;
+}
+input::-moz-placeholder, textarea::-moz-placeholder { 
+    color:    #BBBEC7;
+}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+    color:    #BBBEC7;
+}
+
+
+
+input:hover,button:hover,select:hover,textarea:hover{
+    border:1px solid #2d8cf0;
+    color: #2d8cf0;
+}
+input:hover{
+    color: #333;
+}
+input:hover .ivu-icon,button:hover .ivu-icon,select:hover .ivu-icon,textarea:hover .ivu-icon{
+    color: #2d8cf0;
+}
+select{
+    border-radius: 4px;
+}
+.page{
+    margin-top: 15px;
+}
+.temp1{
+    margin-left: 36px; 
+    margin-right: 28px
+}
+/* 年月日表单 */
+.temp2{
+    margin-top: 20px;
+}
+.selectpage{
+    margin-top: 20px;
+    float: left;
+}
+.page{
+    float: right;
+}
+
+.content{
+    overflow: hidden;
+}
+
+
+.ivu-date-picker{
+    width: 10rem;
+}

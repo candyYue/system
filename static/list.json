@@ -1,0 +1,102 @@
+// 20170916154932
+// http://192.168.1.222/account/CallRecord/getStatistic&type=cc_day_callinout_statistic?searchType=365
+
+{
+  "status": 0,
+  "info": "success",
+  "time": 1505548181,
+  "data": {
+    "0": {
+      "outcall_count": 0,
+      "miss_outcall": 0,
+      "outcall_total_count": 0,
+      "outcall_time": 0,
+      "outcall_rate": 0,
+      "fDay": "总计"
+    },
+    "2017-01": {
+      "outcall_time": "0",
+      "outcall_count": "0",
+      "miss_outcall": "0",
+      "outcall_total_count": "0",
+      "fDay": "2017-01"
+    },
+    "2017-02": {
+      "outcall_time": "0",
+      "outcall_count": "0",
+      "miss_outcall": "0",
+      "outcall_total_count": "0",
+      "fDay": "2017-02"
+    },
+    "2017-03": {
+      "outcall_time": "0",
+      "outcall_count": "0",
+      "miss_outcall": "0",
+      "outcall_total_count": "0",
+      "fDay": "2017-03"
+    },
+    "2017-04": {
+      "outcall_time": "0",
+      "outcall_count": "0",
+      "miss_outcall": "0",
+      "outcall_total_count": "0",
+      "fDay": "2017-04"
+    },
+    "2017-05": {
+      "outcall_time": "0",
+      "outcall_count": "0",
+      "miss_outcall": "0",
+      "outcall_total_count": "0",
+      "fDay": "2017-05"
+    },
+    "2017-06": {
+      "outcall_time": "0",
+      "outcall_count": "0",
+      "miss_outcall": "0",
+      "outcall_total_count": "0",
+      "fDay": "2017-06"
+    },
+    "2017-07": {
+      "outcall_time": "0",
+      "outcall_count": "0",
+      "miss_outcall": "0",
+      "outcall_total_count": "0",
+      "fDay": "2017-07"
+    },
+    "2017-08": {
+      "outcall_time": "0",
+      "outcall_count": "0",
+      "miss_outcall": "0",
+      "outcall_total_count": "0",
+      "fDay": "2017-08"
+    },
+    "2017-09": {
+      "outcall_time": "0",
+      "outcall_count": "0",
+      "miss_outcall": "0",
+      "outcall_total_count": "0",
+      "fDay": "2017-09"
+    },
+    "2017-10": {
+      "outcall_time": "0",
+      "outcall_count": "0",
+      "miss_outcall": "0",
+      "outcall_total_count": "0",
+      "fDay": "2017-10"
+    },
+    "2017-11": {
+      "outcall_time": "0",
+      "outcall_count": "0",
+      "miss_outcall": "0",
+      "outcall_total_count": "0",
+      "fDay": "2017-11"
+    },
+    "2017-12": {
+      "outcall_time": "0",
+      "outcall_count": "0",
+      "miss_outcall": "0",
+      "outcall_total_count": "0",
+      "fDay": "2017-12"
+    }
+  }
+}

@@ -1,0 +1,304 @@
+<template>
+    <div class="temp1">
+        <div class="handle">
+            <Select class="select" @on-change="catselect" >
+                <Option v-for="item in category" :value="item.id"  :key="item.id">{{item.cm_result}}</Option>
+            </Select>
+            <DatePicker type="date" placeholder="选择日期"  @on-change='startT'></DatePicker>
+             至
+            <DatePicker type="date" placeholder="选择日期" @on-change='endT'></DatePicker>
+            <Button type="primary" @click='searchdate' size="small">搜索</Button>
+            <Button type="primary" class='search' @click='searchrecord'>搜索</Button>
+            <Input class='search searchinput' v-model="searchvalue" placeholder="请输入姓名或号码进行模糊匹配"></Input>
+            
+        </div>
+        
+        <div>
+            <Table :columns="columns1" :data="list"  ></Table>
+
+            <div class="page">
+                <Page :total="total" :page-size="pagesize" show-sizer :page-size-opts="[20, 50, 100]" @on-page-size-change="changepagesize" @on-change="changepage"></Page>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    // import {myCommon} from '../../assets/common.js';
+    import axios from 'axios';
+    import qs from 'qs';
+    export default {
+        data: function(){
+            return {
+                tableheight:0,
+                searchvalue:'',
+                starttime:"",
+                endtime:"",
+                pagesize:20,  //每页条数
+                page:1,      //页数
+                total:0,
+                category: [],
+                columns1: [
+                    {
+                        type: 'selection',
+                        width: 60,
+                        align: 'center'
+                    },
+                    {
+                        title: '号码',
+                        key: 'callee_number'
+                    },
+                    {
+                        title: '姓名',
+                        key: 'callee'
+                    },
+                    {
+                        title: '坐席',
+                        key: 'caller'
+                    },
+                    {
+                        title: '时间',
+                        key: 'time',
+                        render: (h, params) => {
+                            return h('div',[
+                                h('span', params.row.start_time),
+                                h('span', params.row.end_time)
+                            ]);
+                        }
+                    },
+                    {
+                        title: '结果',
+                        key: 'result',
+                        render: (h, params) => {
+                            return h('div',params.row.result.cm_result);
+                        }
+                    },
+                    {
+                        title: '录音',
+                        // width: 250,
+                        key: 'audio',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('progress', {
+                                    attrs: {
+                                        value: '22',
+                                        max: '100',
+                                        
+                                    },
+                                    'class':{
+                                        progress:true
+                                    },
+                                }),
+                                h('p', '剩余00：04：12'),
+                            ]);
+                        }
+                    },
+                    {
+                        title: '操作',
+                        key: 'action',
+                        // width: 150,
+                        align: 'center',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'ghost',
+                                        size: 'small',
+                                        shape:'circle',
+                                        icon:'ios-play-outline',
+                                        
+                                    },
+                                    attrs:{
+                                        ref:'btn1',
+                                        value:'pause'
+                                    },
+                                    'class':{
+                                        btn1:true
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.play(params.index,params.row,params.column)
+                                        }
+                                    }
+                                }),
+                                h('audio',{
+                                    // attrs:{
+                                    //     src:this.data[params.index].id
+                                    // },
+                                    'class':{
+                                        audio:true
+                                    },
+                                }),
+                                h('Button', {
+                                    props: {
+                                        type: 'ghost',
+                                        size: 'small',
+                                        shape:'circle',
+                                        icon:'ios-arrow-thin-down'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.download(params.index)
+                                        }
+                                    }
+                                }),
+                            ]);
+                        }
+                    }
+                ],
+                list: [],
+                start_time:'',
+                end_time:''
+            }
+        },
+        methods: {
+            //所有
+            getCallRecord(config){
+                var that=this;
+                axios.get('/account/CallRecord/getCallRecord',{
+                    params:{
+                        first_id:(this.page-1)*this.pagesize,
+                        count:this.pagesize,
+                        search:this.searchvalue,
+                        start_time:this.start_time,
+                        end_time:this.end_time,
+                        rid:this.typevalue,
+                    }
+               })
+                .then(function(response){
+                    console.log(response)
+                    if (response.data.data==null) {
+                        that.list=[]
+                        return
+                    }
+                    if (response.data.status==0) {
+                        that.total=response.data.data.total;
+                        that.list=response.data.data.content 
+                    };
+                    
+                })
+                .catch(function(err){
+                    console.log(err);
+                });
+            },
+            //日期搜索
+            searchdate(){
+                this.getCallRecord()
+            },
+            //关键字搜索
+            searchrecord(){
+                
+                this.getCallRecord()
+                
+            },
+            //播放
+            play(index,row,column){
+                
+                var btn1=document.querySelectorAll('.btn1');
+                var downloadaudio='/account/CallRecord/DownloadVideo?res_token='+this.list[index].res_token+'&id='+this.list[index].id
+                
+                if (btn1[index].value=="pause") {  // >
+                    for (var i = 0; i < btn1.length; i++) {
+                        btn1[i].innerHTML='<i class="ivu-icon ivu-icon-ios-play-outline"></i>';
+                        btn1[index].innerHTML='<i class="ivu-icon ivu-icon-ios-pause-outline"></i>'
+                        btn1[index].value="play"
+                    };
+
+                    document.querySelector('.audio').src=downloadaudio;
+                    document.querySelector('.audio').play()
+                }else{
+                    btn1[index].innerHTML='<i class="ivu-icon ivu-icon-ios-play-outline"></i>'
+                    document.querySelector('.audio').pause()
+                    btn1[index].value="pause"
+                }    
+            },
+            //下载
+            download(index,row,column){
+                window.location.href='/account/CallRecord/DownloadVideo?res_token='+this.list[index].res_token+'&id='+this.list[index].id
+                   
+            },
+            //选择分类
+            catselect(value){
+                this.typevalue=value;
+                this.getCallRecord({
+                    params:{
+                        rid:value,
+                        search:this.searchvalue
+                    }
+                })
+            },
+            startT(a){
+                this.start_time=a
+            },
+            endT(b){
+                this.end_time=b
+            },
+            
+            //每页多少条
+            changepagesize(index){
+                this.pagesize=index;
+                this.getCallRecord()
+
+            },
+            //切换页数
+            changepage(index){
+                this.page=index;
+                this.getCallRecord()
+            },
+        },
+        mounted(){
+
+            this.tableheight=document.body.clientHeight-270;
+            var that=this;
+            //获取分类
+            axios.get('/account/Customer/GetCallresult')
+            .then(function(response){
+                if (response.data.status==0) {
+                   that.category=response.data.data
+                    that.category.push({
+                        cm_result:'未分类',
+                        id:0
+                    })
+                };
+                
+            })
+            .catch(function(err){
+                console.log(err);
+            });
+            //获取record
+            this.getCallRecord()
+        }
+    }
+</script>
+<style scoped>
+    .temp1{
+        margin-bottom: 7.5rem;
+    }
+    .handle{
+        position: relative;
+        margin:1.25rem 0;
+    }
+    .block{
+        display: inline-block;
+    }
+    .select{
+        width: 12.375rem;
+        height: 2.125rem;
+        padding: 0 0.875rem;
+        overflow: hidden;
+        margin-right: 1.25rem;
+    }
+    .search{
+        float: right;
+        margin:0 0.3125rem;
+    }
+    .searchinput{
+        width: 13rem;
+    }
+    progress{
+        border: 1px solid #00b5ff
+    }
+</style>

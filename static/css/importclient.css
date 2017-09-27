@@ -1,0 +1,66 @@
+    .item1>ul{
+        width: 33.125rem;
+        height: 5rem;
+        position: relative;
+        margin-bottom: 0.625rem;
+        overflow: hidden;
+    }
+    .item1>ul li{
+        position: absolute;
+        bottom: 0;
+    }
+    .item1>ul li span{
+        position: absolute;
+        left: 5rem;
+        top: 1.0625rem;
+        width: 8.125rem;
+        height: 0.0625rem;
+        /* background-color: #00b5ff; */
+        border-top: 1px dashed #00b5ff
+    }
+    .item1>ul li div{
+        margin: 0 auto;
+        width: 2.1875rem;
+        height: 2.1875rem;
+        background-color: #00b5ff;
+        border: 2px solid #00b5ff;
+        border-radius: 50%;
+        color:#fff;
+        text-align: center;
+        line-height: 2.0625rem
+    }
+    .item1>ul li.active{
+        background-color: #fff;
+        color:#00b5ff;
+    }
+    .start{
+        left: 0;
+    }
+    .doing{
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .finish{
+        right: 0;
+    }
+    .downfailure,.downtemp{
+        color: #00b5ff
+    }
+    .file{
+        margin-top: 0.3125rem;
+        border: none;
+    }
+    input[type="file"]:hover{
+        border: none;
+    }
+    .ivu-upload-list{
+        position: absolute;
+        left: 7.8125rem;
+        bottom: 3.4375rem;
+        margin: 0;
+    }
+    .uptip{
+        margin-left: 0.3125rem;
+        font-size: 0.75rem;
+        color: #00B5FF
+    }
