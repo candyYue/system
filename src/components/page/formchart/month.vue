@@ -3,7 +3,7 @@
         <ul class="statistic">
             <li>
                 <span>拨打次数</span>
-                <p>{{typelist.outcall_count}}</p>
+                <p>{{typelist.outcall_total_count}}</p>
             </li>
             <li>
                 <span>接听次数</span>
@@ -11,11 +11,11 @@
             </li>
             <li>
                 <span>接通率</span>
-                <p>{{typelist.outcall_rate}}</p>
+                <p>{{typelist.outcall_rate}}%</p>
             </li>
             <li>
                 <span>通话时长</span>
-                <p>{{typelist.outcall_time}}</p>
+                <p>{{this.time(typelist.outcall_time)}}</p>
             </li>
         </ul> 
         <!-- 图表 -->
@@ -27,7 +27,7 @@
         <table class="posl data_table">
                  <thead>
                     <tr>
-                        <td @click='calloutsort("fDay")'><a href="javascript:;">栏目<Icon type="arrow-swap"></Icon></a></td>
+                        <td><a href="javascript:;">栏目</a></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,7 +38,7 @@
                         <td @click='calloutsort("outcall_count")'><a href="javascript:;">接听次数<Icon type="arrow-swap"></Icon></a></td>
                     </tr>
                     <tr>
-                        <td @click='calloutsort("outcall_total_count")'><a href="javascript:;">接通率<Icon type="arrow-swap"></Icon></a></td>
+                        <td @click='calloutsort("outcall_rate")'><a href="javascript:;">接通率<Icon type="arrow-swap"></Icon></a></td>
                     </tr>
                     <tr>
                         <td @click='calloutsort("outcall_time")'><a href="javascript:;">通话时长<Icon type="arrow-swap"></Icon></a></td>
@@ -58,13 +58,13 @@
                         <td v-for='item in outcallxaxis'>{{item}}</td>
                     </tr>
                     <tr>
-                        <td v-for='item in outcallxaxis'>{{item}}</td>
+                        <td v-for='item in incallxaxis'>{{item}}</td>
                     </tr>
                     <tr>
-                        <td v-for='item in outcallxaxis'>{{item}}</td>
+                        <td v-for='item in ratexaxis'>{{item}}%</td>
                     </tr>
                     <tr>
-                        <td v-for='item in outcallxaxis'>{{item}}</td>
+                        <td v-for='item in timexaxis'>{{item}}</td>
                     </tr>
                 </tbody> 
             </table>
@@ -98,7 +98,31 @@ export default {
         }
     },
     methods:{
-        
+        time(second_time){
+            var time = parseInt(second_time) + "秒";  
+            if( parseInt(second_time )> 60){  
+              
+                var second = parseInt(second_time) % 60;  
+                var min = parseInt(second_time / 60);  
+                time = min + "分" + second + "秒";  
+                  
+                if( min > 60 ){  
+                    min = parseInt(second_time / 60) % 60;  
+                    var hour = parseInt( parseInt(second_time / 60) /60 );  
+                    time = hour + "小时" + min + "分" + second + "秒";  
+              
+                    if( hour > 24 ){  
+                        hour = parseInt( parseInt(second_time / 60) /60 ) % 24;  
+                        var day = parseInt( parseInt( parseInt(second_time / 60) /60 ) / 24 );  
+                        time = day + "天" + hour + "小时" + min + "分" + second + "秒";  
+                    }  
+                }  
+            }  
+        return time;
+        },
+
+
+        // sort
         calloutsort(val){
             function sortStatistic(map,key,type="ase"){
 
@@ -106,9 +130,7 @@ export default {
                     return a[key]<b[key];
                 });
             }
-            
             sortStatistic(this.sortlist,val)
-
             //重新渲染
             this.xaxis=[];
             this.outcallxaxis=[];
@@ -123,14 +145,26 @@ export default {
                 this.timexaxis.push(this.sortlist[i].outcall_time)
             } 
 
+            //接通率
+            for(var i=0;i<this.ratexaxis.length;i++){
+                if(isNaN(this.ratexaxis[i])){
+                    this.ratexaxis[i]=0;
+                }
+            }
+            //通话时长
+            for (var i = 0; i < this.timexaxis.length; i++) {
+                this.timexaxis[i]=this.time(this.timexaxis[i])
+            };
         }
+
+
     },
     mounted(){
 
         var that=this
         axios.get('/account/CallRecord/getStatistic?type=cc_day_callinout_statistic',{
             params: {
-                searchType:30  //日报
+                searchType:30  //月报
             }
         })
         .then(function(response){
@@ -149,14 +183,26 @@ export default {
             };
             
             that.sortlist.shift() //去除第一项
+           
             for (var i = 0; i < that.sortlist.length; i++) {
                 that.xaxis.push(that.sortlist[i].fDay) //x轴
                 that.outcallxaxis.push(that.sortlist[i].outcall_total_count)
                 that.incallxaxis.push(that.sortlist[i].outcall_count)
-                that.ratexaxis.push(that.sortlist[i].outcall_time/that.sortlist[i].outcall_total_count)
+                that.ratexaxis.push(that.sortlist[1].outcall_time/that.sortlist[1].outcall_total_count)
                 that.timexaxis.push(that.sortlist[i].outcall_time)
             } 
             
+            //接通率
+            for(var i=0;i<that.ratexaxis.length;i++){
+                if(isNaN(that.ratexaxis[i])){
+                    that.ratexaxis[i]=0;
+                }
+            }
+            //通话时长
+            for (var i = 0; i < that.timexaxis.length; i++) {
+                that.timexaxis[i]=that.time(that.timexaxis[i])
+            };
+
             var length=that.xaxis.length*150+'px'
             that.$refs.data_table.style.width=length  //动态设置table宽度
             var option = {
@@ -172,7 +218,7 @@ export default {
                     show : true,
                     feature : {
                         mark : {show: true},
-                        dataView : {show: true, readOnly: false},
+                        // dataView : {show: true, readOnly: false},
                         magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
                         restore : {show: true},
                         saveAsImage : {show: true}
@@ -182,7 +228,7 @@ export default {
                 xAxis : [
                     {
                         type : 'category',
-                        name:'(日)',        //X轴名称单位
+                        name:'(天)',        //X轴名称单位
                         nameLocation:'end', //名称的位置
                         nameTextStyle:{     //名称的样式
                             color:'#999',

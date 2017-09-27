@@ -32,6 +32,7 @@
     export default {
         data () {
             return {
+                ExportOperatorhashcode:'',
                 tableheight:0,
                 exportcsv:'全部导出',
                 exporticon:'reply',
@@ -177,19 +178,19 @@
             //导出csv
             exportData(){
                 var that=this;
-                axios.get('')
+                axios.get('/account/Operator/ExportOperator')
                 .then(function (response) {
 
                     if (response.data.status==0) {
-                        that.ExportCustomerhashcode=response.data.data.hash_code;
+                        that.ExportOperatorhashcode=response.data.data.hash_code;
                         that.exportcsv='正在导出'
                         that.exporticon='load-d'
                         //导出进度
-                        console.log(that.ExportCustomerhashcode)
+                        console.log(that.ExportOperatorhashcode)
                         var getper=setInterval(function () {
-                            axios.get('/account/Customer/getPercent',{
+                            axios.get('/account/Operator/getPercent',{
                                 params:{
-                                    hash_code:that.ExportCustomerhashcode
+                                    hash_code:that.ExportOperatorhashcode
                                 }
                             })
                             .then(function (response) {
@@ -197,7 +198,7 @@
                                     that.exportcsv='全部导出'
                                     that.exporticon='reply'
                                     clearInterval(getper)
-                                    window.location.href='/account/Customer/getExportFile?hash_code=' +that.ExportCustomerhashcode
+                                    window.location.href='/account/Operator/getExportFile?hash_code=' +that.ExportOperatorhashcode
                                 };
                             })
                             .catch(function (error) {

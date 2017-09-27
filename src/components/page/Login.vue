@@ -5,7 +5,7 @@
                 <img src="../../../static/img/login/logo.png" height="80" width="80" alt="">
                 <p>
                     <span>
-                        —————— 南京易米云通网络科技有限公司 版本所有 ——————
+                        —————— 南京易米云通网络科技有限公司 版权所有 ——————
                     </span>
                 </p>
             </div>
