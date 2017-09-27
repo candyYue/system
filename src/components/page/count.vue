@@ -227,12 +227,12 @@
 
 <style scoped>
         div.dataTables_wrapper {
-            width: 50rem;
+            width: 800px;
             margin: 0 auto;
         }
         .table.dataTable thead th, table.dataTable thead td{
             border-bottom: none;
-            font-size: 0.875rem;
+            font-size: 14px;
             color: #333;
         }
         table.dataTable.no-footer {
@@ -243,13 +243,13 @@
             background-color: none;
         }
         #table_id_example{
-            font-size: 0.875rem;
+            font-size: 14px;
         }
         td{
             border-right: 1px solid #ccc;
         }
         .time{
-            margin: 0.625rem 0 1.25rem;
+            margin: 10px 0 20px;
             position: relative;
         }
         .fr{
@@ -258,16 +258,16 @@
         }
         .fr>i{
             position: absolute;
-            left: 0.4375rem; 
-            top: 0.625rem;
-            width: 0.9375rem;
-            height: 0.9375rem;
-            background: url(../../../static/img/2.png) no-repeat 0-1.875rem ;
+            left: 7px; 
+            top: 10px;
+            width: 15px;
+            height: 15px;
+            background: url(../../../static/img/2.png) no-repeat 0-30px ;
         }
         .search{
-            width: 17.5rem;
-            height: 2.125rem;
-            padding-left: 1.5rem;
+            width: 280px;
+            height: 34px;
+            padding-left: 24px;
         }
         .searchicon{
             margin-right: 8px
@@ -286,7 +286,7 @@
         .page{
             position: absolute;
             right: 0;
-            bottom: -3.125rem;
+            bottom: -50px;
         }
         .temp1{
             margin-bottom: 120px

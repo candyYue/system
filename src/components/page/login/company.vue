@@ -77,14 +77,14 @@ import axios from 'axios';
         position: relative;
     }
     .company button{
-        width: 18.75rem;
-        height: 2.625rem;
+        width: 300px;
+        height: 42px;
         border: 1px solid #d8d8d8;
         border-radius: 2px;
         cursor: pointer;
     }
     .company button:nth-of-type(2){
-        margin:0.75rem 0; 
+        margin:12px 0; 
     }
     .onfocus{
         background-color: #03a9f4;
@@ -92,10 +92,10 @@ import axios from 'axios';
     }
     .wrongTel{
         position: absolute;
-        bottom: -0.9375rem;
-        left: 5.3125rem;
-        font-size:0.875rem;
+        bottom: -15px;
+        left: 85px;
+        font-size:14px;
         color: #ff5e5e;
-        line-height: 1.5rem;
+        line-height: 24px;
     }
 </style>

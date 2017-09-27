@@ -1,8 +1,8 @@
-    .item1>ul{
-        width: 33.125rem;
-        height: 5rem;
+ .item1>ul{
+        width: 530px;
+        height: 80px;
         position: relative;
-        margin-bottom: 0.625rem;
+        margin-bottom: 10px;
         overflow: hidden;
     }
     .item1>ul li{
@@ -11,23 +11,23 @@
     }
     .item1>ul li span{
         position: absolute;
-        left: 5rem;
-        top: 1.0625rem;
-        width: 8.125rem;
-        height: 0.0625rem;
+        left: 80px;
+        top: 17px;
+        width: 130px;
+        height: 1px;
         /* background-color: #00b5ff; */
         border-top: 1px dashed #00b5ff
     }
     .item1>ul li div{
         margin: 0 auto;
-        width: 2.1875rem;
-        height: 2.1875rem;
+        width: 35px;
+        height: 35px;
         background-color: #00b5ff;
         border: 2px solid #00b5ff;
         border-radius: 50%;
         color:#fff;
         text-align: center;
-        line-height: 2.0625rem
+        line-height: 33px
     }
     .item1>ul li.active{
         background-color: #fff;
@@ -47,7 +47,7 @@
         color: #00b5ff
     }
     .file{
-        margin-top: 0.3125rem;
+        margin-top: 5px;
         border: none;
     }
     input[type="file"]:hover{
@@ -55,12 +55,12 @@
     }
     .ivu-upload-list{
         position: absolute;
-        left: 7.8125rem;
-        bottom: 3.4375rem;
+        left: 125px;
+        bottom: 55px;
         margin: 0;
     }
     .uptip{
-        margin-left: 0.3125rem;
-        font-size: 0.75rem;
+        margin-left: 5px;
+        font-size: 12px;
         color: #00B5FF
     }

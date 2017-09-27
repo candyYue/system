@@ -143,9 +143,9 @@
 
             var sidebar=document.querySelector('.sidebar')
             this.sidebarstyle = window.getComputedStyle ? window.getComputedStyle(sidebar,null) : null || sidebar.currentStyle;
-            // this.tablewidthsmall=parseInt(this.ivuTablestyle.width)/16+'rem'
+            this.tablewidthsmall=this.ivuTablestyle.width
 
-            // this.tablewidthlarge=(parseInt(this.ivuTablestyle.width)/16+11.25)+'rem'
+            this.tablewidthlarge=(parseInt(this.ivuTablestyle.width)+180)+'px'
 
             if (this.$store.state.firstlogin) {
 
@@ -173,18 +173,18 @@
                 this.isbigcontent=!this.isbigcontent;
 
                 var logotext=document.querySelector('.logo p')
-                var tables=document.querySelectorAll('table')
+                var tables=document.querySelectorAll('.ivu-table-wrapper table')
                 
                 if (this.sidebarstyle.left=='0px') {
                     logotext.innerText='云电销'
-                    // for (var i = 0; i < tables.length-1; i++) {
-                    //     tables[i].style.width=this.tablewidthlarge
-                    // };
+                    for (var i = 0; i < tables.length-1; i++) {
+                        tables[i].style.width=this.tablewidthlarge
+                    };
                 }else{
                     logotext.innerText='云电销企业后台管理'
-                    // for (var i = 0; i < tables.length-1; i++) {
-                    //     tables[i].style.width=this.tablewidthsmall
-                    // };
+                    for (var i = 0; i < tables.length-1; i++) {
+                        tables[i].style.width=this.tablewidthsmall
+                    };
                 }
                 
 
@@ -266,27 +266,27 @@
     .header {
         position: relative;
         box-sizing: border-box;
-        height: 3.375rem;
-        line-height: 3.375rem;
+        height: 54px;
+        line-height: 54px;
         border-bottom: 1px solid #ccc;
     }
     .logo{
-        line-height: 3.375rem;
-        width:14.375rem;
+        line-height: 54px;
+        width:230px;
         text-align: center;
-        font-size: 1rem;
-        padding-left: 1.875rem;
-        background: url(../../../static/img/01.png) no-repeat 1.875rem center;
+        font-size: 16px;
+        padding-left: 30px;
+        background: url(../../../static/img/01.png) no-repeat 30px center;
         background-color: #00b5ff;
         color: #fff;
     }
     .user-info {  
         float: right;
-        padding-right: 1.75rem;
-        font-size: 1rem;
+        padding-right: 28px;
+        font-size: 16px;
     }
     .user-info .date{
-        font-size: 0.75rem;
+        font-size: 12px;
         color: #999;
     }
     .user-info .el-dropdown-link{
@@ -296,33 +296,33 @@
         vertical-align: middle;
     }
     .user-info .welcome{
-        margin-left: 3.125rem;
+        margin-left: 50px;
         position: relative;
         color: #303030;
-        font-size: 0.75rem
+        font-size: 12px
     }
     .user-info .user-logo{
         position: absolute;
-        margin: 0 0.625rem;
-        left: -3.125rem;
-        top: -0.3125rem;
-        width:1.625rem;
-        height:1.625rem;
+        margin: 0 10px;
+        left: -50px;
+        top: -5px;
+        width:26px;
+        height:26px;
         border-radius: 50%;
     }
     .toggle{
         display: inline-block;
-        width: 3.375rem;
+        width: 54px;
         text-align: center;
     }
     .toggle i{
-        font-size: 1.75rem;
-        line-height: 3.125rem;
+        font-size: 28px;
+        line-height: 50px;
     }
     .sidebar{
         display: block;
         position: absolute;
-        width: 14.375rem;
+        width: 230px;
         left: 0;
         top: 0;
         bottom:0;
@@ -334,8 +334,8 @@
         height: 100%;
     }
     .sidebar i{
-        margin-right: 0.625rem;
-        font-size:1rem;
+        margin-right: 10px;
+        font-size:16px;
     }
     .content{
         background: none repeat scroll 0 0 #fff;
@@ -343,13 +343,13 @@
         right: 0;
         top: 0;
         bottom:0;
-        left: 14.375rem;
+        left: 230px;
         width: auto;
         box-sizing: border-box;
         overflow-y: scroll;
     }
-    .smallsidebar{left: -11.25rem;}
-    .bigcontent{left: 3.125rem;}
+    .smallsidebar{left: -180px;}
+    .bigcontent{left: 50px;}
     li>a{
         display: block;
         width: 100%;
@@ -359,80 +359,80 @@
         width: 100%;
         position: fixed;
         bottom: 0;
-        height: 3.125rem;
-        padding-left: 2.25rem;
-        font-size: 0.75rem;
-        line-height: 3.125rem;
+        height: 50px;
+        padding-left: 36px;
+        font-size: 12px;
+        line-height: 50px;
         color: #666; 
         background-color: #fafafb;
         border: 1px solid #e6e6e6;
         z-index: 99;
     }
     .drop{
-        width: 16.25rem;
-        height: 14.375rem;
+        width: 260px;
+        height: 230px;
         border:1px solid #ccc;
         border-radius: 3px;
         position: absolute;
-        right: 1.75rem;
-        top: 3.4375rem;
+        right: 28px;
+        top: 55px;
         z-index: 99; 
         background-color: #fafafa;
     }
     .dropup{
         width: 100%;
-        height: 10.5rem;
+        height: 168px;
         background-color: #00b5ff;
-        padding-top: 0.625rem;
+        padding-top: 10px;
         text-align: center;
     }
     .userphoto{
         display: block;
-        width: 5.25rem;
-        height: 5.25rem;
+        width: 84px;
+        height: 84px;
         border-radius: 50%;
-        margin:0 auto 0.875rem;
-        box-shadow: 0 0 0.125rem 0.25rem #00a4e2;
+        margin:0 auto 14px;
+        box-shadow: 0 0 2px 4px #00a4e2;
     }
     .dropup h4{
         margin: 0;
         padding: 0;
-        font-size: 1rem;
+        font-size: 16px;
         color: #fff;
-        line-height: 1.25rem;
+        line-height: 20px;
     }
     .dropup p{
-        font-size: 0.75rem;
+        font-size: 12px;
         color: #c6e3f5;
         margin: 0
     }
     .dropdown{
-        height: 4rem;
-        padding: 0.75rem;
+        height: 64px;
+        padding: 12px;
         position: relative;
     }
     .dropdown button{
-        width: 5.5rem;
-        height: 2.125rem;
+        width: 88px;
+        height: 34px;
         border-radius: 3px solid #ddd;
         background-color: #f4f4f4;
         text-align: center;
         color: #000;
         cursor: pointer;
-        line-height: 2.125rem;
-        font-size: 0.875rem;
+        line-height: 34px;
+        font-size: 14px;
     }
     .changpwd{
         position: absolute;
-        left: 0.9375rem;
-        top: 0.9375rem;
+        left: 15px;
+        top: 15px;
     }
     .signOut{
         position: absolute;
-        right: 0.9375rem;
-        top: 0.9375rem;
+        right: 15px;
+        top: 15px;
     }
     .changebox{
-        height: 23.125rem;
+        height: 370px;
     }
 </style>

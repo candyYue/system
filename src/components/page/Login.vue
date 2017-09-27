@@ -60,36 +60,36 @@ import findpassword from './login/findpassword.vue'
         left:50%;
         top:50%;
         transform:translate(-50%,-50%); 
-        width:66.625rem;
-        height:37.5rem;
-        box-shadow: 0.3125rem 0.3125rem  0.625rem 0 #a5c8df
+        width:1066px;
+        height:600px;
+        box-shadow: 5px 5px  10px 0 #a5c8df
     }
     .loginLeft{
         float: left;
-        width: 37.5rem;
+        width: 600px;
         height: 100%;
         background: url(../../../static/img/login/bg.png) no-repeat center;
         color: #fff;
-        font-size: 0.875rem;
+        font-size: 14px;
         position: relative;
     }
     .loginLeft img{
         position: absolute;
-        top: 7rem;
+        top: 112px;
         left: 50%;
         transform:translate(-50%);
-        box-shadow: 0.3125rem 0.3125rem  0.625rem 0 #76c3e7
+        box-shadow: 5px 5px  10px 0 #76c3e7
     }
     .loginLeft p{
         width: 100%;
         position: absolute;
         text-align: center;
-        bottom: 1rem;
+        bottom: 16px;
     }
     .loginRight{
         text-align: center;
         float: right;
-        width: 29.125rem;
+        width: 466px;
         height: 100%;
         background-color: #fff;
     }

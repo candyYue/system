@@ -386,26 +386,26 @@
 
 <style scoped>
     .manage{
-        margin-top: 0.625rem
+        margin-top: 10px
     }
     .handle{
-        margin-bottom: 1.25rem;
+        margin-bottom: 20px;
         overflow: hidden;
         position: relative;
     }
     .handle>i{
         position: absolute;
-        left: 0.375rem; 
-        top: 0.625rem;
-        width: 0.9375rem;
-        height: 0.9375rem;
-        background: url(../../../static/img/2.png) no-repeat 0-1.875rem ;
+        left: 6px; 
+        top: 10px;
+        width: 15px;
+        height: 15px;
+        background: url(../../../static/img/2.png) no-repeat 0-30px ;
         z-index: 99
     }
     .sname{
-        width: 15.625rem;
-        height: 2.125rem;
-        padding-left: 1.5625rem;
+        width: 250px;
+        height: 34px;
+        padding-left: 25px;
     }
     .fr{
         float: right;
@@ -415,7 +415,7 @@
         height: 34px;
         border-radius: 3px;
         background-color: #fafafa;
-        margin-left: 0.875rem;
+        margin-left: 14px;
         font-size: 12px;
     }
     .handle button:nth-of-type(2){
@@ -427,17 +427,17 @@
     }
     .ivu-icon{
         color: #333;
-        margin-right: 0.5rem;
+        margin-right: 8px;
         transition: color .2s linear,background-color .2s linear,border .2s linear;
     }
     .item1 p{
         position: absolute;
-        bottom: 5rem;
-        left: 8.75rem;
+        bottom: 80px;
+        left: 140px;
         color:#ff5e5e;
     }
     .newseat,.editseat{
-        height: 21.875rem;
+        height: 350px;
     }
     .manage>div{
         position: relative;
@@ -445,10 +445,10 @@
     .page{
         position: absolute;
         right: 0;
-        bottom: -3.125rem;
+        bottom: -50px;
     }
     .temp1{
-        margin-bottom: 7.5rem
+        margin-bottom: 120px
     }
     .ivu-btn{
         border-color: none;
@@ -458,30 +458,30 @@
     }
     .importseat{
         position: absolute;
-        width: 37.5rem;
-        height: 18.75rem;
+        width: 600px;
+        height: 300px;
         background-color: #fff;
-        top: 12.5rem;
+        top: 200px;
         left: 50%;
         transform: translateX(-50%);
         z-index: 999;
-        font-size: 0.875rem;
+        font-size: 14px;
         color: #333;
     }
     .importseat>div{
-        padding: 0 1.875rem;
+        padding: 0 30px;
     }
     .importseat h2{
         font-weight: 500;
-        font-size: 1.5rem;
-        height: 3.125rem;
+        font-size: 24px;
+        height: 50px;
         border-bottom: 1px solid #f6f6f6;
-        padding-left: 1.25rem;
-        line-height: 3.125rem;
-        margin-bottom: 0.875rem;
+        padding-left: 20px;
+        line-height: 50px;
+        margin-bottom: 14px;
     }
     .deletedata{
-        width: 25rem;
-        height: 12.5rem;
+        width: 400px;
+        height: 200px;
     }
 </style>

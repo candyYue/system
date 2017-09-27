@@ -232,33 +232,33 @@
     overflow: hidden;
 }
     .phoneresult{
-        width: 12.375rem;
-        height: 8.8rem;
+        width: 198px;
+        height: 140.8px;
         border-radius: 2px;
         background-color: #fff;
         border: 1px solid #e6e6e6;
-        margin-right: 0.875rem;
-        margin-bottom: 0.875rem;
+        margin-right: 14px;
+        margin-bottom: 14px;
         float: left;
         text-align: center;
         color: #666;
-        padding-top: 0.75rem;
+        padding-top: 12px;
         position: relative;
     }
     .phoneresult p{
-        margin: 0.625rem 0 0.9375rem;
+        margin: 10px 0 15px;
         cursor: pointer;
         font-size: 12px;
     }
     .edit,.del{
-        width: 3.75rem;
-        height: 1.625rem;
-        margin: 0 0.375rem;
+        width: 60px;
+        height: 26px;
+        margin: 0 6px;
         
     }
     .phoneresult img{
-        width: 2.43rem;
-        height: 2.375rem;
+        width: 38.88px;
+        height: 38px;
     }
     .edit{
         
@@ -266,36 +266,36 @@
         color: #fff
     }
     .newphoneresult{
-        margin: 2rem auto 0;
-        width: 2.25rem;
-        height: 2.25rem;
+        margin: 32px auto 0;
+        width: 36px;
+        height: 36px;
         display: block;
-        font-size: 2.25rem;
+        font-size: 36px;
         text-align: center;
     }
 
     .item1{
-        padding-right: 3.125rem;
+        padding-right: 50px;
     }
     .changebox>.item1 input{
-        width: 25.625rem;
+        width: 410px;
         border:1px solid #dddee1;
-        padding-left: 0.3125rem;
-        margin-bottom: 0.625rem
+        padding-left: 5px;
+        margin-bottom: 10px
     }
     .changebox>.item1>div{
-        width: 25rem;
-        margin-bottom: 0.5rem
+        width: 400px;
+        margin-bottom: 8px
     }
     .addcategory{
-        width: 1.875rem;
-        height: 1.875rem;
+        width: 30px;
+        height: 30px;
         border-radius: 50%;
         border: 1px solid #666;
         background-color: #F4F4F4;
         position: absolute;
-        right: 0.9375rem;
-        top: 4.0625rem;
+        right: 15px;
+        top: 65px;
         background:url(../../../../static/img/newphoneresult.gif) no-repeat center;
     }
     .changebox .item4{

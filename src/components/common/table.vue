@@ -159,25 +159,25 @@
     .header {
         position: relative;
         box-sizing: border-box;
-        height: 3.375rem;
-        line-height: 3.375rem;
+        height: 54px;
+        line-height: 54px;
         border-bottom: 1px solid #ccc;
     }
     .logo{
-        line-height: 3.375rem;
-        width:14.375rem;
+        line-height: 54px;
+        width:230px;
         text-align: center;
-        font-size: 1rem;
+        font-size: 16px;
         background-color: #00b5ff;
         color: #fff;
     }
     .user-info {  
         float: right;
-        padding-right: 1.75rem;
-        font-size: 1rem;
+        padding-right: 28px;
+        font-size: 16px;
     }
     .user-info .date{
-        font-size: 0.75rem;
+        font-size: 12px;
         color: #999;
     }
     .user-info .el-dropdown-link{
@@ -187,25 +187,25 @@
         vertical-align: middle;
     }
     .user-info .welcome{
-        margin-left: 3.125rem;
+        margin-left: 50px;
         position: relative;
         color: #303030;
-        font-size: 0.75rem
+        font-size: 12px
     }
     .user-info .user-logo{
         position: absolute;
-        margin: 0 0.625rem;
-        left: -3.125rem;
-        top: -0.3125rem;
-        width:1.625rem;
-        height:1.625rem;
+        margin: 0 10px;
+        left: -50px;
+        top: -5px;
+        width:26px;
+        height:26px;
         border-radius: 50%;
     }
     
     .sidebar{
         display: block;
         position: absolute;
-        width: 14.375rem;
+        width: 230px;
         left: 0;
         top: 0;
         bottom:0;
@@ -222,7 +222,7 @@
         right: 0;
         top: 0;
         bottom:0;
-        left: 14.375rem;
+        left: 230px;
         width: auto;
         box-sizing: border-box;
         overflow-y: scroll;
@@ -231,17 +231,17 @@
         float: right;
     }
     .temp2>div{
-        padding: 0.3125rem 0.625rem;
+        padding: 5px 10px;
         position: relative;
         display: inline-block;
-        width: 6.875rem;
-        height: 2.75rem;
+        width: 110px;
+        height: 44px;
         background-color: #fff;
         border-radius: 4px;
     }
     .temp2 button{
-         width: 5rem;
-        height: 2.125rem;
+         width: 80px;
+        height: 34px;
         background-color: #fafafa;
     }
     li>a{
@@ -254,24 +254,24 @@
         width: 100%;
         position: fixed;
         bottom: 0;
-        height: 3.125rem;
-        padding-left: 2.25rem;
-        font-size: 0.75rem;
-        line-height: 3.125rem;
+        height: 50px;
+        padding-left: 36px;
+        font-size: 12px;
+        line-height: 50px;
         color: #666; 
         background-color: #fafafb;
         border: 1px solid #e6e6e6;
     }
      .link{
-        margin:2.5rem 0 1.25rem; 
+        margin:40px 0 20px; 
         height: 46;
-        line-height: 2.875rem;
+        line-height: 46px;
         border-bottom: 1px solid #ccc;
     }
     a{
-        font-size: 1rem;
+        font-size: 16px;
         color: #333;
-        padding: 0.875rem;
+        padding: 14px;
         background-color: #f4f4f4;
         border: 1px solid #ccc;
         border-radius: 5px 5px 0 0;

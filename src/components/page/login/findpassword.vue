@@ -161,58 +161,58 @@
     }
     .wrongPWD{
         position: absolute;
-        top: 2rem;
-        left: 4.375rem;
-        font-size:0.875rem;
+        top: 32px;
+        left: 70px;
+        font-size:14px;
         color: #ff5e5e;
-        line-height: 1.5rem;
+        line-height: 24px;
     }
     .forgetpwd{
         position: absolute;
-        top: 2rem;
-        right: 4.0625rem;
-        font-size:0.875rem;
+        top: 32px;
+        right: 65px;
+        font-size:14px;
         color: #03a9f4;
-        line-height: 1.5rem;
+        line-height: 24px;
     }
     .tel{
-        padding-left: 1.875rem;
+        padding-left: 30px;
     }
     .vcode,.newpwd,.pwdagain{
-        width: 18.75rem;
+        width: 300px;
     }
     .findpassword>div{
         position: relative;
-        margin-bottom: 0.75rem;
+        margin-bottom: 12px;
     }
     .cell{
         position: absolute;
-        left: 5.3125rem;
-        bottom: 0.5rem;
+        left: 85px;
+        bottom: 8px;
     }
      .wrong{
         position: absolute;
-        bottom: -1.5625rem;
-        left: 5.3125rem;
-        font-size:0.875rem;
+        bottom: -25px;
+        left: 85px;
+        font-size:14px;
         color: #ff5e5e;
-        line-height: 1.5rem;
+        line-height: 24px;
     }
     .getvcode{
         position: absolute;
-        right: 5.3125rem;
-        bottom: 0.5rem;
-        font-size: 0.875rem;
+        right: 85px;
+        bottom: 8px;
+        font-size: 14px;
         color: #03a9f4;
         border:none;
         cursor: pointer;
     }
     .pwdeye{
-        width: 2rem;
-        height: 2rem;
+        width: 32px;
+        height: 32px;
         background:url(../../../../static/img/login/da.png) no-repeat center;
         position: absolute;
-        right: 5.3125rem;
+        right: 85px;
         top: 0;
     }
     .newpwd:focus~.pwdeye{

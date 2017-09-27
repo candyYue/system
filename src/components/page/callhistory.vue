@@ -275,28 +275,28 @@
 </script>
 <style scoped>
     .temp1{
-        margin-bottom: 7.5rem;
+        margin-bottom: 120px;
     }
     .handle{
         position: relative;
-        margin:1.25rem 0;
+        margin:20px 0;
     }
     .block{
         display: inline-block;
     }
     .select{
-        width: 12.375rem;
-        height: 2.125rem;
-        padding: 0 0.875rem;
+        width: 198px;
+        height: 34px;
+        padding: 0 14px;
         overflow: hidden;
-        margin-right: 1.25rem;
+        margin-right: 20px;
     }
     .search{
         float: right;
-        margin:0 0.3125rem;
+        margin:0 5px;
     }
     .searchinput{
-        width: 13rem;
+        width: 208px;
     }
     progress{
         border: 1px solid #00b5ff

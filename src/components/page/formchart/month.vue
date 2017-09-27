@@ -315,7 +315,7 @@ export default {
 <style scoped> 
     @import "../../../../static/css/count.css";
     .table{
-        padding-left: 12.5rem;
+        padding-left: 200px;
         position: relative;
     }
     .posl{
@@ -325,7 +325,7 @@ export default {
         z-index: 9;
     }
     .posl td{
-        height: 2rem;
+        height: 32px;
     }
     .ivu-table{
         overflow: scroll;
@@ -333,10 +333,10 @@ export default {
     }
     .ivu-table td, .ivu-table th {
         min-width: 0;
-        height: 2rem;
+        height: 32px;
     }
     .data_table{
-        /* width: 300rem; */
+        /* width: 4800px; */
         border-collapse: collapse;
     }
     .data_table thead td{
@@ -348,8 +348,8 @@ export default {
     }
     td i{
         position: absolute;
-        right: 1.25rem;
-        top: 0.625rem;
+        right: 20px;
+        top: 10px;
     }
     .ivu-table:before{
         height: 0;
@@ -358,11 +358,11 @@ export default {
         display: inline-block;
         width: 100%;
         height: 100%;
-        line-height: 1.875rem;
+        line-height: 30px;
         color: #495060
     }
     .posl td{
-        width: 12.5rem;
+        width: 200px;
     }
     .posl a:hover{
         color: #000;

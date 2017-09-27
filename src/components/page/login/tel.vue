@@ -86,20 +86,20 @@
         position: relative;
     }
     .phone input{
-        padding-left: 1.875rem;
+        padding-left: 30px;
         color: #000;
     }
     .wrongTel{
         position: absolute;
-        top: 2rem;
-        left: 5.3125rem;
-        font-size:0.875rem;
+        top: 32px;
+        left: 85px;
+        font-size:14px;
         color: #ff5e5e;
-        line-height: 1.5rem;
+        line-height: 24px;
     }
     .phone img{
         position: absolute;
-        left: 5.3125rem;
-        bottom: 0.5rem;
+        left: 85px;
+        bottom: 8px;
     }
 </style>

@@ -29,18 +29,18 @@
 
 <style scoped>
     .temp1{
-        margin-bottom: 5rem;
+        margin-bottom: 80px;
     }
     .link{
-        margin:1.25rem 0; 
+        margin:20px 0; 
         height: 46;
-        line-height: 2.875rem;
+        line-height: 46px;
         border-bottom: 1px solid #ccc;
     }
     a{
-        font-size: 1rem;
+        font-size: 16px;
         color: #333;
-        padding: 0.875rem;
+        padding: 14px;
         background-color: #f4f4f4;
         border: 1px solid #ccc;
         border-radius: 5px 5px 0 0;

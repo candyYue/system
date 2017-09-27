@@ -29,17 +29,17 @@
 
 <style scoped>
     .cate{
-        margin-top: 0.625rem;
+        margin-top: 10px;
     }
     .cate li{
         text-align: center;
         float: left;
-        width: 3.75rem;
-        line-height: 2.125rem;
+        width: 60px;
+        line-height: 34px;
         border: 1px solid #ccc;
         border-right: 0;
         cursor: pointer;
-        font-size: 0.875rem;
+        font-size: 14px;
     }
     .cate .choosetime{
         border-right: 1px solid #ccc

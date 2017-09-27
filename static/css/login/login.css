@@ -1,41 +1,41 @@
 .loginIn{
-    width: 29.125rem;
-    height: 37.5rem;
+    width: 466px;
+    height: 600px;
 }
 .login-btn{
     text-align: center;
 }
 input{
-    width: 18.75rem;
+    width: 300px;
     color: #333;
 }
 .login-btn button{
-    width: 18.75rem;
-    height:2.5rem;
+    width: 300px;
+    height:40px;
     border-radius: 20px;
     background-color:rgba(3,169,244,0.5);
     color: #fff;
     border:none;
-    margin-top: 2.25rem;
+    margin-top: 36px;
 }
 .login-btn button:hover,.login-btn button:active{
     background-color: #03a9f4;
 }
 .loginIn h1{
-    font-size: 2.25rem;
+    font-size: 36px;
     color: #333;
     font-weight: 500;
-    margin-top: 8.25rem;
+    margin-top: 132px;
 }
 .loginIn p{
-    font-size: 1rem;
+    font-size: 16px;
     color: #d8d8d8;
-    margin:0.75rem 0 3.375rem 0;
+    margin:12px 0 54px 0;
 }
 .loginIn input{
     border: none;
     border-bottom: 1px solid #ccc;
-    height: 2rem;
+    height: 32px;
     transform:all .2s 
 }
 .loginIn input:hover,.loginIn input:focus{

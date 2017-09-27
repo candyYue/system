@@ -862,14 +862,14 @@
 
 <style scoped>
     .select{
-        width: 12.375rem;
-        height: 2.125rem;
-        padding: 0 0.875rem;
+        width: 198px;
+        height: 34px;
+        padding: 0 14px;
         overflow: hidden
     }
     .fr button{
         border-radius: 3px;
-        margin-left: 0.875rem;
+        margin-left: 14px;
     }
     .bgw{
         width: 75px;
@@ -877,46 +877,46 @@
         background-color: #fafafa;
     }
     .dosth{
-        margin-bottom: 1.25rem
+        margin-bottom: 20px
     }
     .fr{
         float: right;
         overflow: hidden;
     }
     .changebox{
-        height: 38rem;
+        height: 608px;
         /* width: 37.5px; */
     }
     .changebox .chooseseat{
-        width: 30rem;
-        margin: 0.625rem auto;
-        height: 21.25rem;
+        width: 480px;
+        margin: 10px auto;
+        height: 340px;
         background-color: #eee;
-        padding: 1.25rem;
+        padding: 20px;
     }
     .chooseseat .search{
         display: block;
-        width: 13.125rem;
-        height: 2.125rem;
+        width: 210px;
+        height: 34px;
         background-color: #fff;
-        padding-left: 1.125rem;
-        margin-bottom: 1.5rem;
+        padding-left: 18px;
+        margin-bottom: 24px;
     }
     .seat{
-        margin-top: 1.5rem;
+        margin-top: 24px;
     }
     .seat label{
         display: block;
-        margin-bottom: 1rem;
+        margin-bottom: 16px;
         
     }
     input[type="checkbox"]{
         vertical-align: middle;
-        margin-right: 0.75rem
+        margin-right: 12px
     }
     .ivu-icon{
         color: #333;
-        margin-right: 0.5rem;
+        margin-right: 8px;
         transition: color .2s linear,background-color .2s linear,border .2s linear;
     }
     .ivu-btn{
@@ -931,48 +931,48 @@
         float: right;
     }
     .newclint,.editclient{
-        height: 25rem;
+        height: 400px;
     }
     .importclient{
-        height: 18.75rem;
+        height: 300px;
     }
     .deletedata{
-        width: 25rem;
-        height: 12.5rem;
+        width: 400px;
+        height: 200px;
     }
     .deletedata .item4{
         position: fixed;
         bottom: 0;
-        right: -1.875rem;
+        right: -30px;
     }
     .newclint>.item1,.editclient>.item1,.deletedata>.item1{
-        line-height: 2.125rem;
+        line-height: 34px;
         overflow: hidden;
     }
     
     .newclint>.item1>div,.editclient>.item1>div{
-        width: 27.375rem;
-        height: 2.125rem;
+        width: 438px;
+        height: 34px;
         background-color: #fff;
         border-radius: 3px;
-        margin-bottom: 0.8125rem;
+        margin-bottom: 13px;
         float: right;
-        max-height: 12.5rem
+        max-height: 200px
     }
     .item1 p{
         position: absolute;
-        bottom: 4.6875rem;
-        left: 7.1875rem;
+        bottom: 75px;
+        left: 115px;
         color:#ff5e5e;
     }
     .explain{
-        margin-top: 1.875rem;
+        margin-top: 30px;
         color: #999
     }
     .wrongtip{
         position: absolute;
-        bottom: 4.6875rem;
-        left: 1.875rem;
+        bottom: 75px;
+        left: 30px;
         color:#ff5e5e;
     }
 </style>
