@@ -740,16 +740,18 @@
             },
             //分类选择
             catselect(value){
-                console.log(value)
-                var that=this;
+                // console.log(value)
+                // var that=this;
                 this.typevalue=value;
-                this.getclientlist('/account/Customer/getCustomer',{
-                    params:{
-                        first_id:(that.page-1)*that.pagesize,
-                        count:that.pagesize,
-                        type:value
-                    } 
-                });
+                this.changepage(1)
+                console.log(this.page)
+                // this.getclientlist('/account/Customer/getCustomer',{
+                //     params:{
+                //         first_id:(that.page-1)*that.pagesize,
+                //         count:that.pagesize,
+                //         type:value
+                //     } 
+                // });
             },
             //每页多少条
             changepagesize(index){
@@ -771,7 +773,7 @@
                 params:{
                     first_id:(that.page-1)*that.pagesize,
                     count:that.pagesize,
-                    value:that.typevalue
+                    type:that.typevalue
                     }
                })
             },

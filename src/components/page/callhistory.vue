@@ -61,8 +61,8 @@
                         key: 'time',
                         render: (h, params) => {
                             return h('div',[
-                                h('span', params.row.start_time),
-                                h('span', params.row.end_time)
+                                h('span', params.row.start_time)
+                                // h('span', params.row.end_time)
                             ]);
                         }
                     },
@@ -74,7 +74,7 @@
                         }
                     },
                     {
-                        title: '录音',
+                        title: '录音时长',
                         // width: 250,
                         key: 'audio',
                         render: (h, params) => {
@@ -89,7 +89,7 @@
                                         progress:true
                                     },
                                 }),
-                                h('p', '剩余00：04：12'),
+                                h('p', this.time(params.row.duration_time)),
                             ]);
                         }
                     },
@@ -155,6 +155,32 @@
             }
         },
         methods: {
+            time(second_time){
+                var time = parseInt(second_time) + "秒";  
+                if( parseInt(second_time )> 60){  
+                  
+                    var second = parseInt(second_time) % 60;  
+                    var min = parseInt(second_time / 60);  
+                    time = min + "分" + second + "秒";  
+                      
+                    if( min > 60 ){  
+                        min = parseInt(second_time / 60) % 60;  
+                        var hour = parseInt( parseInt(second_time / 60) /60 );  
+                        time = hour + "小时" + min + "分" + second + "秒";  
+                  
+                        if( hour > 24 ){  
+                            // hour = parseInt( parseInt(second_time / 60) /60 ) % 24;  
+                            // var day = parseInt( parseInt( parseInt(second_time / 60) /60 ) / 24 );  
+                            // time = day + "天" + hour + "小时" + min + "分" + second + "秒";  
+                            time = 24 +'小时'
+                        }  
+                    }  
+                      
+                  
+                }  
+  
+            return time;
+            },
             //所有
             getCallRecord(config){
                 var that=this;

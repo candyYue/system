@@ -6,21 +6,21 @@ const config = {
     base_img: 'http://www.baidu.com',
     changepagesize:function(index){
         this.pagesize=index;
-        var that=this;
+        // var that=this;
         this.getclientlist('/account/Customer/getCustomer',{
         params:{
-        first_id:(that.page-1)*that.pagesize,
-        count:that.pagesize
+        first_id:(this.page-1)*this.pagesize,
+        count:this.pagesize
         } 
       })
     },
     changepage:function(index){
         this.page=index;
-        var that=this;
+        // var that=this;
         this.getclientlist('/account/Customer/getCustomer',{
         params:{
-        first_id:(that.page-1)*that.pagesize,
-        count:that.pagesize
+        first_id:(this.page-1)*this.pagesize,
+        count:this.pagesize
         }
       })
     }

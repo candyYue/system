@@ -127,9 +127,14 @@ export default {
             function sortStatistic(map,key,type="ase"){
 
                 return  map.sort(function(a,b){
-                    return a[key]<b[key];
+                    if (a[key]<b[key]) {
+                        return -1;  
+                    }else {
+                        return 1;  
+                    }
                 });
             }
+            
             sortStatistic(this.sortlist,val)
             //重新渲染
             this.xaxis=[];

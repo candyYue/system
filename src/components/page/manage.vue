@@ -41,16 +41,22 @@
         </transition>
         
         <!-- 单条删除提醒 -->
-        <Modal
-            v-model="deleteone"
-            title="删除提醒"
-            :loading="loading"
-            @on-ok="removesingle"
-            @on-cancel="cancel">
-            <div class="item1">
+        <transition  enter-active-class="animated fadeIn">
+            <div class="mark" v-if="deleteone" @click="cancel"></div>
+        </transition>
+        <transition  enter-active-class="animated fadeIn">
+            <div class="deletedata changebox" v-if="deleteone">
+                <a href="javascript:;" class="delete" @click="cancel"></a>
+                <h2>删除提醒</h2>
+                <div class="item1">
                     删除后，线索将无法恢复。确定删除线索？
+                </div>
+                <div class="item4">
+                    <button class="giveup" @click="cancel">取消</button>
+                    <button class="confirm" @click="removesingle">确认</button>
+                </div>
             </div>
-        </Modal>
+        </transition>
 
         <!-- 编辑坐席 -->
         <transition  enter-active-class="animated fadeIn">
@@ -102,7 +108,6 @@
     export default {
         data () {
             return {
-                loading:true,
                 tableheight:0,
                 sname:'',
                 newlistname:"",

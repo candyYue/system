@@ -7,13 +7,13 @@
                     <span class="el-dropdown-link">
                         <span class="date">今天是{{datemg1}}，{{datemg2}}</span>
                         <span class="welcome" @click="dropshow=!dropshow">
-                        <img class="user-logo" src="../../../static/img/img.jpg">
+                        <img class="user-logo" src="../../../static/img/photo.png">
                         您好！云电销 - 管理员</span> 
                     </span>
                     <transition name="custom-classes-transition" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                         <div class="drop" v-if="dropshow">
                             <div class="dropup">
-                                <img src="../../../static/img/img.jpg" alt="" class="userphoto">
+                                <img src="../../../static/img/photo.png" alt="" class="userphoto">
                                 <h4>{{companyname}} - 管理员</h4>
                                 <p>登陆时间：{{datemg1}}，{{datemg2}}</p>
                             </div>
@@ -34,7 +34,23 @@
         </div>
         <div class="sidebar":class={smallsidebar:issmallsidebar}>
             <div class="logo"><p>云电销企业后台管理</p></div>
-            <el-menu default-active="2" class="el-menu-vertical-demo" theme="dark">
+            <Col span="8">
+            <Menu theme="dark" width='230px'>
+                <Submenu name="1">
+                    <template slot="title">
+                        <Icon type="ios-pie-outline"></Icon>
+                        统计中心
+                    </template>
+                    <MenuItem name="1-1"><router-link to="/day">统计概况</router-link></MenuItem>
+                    <MenuItem name="1-2"><router-link to="/count">坐席统计</router-link></MenuItem>
+                </Submenu>
+                
+                <MenuItem name="1-3"><router-link to="/link"><Icon type="ios-paper-outline"></Icon>线索池</router-link></MenuItem>
+                <MenuItem name="1-4"><router-link to="/manage"><Icon type="ios-grid-view-outline"></Icon>坐席管理</router-link></MenuItem>
+                <MenuItem name="1-5"><router-link to="/callhistory"><Icon type="document"></Icon>通话记录</router-link></MenuItem>
+            </Menu>
+        </Col>
+            <!-- <el-menu default-active="2" class="el-menu-vertical-demo" theme="dark">
                 <el-submenu index="1">
                     <template slot="title"><Icon type="ios-pie-outline"></Icon>统计中心</template>
                         <el-menu-item index="1-1"><router-link to="/day">统计概况</router-link></el-menu-item>
@@ -43,7 +59,7 @@
                 <el-menu-item index="2"><router-link to="/link"><Icon type="ios-paper-outline"></Icon>线索池</router-link></el-menu-item>
                 <el-menu-item index="3"><router-link to="/manage"><Icon type="ios-grid-view-outline"></Icon>坐席管理</router-link></el-menu-item>
                 <el-menu-item index="4"><router-link to="/callhistory"><Icon type="document"></Icon>通话记录</router-link></el-menu-item>
-            </el-menu>
+            </el-menu> -->
         </div>
 
         <!-- 修改密码 -->
@@ -434,5 +450,14 @@
     }
     .changebox{
         height: 370px;
+    }
+    a:hover{
+        color:#bfcbd9
+    }
+    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu){
+            color: #363e4f;
+    }
+    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active:hover{
+        background-color: none;
     }
 </style>

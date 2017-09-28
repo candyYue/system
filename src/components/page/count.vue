@@ -177,39 +177,7 @@
             },
             //导出csv
             exportData(){
-                var that=this;
-                axios.get('/account/Operator/ExportOperator')
-                .then(function (response) {
-
-                    if (response.data.status==0) {
-                        that.ExportOperatorhashcode=response.data.data.hash_code;
-                        that.exportcsv='正在导出'
-                        that.exporticon='load-d'
-                        //导出进度
-                        console.log(that.ExportOperatorhashcode)
-                        var getper=setInterval(function () {
-                            axios.get('/account/Operator/getPercent',{
-                                params:{
-                                    hash_code:that.ExportOperatorhashcode
-                                }
-                            })
-                            .then(function (response) {
-                                if (response.data.data.per==100) {
-                                    that.exportcsv='全部导出'
-                                    that.exporticon='reply'
-                                    clearInterval(getper)
-                                    window.location.href='/account/Operator/getExportFile?hash_code=' +that.ExportOperatorhashcode
-                                };
-                            })
-                            .catch(function (error) {
-                                console.log(error);
-                            });
-                        },1000)
-                    };
-                })
-                .catch(function (error) {
-                    console.log(error);
-                }); 
+                window.location.href='/account/Operator/ExportStatistic'
             }
         },
         mounted () {

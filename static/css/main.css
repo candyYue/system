@@ -67,7 +67,7 @@ select{
 }
 .temp1{
     margin-left: 36px; 
-    margin-right: 28px
+    margin-right: 28px;
 }
 /* 年月日表单 */
 .temp2{
@@ -78,11 +78,16 @@ select{
     float: left;
 }
 .page{
+    /* float: right; */
+    height: 40px;
+    margin-top: 20px
+}
+.page ul{
     float: right;
 }
-
 .content{
-    overflow: hidden;
+    /* overflow: hidden; */
+    position: relative;
 }
 
 
