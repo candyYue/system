@@ -195,7 +195,7 @@
 </script>
 
 <style scoped>
-        div.dataTables_wrapper {
+        /* div.dataTables_wrapper {
             width: 800px;
             margin: 0 auto;
         }
@@ -216,7 +216,7 @@
         }
         td{
             border-right: 1px solid #ccc;
-        }
+        } */
         .time{
             margin: 10px 0 20px;
             position: relative;
@@ -260,4 +260,5 @@
         .temp1{
             margin-bottom: 120px
         }
+
 </style>

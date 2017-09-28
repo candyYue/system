@@ -1,10 +1,10 @@
 <template>
     <div class="temp1">
             
-        <div class="link">
-            <router-link to="/link">线索池</router-link>
-            <router-link to="/phoneresult">通话结果管理</router-link>
-        </div>
+        <ul class="link">
+            <li class='linktab'><router-link to="/link">线索池</router-link></li>
+            <li class='linktab'><router-link to="/phoneresult">通话结果管理</router-link></li>
+        </ul>
         
 
         <router-view></router-view>
@@ -32,26 +32,34 @@
         margin-bottom: 80px;
     }
     .link{
-        margin:20px 0; 
-        height: 46;
-        line-height: 46px;
+        margin:20px 0;
         border-bottom: 1px solid #ccc;
     }
-    a{
-        font-size: 16px;
-        color: #333;
-        padding: 14px;
-        background-color: #f4f4f4;
-        border: 1px solid #ccc;
-        border-radius: 5px 5px 0 0;
-        border-bottom: 3px solid #fff
+    .link .linktab{
+        float: left;
+        /* height: 50px;
+        box-sizing: border-box; */
     }
-    .link a:nth-of-type(1){
+    .link .linktab:nth-of-type(1){
         margin-left: 10px;
+    }
+    a{
+        display: inline-block;
+        line-height: 50px;
+        height: 51px;
+        padding: 0 20px;
+        border: 1px solid #ccc;
+        border-bottom: none;
+        background-color: #f4f4f4;
+        color: #000;
+        /* box-sizing: border-box; */
+    }
+    .linktab:nth-of-type(1) a{
+        border-right: none;
     }
     .router-link-active {
         background-color: #fff;
         border-top: 3px solid #00b5ff;
-        
+        border-bottom: 1px solid #fff
     }
 </style>

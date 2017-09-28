@@ -94,24 +94,26 @@ import findpassword from './login/findpassword.vue'
     .logotext:before{
         content: '';
         display: inline-block;
-        width:80px;
+        width:107px;
         height:1px;
         background-color:#fff;
         position:absolute;
            bottom:50%;
            z-index:1;
            left:60px;
+           opacity: .8
     }
     .logotext:after{
         content: '';
         display: inline-block;
-        width:80px;
+        width:107px;
         height:1px;
         background-color:#fff;
         position:absolute;
            bottom:50%;
            z-index:1;
            right:60px;
+           opacity: .8
     }
     .loginRight{
         text-align: center;

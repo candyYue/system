@@ -300,28 +300,33 @@
         float: right;
         padding-right: 28px;
         font-size: 16px;
+        height: 54px;
     }
     .user-info .date{
         font-size: 12px;
         color: #999;
+        margin-right: 14px
     }
     .user-info .el-dropdown-link{
         position: relative;
         display: inline-block;
         cursor: pointer;
-        vertical-align: middle;
+        height: 54px;
     }
     .user-info .welcome{
-        margin-left: 50px;
+        display: inline-block;
+        height: 100%;
+        padding:0 14px 0 64px;
         position: relative;
         color: #303030;
-        font-size: 12px
+        border: 1px solid #ccc;
+        background-color: #fafafb;
     }
     .user-info .user-logo{
         position: absolute;
         margin: 0 10px;
-        left: -50px;
-        top: -5px;
+        left: 14px;
+        top: 10px;
         width:26px;
         height:26px;
         border-radius: 50%;
@@ -454,10 +459,16 @@
     a:hover{
         color:#bfcbd9
     }
+    .ivu-menu-dark{
+        background-color: #222c3e;
+    }
     .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu){
             color: #363e4f;
     }
     .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active:hover{
-        background-color: none;
+        background-color: #3a4f72!important;
+    }
+    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active[data-v-0cbe70e4]:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active[data-v-0cbe70e4]:not(.ivu-menu-submenu){
+        background-color: #3a4f72;
     }
 </style>
