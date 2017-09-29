@@ -315,12 +315,17 @@
     }
     .user-info .welcome{
         display: inline-block;
-        height: 100%;
+        height: 53px;
         padding:0 14px 0 64px;
         position: relative;
         color: #303030;
-        border: 1px solid #ccc;
+        /* border: 1px solid #ccc; */
+        /* background-color: #fafafb; */
+        font-size: 12px
+    }
+    .user-info .welcome:hover{
         background-color: #fafafb;
+        border-bottom: 1px solid #ccc;
     }
     .user-info .user-logo{
         position: absolute;
