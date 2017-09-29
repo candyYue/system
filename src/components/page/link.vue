@@ -1,44 +1,35 @@
 <template>
-    <div class="temp1">
-            
-        <ul class="link">
+    <div class="temp">
+        <ul class="link clearfix">
             <li class='linktab'><router-link to="/link">线索池</router-link></li>
             <li class='linktab'><router-link to="/phoneresult">通话结果管理</router-link></li>
         </ul>
-        
-
         <router-view></router-view>
     </div>
 </template>
 
 <script>
-    // import {myCommon} from '../../assets/common.js';
     export default {
         data() {
             return {
-                
+
             }
         },
-        
+
         methods: {
-             
-            
         }
     }
 </script>
 
 <style scoped>
-    .temp1{
-        margin-bottom: 80px;
-    }
+
     .link{
-        margin:20px 0;
+        margin:40px 0 20px;
         border-bottom: 1px solid #ccc;
     }
     .link .linktab{
         float: left;
-        /* height: 50px;
-        box-sizing: border-box; */
+        margin-bottom: -1px;
     }
     .link .linktab:nth-of-type(1){
         margin-left: 10px;
@@ -51,8 +42,8 @@
         border: 1px solid #ccc;
         border-bottom: none;
         background-color: #f4f4f4;
-        color: #000;
-        /* box-sizing: border-box; */
+        font-size: 16px;
+        color: #333;
     }
     .linktab:nth-of-type(1) a{
         border-right: none;

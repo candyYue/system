@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">        
+    <div class="wrapper">
         <div class="content" :class={bigcontent:isbigcontent}>
             <div class="header">
                 <a href="javascript:;" class="toggle" @click="toogle"><Icon type="navicon"></Icon></a>
@@ -8,7 +8,7 @@
                         <span class="date">今天是{{datemg1}}，{{datemg2}}</span>
                         <span class="welcome" @click="dropshow=!dropshow">
                         <img class="user-logo" src="../../../static/img/photo.png">
-                        您好！云电销 - 管理员</span> 
+                        您好！云电销 - 管理员</span>
                     </span>
                     <transition name="custom-classes-transition" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                         <div class="drop" v-if="dropshow">
@@ -28,9 +28,9 @@
 
             <!-- 主体部分 -->
             <transition name="move" mode="out-in"><router-view></router-view></transition>
-            
-            <footer>copyright@20142015</footer>  
-                          
+
+            <footer>copyright@20142015</footer>
+
         </div>
         <div class="sidebar":class={smallsidebar:issmallsidebar}>
             <div class="logo"><p>云电销企业后台管理</p></div>
@@ -44,7 +44,7 @@
                     <MenuItem name="1-1"><router-link to="/day">统计概况</router-link></MenuItem>
                     <MenuItem name="1-2"><router-link to="/count">坐席统计</router-link></MenuItem>
                 </Submenu>
-                
+
                 <MenuItem name="1-3"><router-link to="/link"><Icon type="ios-paper-outline"></Icon>线索池</router-link></MenuItem>
                 <MenuItem name="1-4"><router-link to="/manage"><Icon type="ios-grid-view-outline"></Icon>坐席管理</router-link></MenuItem>
                 <MenuItem name="1-5"><router-link to="/callhistory"><Icon type="document"></Icon>通话记录</router-link></MenuItem>
@@ -64,7 +64,7 @@
 
         <!-- 修改密码 -->
         <transition>
-            <div class="mark" v-if="changebox" @click="cancel"></div>  
+            <div class="mark" v-if="changebox" @click="cancel"></div>
         </transition>
         <transition>
             <div class="changebox" v-if="changebox">
@@ -86,7 +86,7 @@
 
         <!-- 首次登陆修改密码 -->
         <transition>
-            <div class="mark" v-if="$store.state.firstlogin"></div>  
+            <div class="mark" v-if="$store.state.firstlogin"></div>
         </transition>
         <transition>
             <div class="changebox" v-if="$store.state.firstlogin">
@@ -135,7 +135,7 @@
 
             }
         },
-        
+
         mounted(){
             this.$store.state.tel=true
             this.$store.state.password=false
@@ -146,9 +146,9 @@
             var month = date.getMonth() + 1;
             var day = date.getDate();
             this.datemg1=year+'年'+month+'月'+day+'日';
-            var arr = new Array("日", "一", "二", "三", "四", "五", "六");  
-            var week = new Date().getDay();  
-            this.datemg2 = "星期"+ arr[week];  
+            var arr = new Array("日", "一", "二", "三", "四", "五", "六");
+            var week = new Date().getDay();
+            this.datemg2 = "星期"+ arr[week];
             // this.username=window.localStorage.getItem("username");
             this.companyname=window.localStorage.getItem("companyname");
 
@@ -167,15 +167,15 @@
 
             };
             // this.instance()  //过期提醒
-        }, 
+        },
         methods:{
             instance () {
                 const title = '过期提醒';
-                const content = '<p>您的云电销将于30天后到期，为了不影响您的继续使用，请联系客户经理进行续费。</p>';    
+                const content = '<p>您的云电销将于30天后到期，为了不影响您的继续使用，请联系客户经理进行续费。</p>';
                 this.$Modal.warning({
                     title: title,
                     content: content
-                }); 
+                });
             },
             cancel(){
                 this.changebox=false
@@ -190,7 +190,7 @@
 
                 var logotext=document.querySelector('.logo p')
                 var tables=document.querySelectorAll('.ivu-table-wrapper table')
-                
+
                 if (this.sidebarstyle.left=='0px') {
                     logotext.innerText='云电销'
                     for (var i = 0; i < tables.length-1; i++) {
@@ -202,7 +202,7 @@
                         tables[i].style.width=this.tablewidthsmall
                     };
                 }
-                
+
 
             },
             signOut(){
@@ -212,12 +212,12 @@
                     console.log(response.data);
                     if(response.data.status==0){
                         window.localStorage.clear();  //清除localstorage
-                        that.$router.push("/login") 
+                        that.$router.push("/login")
                     }
                 })
                 .catch(function(err){
                     console.log(err);
-                }); 
+                });
             },
             changepwd(){
                 this.changebox=!this.changebox;
@@ -239,7 +239,7 @@
                     return;
                 }
                 this.changepassword()
-                
+
             },
             changepassword(){
                 var that=this;
@@ -264,7 +264,7 @@
                 })
                 .catch(function(err){
                     console.log(err);
-                }); 
+                });
             }
         }
     }
@@ -296,7 +296,7 @@
         background-color: #00b5ff;
         color: #fff;
     }
-    .user-info {  
+    .user-info {
         float: right;
         padding-right: 28px;
         font-size: 16px;
@@ -389,10 +389,10 @@
         padding-left: 36px;
         font-size: 12px;
         line-height: 50px;
-        color: #666; 
+        color: #666;
         background-color: #fafafb;
         border: 1px solid #e6e6e6;
-        z-index: 99;
+        /*z-index: 99;*/
     }
     .drop{
         width: 260px;
@@ -402,7 +402,7 @@
         position: absolute;
         right: 28px;
         top: 55px;
-        z-index: 99; 
+        z-index: 99;
         background-color: #fafafa;
     }
     .dropup{

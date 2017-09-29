@@ -1,78 +1,54 @@
-*{margin:0;padding:0;}
-html {
-  box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
-}
 html,body,#app,.wrapper{
     width:100%;
     height:100%;
     overflow: hidden;
 }
-body{
-    font-family:"Helvetica Neue",Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif;
+.clearfix:before,.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
 }
-a{color:#ccc;text-decoration:none} 
+.clearfix {
+    zoom: 1;
+}
+.ivu-modal{
+  top: 50%;
+  transform: translateY(-65%);
+}
+.ivu-icon-ios-compose-outline,.ivu-icon-ios-trash-outline{
+  font-size: 18px;
+}
 
-ul{
-    overflow: hidden;
-    list-style: none;
-}
 h3{
     font-size: 18px;
     line-height: 50px;
     font-weight: 500;
 }
 
-input,button,select,textarea{
-    outline: none;
-    background:none;    
-    border:1px solid #ccc;
-    border-radius: 2px;
-    filter:chroma(color=#000000);
-    transition: color .2s linear,background-color .2s linear,border .2s linear;
-    cursor: pointer;
-    font-size: 12px;
-}
-input{
-    cursor: text;
-}
 /* placeholder颜色 */
-input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+/*input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
     color:    #BBBEC7;
 }
-input:-moz-placeholder, textarea:-moz-placeholder { 
+input:-moz-placeholder, textarea:-moz-placeholder {
     color:    #BBBEC7;
 }
-input::-moz-placeholder, textarea::-moz-placeholder { 
+input::-moz-placeholder, textarea::-moz-placeholder {
     color:    #BBBEC7;
 }
-input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     color:    #BBBEC7;
-}
+}*/
 
-
-
-input:hover,button:hover,select:hover,textarea:hover{
-    border:1px solid #2d8cf0;
-    color: #2d8cf0;
-}
-input:hover{
-    color: #333;
-}
-input:hover .ivu-icon,button:hover .ivu-icon,select:hover .ivu-icon,textarea:hover .ivu-icon{
-    color: #2d8cf0;
-}
 select{
     border-radius: 4px;
 }
 .page{
     margin-top: 15px;
 }
-.temp1{
-    margin-left: 36px; 
+.temp{
+    margin-left: 36px;
     margin-right: 28px;
+    padding-bottom: 80px;
 }
 /* 年月日表单 */
 .temp2{
@@ -91,12 +67,8 @@ select{
     float: right;
 }
 .content{
-    /* overflow: hidden; */
     position: relative;
 }
-
-
 .ivu-date-picker{
     width: 160px;
 }
-

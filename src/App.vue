@@ -9,10 +9,10 @@
 	export default {
         data: function(){
             return {
-            	
+
             }
         },
-        
+
         watch: {
           '$route' (to, from) {
                 var that=this
@@ -29,7 +29,3 @@
         },
     }
 </script>
-<style>
-    @import "../static/css/main.css";
-    /* @import "../static/css/color-dark.css";    */
-</style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="temp2">
+    <div class="temp">
         <div class="phoneresult" v-for="(item, index) in category">
             <img src="../../../../static/img/editphoneresult.gif" alt="">
             <p>{{item.cm_result}}</p>
@@ -8,7 +8,7 @@
                 <button class="del" @click='removemark(index)'>删除</button>
             </div>
         </div>
-        
+
         <!-- 新建 -->
         <transition enter-active-class="animated fadeIn">
             <div class="mark" v-if="changebox" @click="changebox=false"></div>
@@ -20,7 +20,7 @@
                 <div class="item1 additem">
                     <span>结果分类名称：</span>
                     <input type="text" v-model='addtype[0]'>
-                    
+
                     <a href="Javascript:;" class="addcategory" @click="addinput"></a>
                 </div>
                 <div class="item4">
@@ -56,7 +56,7 @@
                 <a href="javascript:;" class="delete" @click="removebox=false"></a>
                 <h2>删除分类</h2>
                 <div class="item1">
-                    <span>删除后，该分类将被删除，分类下的客户将被移至未分类</span> 
+                    <span>删除后，该分类将被删除，分类下的客户将被移至未分类</span>
                 </div>
                 <div class="item4">
                     <button class="giveup" @click="removebox=false">取消</button>
@@ -67,7 +67,7 @@
 
         <div class="phoneresult">
             <a href="javascript:;" class="el-icon-plus newphoneresult" @click="addlimite"></a>
-            <p>新建分类</p>  
+            <p>新建分类</p>
         </div>
     </div>
 </template>
@@ -98,13 +98,13 @@
                     input.style.width="25.625rem"
                     input.style.border="1px solid #dddee1"
                     input.style.paddingLeft="5px"
-                    
+
                     this.inputs=document.querySelectorAll('.additem input')
                 }else{
                     this.$Message.warning('通话结果最多只能有10个分类');
                     return;
                 }
-                
+
             },
             addlimite(){
                 if (this.category.length<=9) {
@@ -112,14 +112,14 @@
                 }else{
                     this.$Message.warning('通话结果最多只能有10个分类');
                 }
-                
+
             },
             addcategroy(){
 
                 for (var i = 0; i < this.inputs.length; i++) {
                     this.addtype.push(this.inputs[i].value)
                 };
-                
+
                 var that=this;
                 if (this.addtype.length==1) {
                     axios.get('/account/Customer/addCallResult',{
@@ -136,7 +136,7 @@
                     })
                     .catch(function(err){
                         console.log(err);
-                    }); 
+                    });
                 };
                 if (this.addtype.length>1) {
                     this.addtype=this.addtype.slice(1, this.addtype.length)
@@ -153,12 +153,12 @@
                             that.getresult()
                             that.changebox=false
                         };
-                        
+
                     })
                     .catch(function(err){
                         console.log(err);
-                    }); 
-                }; 
+                    });
+                };
             },
             //删除
             removemark(index){
@@ -167,7 +167,7 @@
             },
             removecategroy(){
                 var that=this;
-                
+
                 axios.get('/account/Customer/deleteCallResult',{
                     params: {
                         rid:that.category[that.select].id,
@@ -179,7 +179,7 @@
                 })
                 .catch(function(err){
                     console.log(err);
-                }); 
+                });
             },
             editmark(index){
                 this.editbox=true
@@ -189,7 +189,7 @@
             editcategroy(){
                 // console.log(this.type);
                 var that=this;
-                
+
                 axios.get('/account/Customer/modifyCallResult',{
                     params: {
                         rid:that.category[that.select].id,
@@ -202,25 +202,25 @@
                 })
                 .catch(function(err){
                     console.log(err);
-                }); 
-                
+                });
+
             },
             getresult(){
                 var that=this;
-                    
+
                 axios.get('/account/Customer/GetCallresult')
                 .then(function(response){
                     if (response.data.status==0) {
                        that.category=response.data.data
                     };
-                    
+
                 })
                 .catch(function(err){
                     console.log(err);
-                }); 
+                });
             },
         },
-        
+
         mounted(){
             this.getresult()
         }
@@ -254,14 +254,14 @@
         width: 60px;
         height: 26px;
         margin: 0 6px;
-        
+
     }
     .phoneresult img{
         width: 38.88px;
         height: 38px;
     }
     .edit{
-        
+
         background-color: #00b5ff;
         color: #fff
     }
