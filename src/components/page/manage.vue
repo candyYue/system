@@ -20,25 +20,27 @@
             </div>    
         </div>
         <!-- 新建坐席 -->
-        <transition  enter-active-class="animated fadeIn">
-            <div class="mark" v-if="newseat" @click="newseat=false"></div>
-        </transition>
-        <transition  enter-active-class="animated fadeIn">
-            <div class="newseat" v-if="newseat">
-                <a href="javascript:;" class="delete" @click="cancel"></a>
-                <h2>新建坐席</h2>
-                <div class="item1">坐席名称<Input v-model="newlistname" placeholder='必填' ></Input></div>
-                <div class="item1">坐席号<Input v-model="newlistnumber" placeholder='选填  (首位不为零的6-8个数字)'></Input></div>
-                <div class="item1">手机号<Input v-model="newlistmobile" placeholder='必填'></Input></div>
-                <div class="item1">登录密码<Input v-model="newlistpwd" placeholder='必填' type='password'></Input></div>
+        <Modal v-model="newseat" title="新建坐席">
+            <Form  :label-width="80">
+                <FormItem label="坐席名称">
+                   <Input v-model="newlistname" placeholder='必填'></Input>
+                </FormItem>
+                <FormItem label="坐席号">
+                   <Input v-model="newlistnumber"  placeholder='选填  (首位不为零的6-8个数字)'></Input>
+                </FormItem>
+                <FormItem label="手机号">
+                    <Input v-model="newlistmobile" placeholder='必填'></Input>
+                </FormItem>
+                <FormItem label="登录密码">
+                   <Input v-model="newlistpwd"  placeholder='必填' type='password'></Input>
+                </FormItem>
                 <div class="item1"><p>{{tip}}</p></div>
-                <div class="item4">
-                    <button class="giveup" @click="cancel">取消</button>
-                    <button class="confirm" @click="confirmnew">确认</button>
-                </div>
+              </Form>
+            <div slot="footer">
+                <Button type="info" @click="confirmnew">确认</Button>
+                <Button @click="cancel">取消</Button>
             </div>
-        </transition>
-        
+        </Modal>
         <!-- 单条删除提醒 -->
         <transition  enter-active-class="animated fadeIn">
             <div class="mark" v-if="deleteone" @click="cancel"></div>
@@ -51,8 +53,8 @@
                     删除后，线索将无法恢复。确定删除线索？
                 </div>
                 <div class="item4">
-                    <button class="giveup" @click="cancel">取消</button>
-                    <button class="confirm" @click="removesingle">确认</button>
+                    <Button @click="cancel">取消</Button>
+                    <Button type="info" @click="removesingle">确认</Button>
                 </div>
             </div>
         </transition>
@@ -71,28 +73,22 @@
                 <div class="item1">登录密码<Input v-model="list[select].pwd"style="width: 438px"  type='password'></Input></div>
                 <div class="item1"><p>{{tip}}</p></div>
                 <div class="item4">
-                    <button class="giveup" @click="cancel">取消</button>
-                    <button class="confirm" @click="confirmedit">确认</button>
+                    <Button @click="cancel">取消</Button>
+                    <Button type="info" @click="confirmedit">确认</Button>
                 </div>
             </div>
         </transition>
 
         
         <!-- 导入坐席 -->
-        <transition  enter-active-class="animated fadeIn">
-            <div class="mark" v-if="$store.state.importseat" @click="cancelimport"></div>
-        </transition>
-        <transition  enter-active-class="animated fadeIn">
-            <div class="importseat" v-if="$store.state.importseat">
-                <a href="javascript:;" class="delete" @click="cancelimport"></a>
-                <h2>导入坐席</h2>
-
-                <!-- <router-view></router-view> -->
-                <stepone v-if="$store.state.steponemark"></stepone>
-                <steptwo v-if="$store.state.steptwomark"></steptwo>
-                <stepthree v-if="$store.state.stepthreemark"></stepthree>
-            
-            </div>
+        <transition enter-active-class="animated fadeIn">
+          <Modal v-if="$store.state.importseat" v-model="$store.state.importseat" title="导入坐席"
+                 :mask-closable="false" width="600" :footer-hide="true"  class="import-modal">
+            <a slot="close" @click="cancelimport"><Icon type="ios-close-empty"></Icon></a>
+            <stepone v-if="$store.state.steponemark"></stepone>
+            <steptwo v-if="$store.state.steptwomark"></steptwo>
+            <stepthree v-if="$store.state.stepthreemark"></stepthree>
+          </Modal>
         </transition>
     </div>
     </div>
@@ -145,7 +141,7 @@
                                     props: {
                                         type: 'ghost',
                                         size: 'small',
-                                        icon:"compose"
+                                        icon:"ios-compose-outline"
                                     },
                                     style: {
                                         border:'none',

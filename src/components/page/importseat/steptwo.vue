@@ -9,9 +9,9 @@
     	    <Progress :percent="percent" status="active"></Progress>
             <p>正在导入</p>
     	</div>
-    	<div class="item4">
+    	<!-- <div class="item4">
     	    <Button class="confirm">正在导入</Button>   
-    	</div>
+    	</div> -->
     </div>
 </template>
 

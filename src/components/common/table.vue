@@ -38,18 +38,18 @@
                             <router-link to="/phoneresult">通话结果管理</router-link>
                         </div>
                         <div class="temp2">
-                        <div><Button icon="trash-a">删除</Button></div>
-                        <div :class={newhighlight:show3}><Button icon="android-person">分配线索</Button></div>
-                        <div ref="new"><Button icon="plus">新建线索</Button></div>
-                        <div ref="import" :class={newhighlight:show2}><Button icon="bluebtn" type="info">批量导入</Button></div>
-                        <div ref="all"><Button icon="reply" type="info">全部导出</Button></div>   
+                        <div><Button icon="trash-a" size="large">删除</Button></div>
+                        <div :class={newhighlight:show3}><Button icon="android-person" size="large">分配线索</Button></div>
+                        <div ref="new"><Button icon="plus" size="large">新建线索</Button></div>
+                        <div ref="import" :class={newhighlight:show2}><Button icon="bluebtn" type="info" size="large">批量导入</Button></div>
+                        <div ref="all"><Button icon="reply" type="info" size="large">全部导出</Button></div>   
                         </div>
                     </div>
                     <div v-if='seat'>
                         
                         <div class="temp2">
-                            <div ref="new" :class={newhighlight:show1}><Button icon="plus">新建线索</Button></div>
-                            <div ref="import" :class={newhighlight:show1}><Button icon="bluebtn" type="info">批量导入</Button></div> 
+                            <div ref="new" :class={newhighlight:show1}><Button icon="plus" size="large">新建线索</Button></div>
+                            <div ref="import" :class={newhighlight:show1}><Button icon="bluebtn" type="info" size="large">批量导入</Button></div> 
                         </div>
                     </div>
             
@@ -241,11 +241,9 @@
         float: right;
     }
     .temp2>div{
-        padding: 5px 10px;
+        padding: 12px 12px;
         position: relative;
         display: inline-block;
-        width: 110px;
-        height: 44px;
         background-color: #fff;
         border-radius: 4px;
     }

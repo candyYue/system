@@ -4,13 +4,12 @@
         <p>欢迎回来</p>
             <div class="password">
                 <img src="../../../../static/img/login/password.png" height="20" width="20" alt="">
-                <input v-model="pwd" placeholder="请输入密码" type="password"></input>
-                
+                <Input v-model="pwd" placeholder="请输入密码" type="password" style="width: 300px"></Input>
                 <span class="wrongPWD">{{wrongtip}}</span>
                 <a href="javascript:;" class="forgetpwd" @click="find">忘记密码?</a>
             </div>
             <div class="login-btn">
-                <button type="primary" @click="login">登录</button>
+                <Button type="info"  @click="login">登录</Button>
             </div>
     </div>
 </template>
@@ -98,5 +97,4 @@
         left: 85px;
         bottom: 8px;
     }
-
 </style>

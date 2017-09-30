@@ -13,7 +13,7 @@
                     <span class="wrongTel">{{wrongTip}}</span>
                 </div>
                 <div class="login-btn">
-                    <button type="primary" @click="next" class="next">下一步</button>
+                     <Button type="info"  @click="next">下一步</Button>
                 </div>
         </div>
     </div>
@@ -92,7 +92,7 @@ import axios from 'axios';
     }
     .wrongTel{
         position: absolute;
-        bottom: -15px;
+        bottom: -30px;
         left: 85px;
         font-size:14px;
         color: #ff5e5e;

@@ -4,11 +4,11 @@
         <p>欢迎回来</p>
             <div class="phone">
                 <img src="../../../../static/img/login/cell.png" height="20" width="20" alt="">
-                <input v-model="tel" placeholder="请输入手机号"></input>
+                <Input v-model="tel" placeholder="请输入手机号" style="width: 300px"></Input>
                 <span class="wrongTel">{{wrongTip}}</span>
             </div>
             <div class="login-btn">
-                <button type="primary" @click="next">下一步</button>
+                <Button type="info"  @click="next">下一步</Button>
             </div>
     </div>
 </template>

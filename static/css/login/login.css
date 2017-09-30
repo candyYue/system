@@ -36,9 +36,10 @@ input{
     border: none;
     border-bottom: 1px solid #ccc;
     height: 32px;
-    transform:all .2s 
+    transform:all .2s;
+    border-radius: 0
 }
 .loginIn input:hover,.loginIn input:focus{
     border-bottom: 1px solid #03a9f4;
-    /* box-shadow:0 0 0 2px rgba(45,140,240,.2); */
+    box-shadow:none;
 }

@@ -5,26 +5,27 @@
             <div class="findpassword">
                 <div>
                     <img src="../../../../static/img/login/cell.png" height="20" width="20" alt="" class="cell">
-                    <input v-model='tel' class="tel" disabled="disabled" /></input>  
+                    <span style="width: 300px"  class="tel">{{tel}}</span>
                 </div>
                 <div>
-                    <input placeholder="请输入验证码" class="vcode" v-model="vcode"></input>
-                    <button class="getvcode" @click="getvcode">
+                    <Input v-model="vcode" placeholder="请输入验证码" type="password"  style="width: 300px"></Input>
+                    <Button  class="getvcode" @click="getvcode">
                       <span v-if="sendMsgDisabled">{{time+'秒后获取'}}</span>
                       <span v-if="!sendMsgDisabled">获取验证码</span>
-                    </button>
+                    </Button>
                 </div>
                 <div>
-                    <input placeholder="请输入6-16位密码" class="newpwd" type="password" v-model="newpwd"></input>
+                    <Input v-model="newpwd" placeholder="请输入6-16位密码" type="password"  style="width: 300px"></Input>
+                    <!-- <input placeholder="" class="newpwd" v-model=""></input> -->
                     <div class="pwdeye"></div>
                 </div>
                 <div>
-                    <input placeholder="请再次输入密码" class="pwdagain" type="password" v-model="pwdagain" @blur="check"></input>
+                    <Input v-model="pwdagain" placeholder="请再次输入密码" type="password"  style="width: 300px" @blur="check"></Input>
                 </div>
                 <span class="wrong">{{checkmsg}}</span>
             </div>
             <div class="login-btn">
-                <button type="primary" @click="check">登录</button>
+                <Button type="info"  @click="check">登录</Button>
             </div>
     </div>
 </template>
@@ -73,11 +74,7 @@
                   console.log(response)
                   if (response.data.status==0) {
                         r_this.$Message.success('密码重置成功');
-                        r_this.$router.push("/bootpage") 
-                        // r_this.$store.state.tel=false
-                        // r_this.$store.state.password=true
-                        // r_this.$store.state.company=false
-                        // r_this.$store.state.findpassword=false
+                        r_this.$router.push("/bootpage")
                   }else{
                         this.checkmsg=response.data.info
                   }
@@ -175,9 +172,14 @@
         color: #03a9f4;
         line-height: 24px;
     }
-    .tel{
+    .tel {
+        display: inline-block;
+        text-align: left;
         padding-left: 30px;
+        border-bottom: 1px solid #ccc;
+        height: 30px
     }
+
     .vcode,.newpwd,.pwdagain{
         width: 300px;
     }
@@ -201,11 +203,11 @@
     .getvcode{
         position: absolute;
         right: 85px;
-        bottom: 8px;
+        bottom: 1px;
         font-size: 14px;
         color: #03a9f4;
         border:none;
-        cursor: pointer;
+        background-color: #fff;
     }
     .pwdeye{
         width: 32px;

@@ -10,9 +10,9 @@
             <p>导入完成，共 {{$store.state.all}} 条，已成功 {{$store.state.already}} 条</p>
     	    <p><a :href="'/account/Operator/getImportreport?hash_code=' + alink" class="downfailure">下载错误报告,</a>&nbsp;查看失败原因</p>
     	</div>
-    	<div class="item4">
-    	    <Button class="confirm" @click="finish">完成</Button>   
-    	</div>
+        <div slot="footer" class="ivu-modal-footer">
+            <Button size="large" type="primary" @click="finish">完成</Button>
+        </div>
     </div>
 </template>
 

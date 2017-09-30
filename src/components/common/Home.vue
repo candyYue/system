@@ -5,7 +5,7 @@
                 <a href="javascript:;" class="toggle" @click="toogle"><Icon type="navicon"></Icon></a>
                 <div class="user-info">
                     <span class="el-dropdown-link">
-                        <span class="date">今天是{{datemg1}}，{{datemg2}}</span>
+                        <span class="date">今 天 是 {{datemg1}}，{{datemg2}}</span>
                         <span class="welcome" @click="dropshow=!dropshow">
                         <img class="user-logo" src="../../../static/img/photo.png">
                         您好！云电销 - 管理员</span>
@@ -18,8 +18,8 @@
                                 <p>登陆时间：{{datemg1}}，{{datemg2}}</p>
                             </div>
                             <div class="dropdown">
-                                <button class="changpwd" @click="changepwd">修改密码</button>
-                                <button class="signOut" @click="signOut">退出登录</button>
+                                <Button class="changpwd" @click="changepwd">修改密码</Button>
+                                <Button class="signOut"  @click="signOut">退出登录</Button>
                             </div>
                         </div>
                 </transition>
@@ -50,38 +50,35 @@
                 <MenuItem name="1-5"><router-link to="/callhistory"><Icon type="document"></Icon>通话记录</router-link></MenuItem>
             </Menu>
         </Col>
-            <!-- <el-menu default-active="2" class="el-menu-vertical-demo" theme="dark">
-                <el-submenu index="1">
-                    <template slot="title"><Icon type="ios-pie-outline"></Icon>统计中心</template>
-                        <el-menu-item index="1-1"><router-link to="/day">统计概况</router-link></el-menu-item>
-                        <el-menu-item index="1-2"><router-link to="/count">坐席统计</router-link></el-menu-item>
-                </el-submenu>
-                <el-menu-item index="2"><router-link to="/link"><Icon type="ios-paper-outline"></Icon>线索池</router-link></el-menu-item>
-                <el-menu-item index="3"><router-link to="/manage"><Icon type="ios-grid-view-outline"></Icon>坐席管理</router-link></el-menu-item>
-                <el-menu-item index="4"><router-link to="/callhistory"><Icon type="document"></Icon>通话记录</router-link></el-menu-item>
-            </el-menu> -->
         </div>
 
         <!-- 修改密码 -->
-        <transition>
-            <div class="mark" v-if="changebox" @click="cancel"></div>
-        </transition>
-        <transition>
-            <div class="changebox" v-if="changebox">
-                <a href="javascript:;" class="delete" @click="cancel"></a>
-                <h2>修改密码</h2>
-                <div class="item1">用户名<input type="text" v-model="companyname"  disabled="disabled" ></div>
-                <div class="item2"><div class="line"></div>修改密码</div>
-                <div class="item1">原密码<input type="password" v-model="oldpwd"></div>
-                <div class="item1">新密码<input type="password" v-model="newpassword"></div>
-                <div class="item1">确认密码<input type="password" v-model="passwordagain"></div>
-                <span class="tip">{{tip}}</span>
-                <div class="item4">
-                    <button class="giveup" @click="cancel">取消</button>
-                    <button class="confirm" @click="confirmpwd">确认</button>
-                </div>
+
+        <Modal v-model="changebox">
+            <p slot="header">
+                <span>修改密码</span>
+            </p>
+            <Form label-position="right" :label-width="80">
+                <FormItem label="用户名">
+                    <Input v-model="companyname"></Input>
+                    <span class='changepwd'>修改密码</span>
+                </FormItem>
+                <FormItem label="原密码">
+                    <Input v-model="oldpwd"></Input>
+                </FormItem>
+                <FormItem label="新密码">
+                    <Input v-model="newpassword"></Input>
+                </FormItem>
+                <FormItem label="确认密码">
+                    <Input v-model="passwordagain"></Input>
+                    <span class="changetip">{{tip}}</span>
+                </FormItem>
+            </Form>
+            <div slot="footer">
+                <Button type="info"  @click="confirmpwd">确认</Button>
+                <Button @click="cancel">取消</Button>
             </div>
-        </transition>
+        </Modal>
 
 
         <!-- 首次登陆修改密码 -->
@@ -148,7 +145,7 @@
             this.datemg1=year+'年'+month+'月'+day+'日';
             var arr = new Array("日", "一", "二", "三", "四", "五", "六");
             var week = new Date().getDay();
-            this.datemg2 = "星期"+ arr[week];
+            this.datemg2 = " 星 期 "+ arr[week];
             // this.username=window.localStorage.getItem("username");
             this.companyname=window.localStorage.getItem("companyname");
 
@@ -289,6 +286,7 @@
     .logo{
         line-height: 54px;
         width:230px;
+        font-weight: 700;
         text-align: center;
         font-size: 16px;
         padding-left: 30px;
@@ -305,7 +303,6 @@
     .user-info .date{
         font-size: 12px;
         color: #999;
-        margin-right: 14px
     }
     .user-info .el-dropdown-link{
         position: relative;
@@ -316,11 +313,10 @@
     .user-info .welcome{
         display: inline-block;
         height: 53px;
+        width: 260px;
         padding:0 14px 0 64px;
         position: relative;
         color: #303030;
-        /* border: 1px solid #ccc; */
-        /* background-color: #fafafb; */
         font-size: 12px
     }
     .user-info .welcome:hover{
@@ -407,7 +403,6 @@
     }
     .dropup{
         width: 100%;
-        height: 168px;
         background-color: #00b5ff;
         padding-top: 10px;
         text-align: center;
@@ -430,22 +425,21 @@
     .dropup p{
         font-size: 12px;
         color: #c6e3f5;
-        margin: 0
+        line-height: 14px;
+        margin-top: 10px;
+        padding-bottom: 14px
     }
     .dropdown{
-        height: 64px;
+        height: 56px;
         padding: 12px;
         position: relative;
     }
     .dropdown button{
         width: 88px;
         height: 34px;
-        border-radius: 3px solid #ddd;
         background-color: #f4f4f4;
-        text-align: center;
-        color: #000;
-        cursor: pointer;
-        line-height: 34px;
+        color: #333;
+        border:1px solid #ddd;
         font-size: 14px;
     }
     .changpwd{
@@ -458,11 +452,39 @@
         right: 15px;
         top: 15px;
     }
-    .changebox{
-        height: 370px;
+    .changepwd{
+        color: #999;
+        position: absolute;
+        left: -60px;
+        top: 28px;
+    }
+    .changepwd:after{
+        content: '';
+        display: inline-block;
+        width:400px;
+        height:1px;
+        background-color:#ccc;
+        position:absolute;
+        bottom:50%;
+        z-index:1;
+        left:60px;
+        opacity: .8
+    }
+    
+    .changetip{
+        position: absolute;
+        left: 0;
+        bottom: -35px;
+        color: #ff5e5e; 
+    }
+    .ivu-btn{
+        width: 80px;
     }
     a:hover{
         color:#bfcbd9
+    }
+    .ivu-form-item{
+        margin-bottom: 24px
     }
     .ivu-menu-dark{
         background-color: #222c3e;

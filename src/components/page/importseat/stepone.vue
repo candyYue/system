@@ -14,10 +14,10 @@
                 <span class="uptip">{{uptip}}</span>
             </Upload>
     	</div>
-    	<div class="item4">
-    	    <Button  type="primary" size="large" @click="$store.state.importseat=false">取消</Button>
-    	    <Button  size="large" @click="startimport">开始导入</Button>   
-    	</div>
+        <div slot="footer" class="ivu-modal-footer">
+            <Button type="primary" size="large" @click="startimport">开始导入</Button>
+            <Button size="large" @click="$store.state.importseat=false">取消</Button>
+        </div>
     </div>
 </template>
 

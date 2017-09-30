@@ -3,14 +3,15 @@
         <h3>坐席统计</h3>
         <div class="temp">
         <!-- 选择日期 -->
-        <div class="time">
-            <DatePicker type="date" placeholder="选择日期" @on-change='startT'></DatePicker>
-             至
-            <DatePicker type="date" placeholder="选择日期" @on-change='endT'></DatePicker>
-            <Button type="primary" @click='searchdate' size="small">搜索</Button>
+        <div class="time clearfix">
+            <div class="fl">
+                <DatePicker type="date" placeholder="选择日期" @on-change='startT'></DatePicker>
+                 至
+                <DatePicker type="date" placeholder="选择日期" @on-change='endT'></DatePicker>
+                <Button type="primary" @click='searchdate' size="small">搜索</Button>
+            </div>
             <div class="fr">
-                <!-- <i></i> -->
-                <input type="text" placeholder="请输入姓名或号码进行模糊匹配" class="search" v-model="sname">
+                <Input v-model="sname" placeholder="请输入姓名或号码进行模糊匹配" style="width: 280px"></Input>
                 <Button  class="searchicon" @click="snamefilter">搜索</Button>  
                 <Button @click="exportData"><Icon :type="exporticon"></Icon>{{exportcsv}}</Button>
             </div>
@@ -197,35 +198,12 @@
 </script>
 
 <style scoped>
-        /* div.dataTables_wrapper {
-            width: 800px;
-            margin: 0 auto;
-        }
-        .table.dataTable thead th, table.dataTable thead td{
-            border-bottom: none;
-            font-size: 14px;
-            color: #333;
-        }
-        table.dataTable.no-footer {
-            border: 1px solid #ccc;
-            border-right: none;
-        }
-        table.dataTable.display tbody tr.odd > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd > .sorting_1{
-            background-color: none;
-        }
-        #table_id_example{
-            font-size: 14px;
-        }
-        td{
-            border-right: 1px solid #ccc;
-        } */
         .time{
             margin: 10px 0 20px;
             position: relative;
         }
-        .fr{
-            float: right;
-            position: relative;
+        .fl div{
+            display: inline-block;
         }
         .fr>i{
             position: absolute;
@@ -235,11 +213,7 @@
             height: 15px;
             background: url(../../../static/img/2.png) no-repeat 0-30px ;
         }
-        .search{
-            width: 280px;
-            height: 34px;
-            padding-left: 24px;
-        }
+        
         .searchicon{
             margin-right: 8px
         }
@@ -256,8 +230,7 @@
         }
         .page{
             position: absolute;
-            right: 0;
-            bottom: -50px;
+            right: 20px;
         }
         .temp1{
             margin-bottom: 120px

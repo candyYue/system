@@ -3,19 +3,24 @@
     <h3>通话记录</h3>
     <div class="temp">
         <div class="handle">
-            <Select class="select" @on-change="catselect" >
-                <Option v-for="item in category" :value="item.id"  :key="item.id">{{item.cm_result}}</Option>
-            </Select>
-            <DatePicker type="date" placeholder="选择日期"  @on-change='startT'></DatePicker>
-             至
-            <DatePicker type="date" placeholder="选择日期" @on-change='endT'></DatePicker>
-            <Button type="primary" @click='searchdate' size="small">搜索</Button>
-            <Button type="primary" class='search' @click='searchrecord'>搜索</Button>
-            <Input class='search searchinput' v-model="searchvalue" placeholder="请输入姓名或号码进行模糊匹配"></Input>
+            <div class="fl">
+                <Select class="select" @on-change="catselect" >
+                    <Option v-for="item in category" :value="item.id"  :key="item.id">{{item.cm_result}}</Option>
+                </Select>
+                <DatePicker type="date" placeholder="选择日期"  @on-change='startT'></DatePicker>
+                 至
+                <DatePicker type="date" placeholder="选择日期" @on-change='endT'></DatePicker>
+                <Button type="primary" @click='searchdate' size="small">搜索</Button>
+            </div>
+                <div class="fr">
+                    <Button type="primary" class='search' @click='searchrecord'>搜索</Button>
+                    <Input class='search searchinput' v-model="searchvalue" placeholder="请输入姓名或号码进行模糊匹配"></Input>
+                </div>
+            
             
         </div>
         
-        <div>
+        <div class="content">
             <Table :columns="columns1" :data="list"  ></Table>
 
             <div class="page">
@@ -310,7 +315,13 @@
     .handle{
         position: relative;
         margin:20px 0;
+        overflow: hidden;
     }
+    
+    .fl div{
+        display: inline-block;
+    }
+    
     .block{
         display: inline-block;
     }
@@ -322,7 +333,6 @@
         margin-right: 20px;
     }
     .search{
-        float: right;
         margin:0 5px;
     }
     .searchinput{
@@ -331,4 +341,5 @@
     progress{
         border: 1px solid #00b5ff
     }
+
 </style>

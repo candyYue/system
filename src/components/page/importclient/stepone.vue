@@ -14,7 +14,7 @@
             </Upload>
     	</div>
     	<div slot="footer" class="ivu-modal-footer">
-				  <Button type="primary" size="large" @click="startimport">开始导入</Button>
+			<Button type="primary" size="large" @click="startimport">开始导入</Button>
     	    <Button size="large" @click="$store.state.importclient=false">取消</Button>
     	</div>
     </div>
