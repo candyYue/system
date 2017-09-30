@@ -28,50 +28,56 @@
 
             <!-- 主体部分 -->
             <transition name="move" mode="out-in">
-                <div class="temp1">
-            
+                <div>
+                    <h3 class="title" v-if='seat'>坐席管理</h3>
+                    <h3 class="title" v-if='client'>线索池</h3>
+                    <div class="temp">
                     <div v-if='client'>
                         <div class="link" v-if='client'>
                             <router-link to="/link">线索池</router-link>
                             <router-link to="/phoneresult">通话结果管理</router-link>
                         </div>
                         <div class="temp2">
-                        <div><button><Icon type="trash-a"></Icon>删除</button></div>
-                        <div :class={newhighlight:show3}><button><Icon type="android-person"></Icon>分配线索</button></div>
-                        <div ref="new"><button><Icon type="plus"></Icon>新建线索</button></div>
-                        <div ref="import" :class={newhighlight:show2}><button class="bluebtn"><Icon type="forward"></Icon>批量导入</button></div>
-                        <div ref="all"><button class="bluebtn"><Icon type="reply"></Icon>全部导出</button>                </div>   
+                        <div><Button icon="trash-a">删除</Button></div>
+                        <div :class={newhighlight:show3}><Button icon="android-person">分配线索</Button></div>
+                        <div ref="new"><Button icon="plus">新建线索</Button></div>
+                        <div ref="import" :class={newhighlight:show2}><Button icon="bluebtn" type="info">批量导入</Button></div>
+                        <div ref="all"><Button icon="reply" type="info">全部导出</Button></div>   
                         </div>
                     </div>
                     <div v-if='seat'>
-                        <h3>坐席管理</h3>
+                        
                         <div class="temp2">
-                            <div ref="new" :class={newhighlight:show1}><button><Icon type="plus"></Icon>新建线索</button></div>
-                            <div ref="import" :class={newhighlight:show1}><button class="bluebtn"><Icon type="forward"></Icon>批量导入</button></div> 
+                            <div ref="new" :class={newhighlight:show1}><Button icon="plus">新建线索</Button></div>
+                            <div ref="import" :class={newhighlight:show1}><Button icon="bluebtn" type="info">批量导入</Button></div> 
                         </div>
                     </div>
             
+                </div>
                 </div>
             </transition>
             
             <footer>copyright@20142015</footer>                
         </div>
         <div class="sidebar">
-            <div class="logo">云电销企业后台管理</div>
-            <el-menu default-active="2" class="el-menu-vertical-demo" theme="dark">
-                <el-submenu index="1">
-                <template slot="title">统计中心</template>
-                <el-menu-item-group>
-                  <el-menu-item index="1-3"><router-link to="/day">统计概况</router-link></el-menu-item>
-                </el-menu-item-group>
-                <el-submenu index="1-4">
-                  <template slot="title"><router-link to="/count">坐席统计</router-link></template>
-                  <el-menu-item index="1-4-1"><router-link to="/link">线索池</router-link></el-menu-item>
-                  <el-menu-item index="1-4-1"><router-link to="/manage">坐席管理</router-link></el-menu-item>
-                  <el-menu-item index="1-4-1"><router-link to="/callhistory">通话记录</router-link></el-menu-item>
-                </el-submenu>
-              </el-submenu>
-            </el-menu>
+            <div class="logo"><p>云电销企业后台管理</p></div>
+            <Col span="8">
+            <Menu theme="dark" width='230px'>
+                <MenuItem name="1-0">菜单栏</MenuItem>
+                <Submenu name="1">
+                    <template slot="title">
+                        <Icon type="ios-pie-outline"></Icon>
+                        统计中心
+                    </template>
+                    <MenuItem name="1-1">统计概况</MenuItem>
+                    <MenuItem name="1-2">坐席统计</MenuItem>
+                </Submenu>
+                
+                <MenuItem name="1-3"><Icon type="ios-paper-outline"></Icon>线索池</MenuItem>
+                <MenuItem name="1-4"><Icon type="ios-grid-view-outline"></Icon>坐席管理</MenuItem>
+                <MenuItem name="1-5"><Icon type="document"></Icon>通话记录</MenuItem>
+            </Menu>
+        </Col>
         </div>
         
         <!-- 新手指导页面1 -->
@@ -79,7 +85,7 @@
             <div class="mark1" v-if="show1">
                  <div class="img1" v-if="show1">
                      <p class="tip1">为了保障坐席人员的使用，建议您先在坐席管理页面新建坐席或批量导入坐席 </p>
-                     <button @click="mark2">下一步</button>
+                     <Button type="info" @click="mark2">下一步</Button>
                  </div>
             </div>
         </transition>
@@ -88,7 +94,7 @@
             <div class="mark2" v-if="show2">
                  <div class="img2" v-if="show2">
                      <p class="tip2">创建完坐席后，您可以在线索池页面批量导入客户号码 </p>
-                     <button @click="mark3">下一步</button>
+                     <Button type="info" @click="mark3">下一步</Button>
                  </div>
             </div>
         </transition>
@@ -97,7 +103,7 @@
             <div class="mark3" v-if="show3">
                  <div class="img3" v-if="show3">
                      <p class="tip3">导入完客户列表后，您可以选择客户，点击分配坐席，将选择的客户分配给对应的坐席，分配完成之后，坐席登录客户端就可以直接使用 </p>
-                     <button @click="markend">完成</button>
+                     <Button type="info" @click="markend">完成</Button>
                  </div>
             </div>
         </transition>
@@ -163,6 +169,10 @@
         line-height: 54px;
         border-bottom: 1px solid #ccc;
     }
+    .header a{
+        font-size: 36px;
+        margin-left: 20px
+    }
     .logo{
         line-height: 54px;
         width:230px;
@@ -201,7 +211,6 @@
         height:26px;
         border-radius: 50%;
     }
-    
     .sidebar{
         display: block;
         position: absolute;
@@ -215,6 +224,7 @@
         display: block;
         width: 100%;
         height: 100%;
+        color: #ccc
     }
     .content{
         background: none repeat scroll 0 0 #fff;
@@ -239,16 +249,25 @@
         background-color: #fff;
         border-radius: 4px;
     }
-    .temp2 button{
-         width: 80px;
-        height: 34px;
-        background-color: #fafafa;
+    .link{
+        border-bottom: 1px solid #ccc;
+        overflow: hidden;
     }
-    li>a{
-
-        display: block;
-        width: 100%;
-        height: 100%;
+    .link a{
+        float: left;
+        height: 50px;
+        padding: 0 20px;
+        border: 1px solid #ccc;
+        background-color: #f4f4f4;
+        color: #000;
+        font-size: 14px;
+    }
+    .link a:nth-of-type(1){
+        border-right: none;
+        border-top: 3px solid #00b5ff;
+        border-bottom: 1px solid #fff;
+        margin-left: 10px;
+        background-color: #fff;
     }
     footer{
         width: 100%;
@@ -268,24 +287,7 @@
         line-height: 46px;
         border-bottom: 1px solid #ccc;
     }
-    a{
-        font-size: 16px;
-        color: #333;
-        padding: 14px;
-        background-color: #f4f4f4;
-        border: 1px solid #ccc;
-        border-radius: 5px 5px 0 0;
-        border-bottom: 3px solid #fff
-    }     
-    .ivu-btn{
-        color: #fff;
-        background-color: #00b5ff;
-    }
-    .ivu-btn .ivu-icon{
-        color: #fff
-    }  
-    .temp2 .bluebtn{
-        background-color: #00b5ff;
-        color: #fff
-    }
+    /* .ivu-menu-dark{
+        background-color: transparent;
+    } */
 </style>

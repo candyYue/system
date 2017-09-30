@@ -15,6 +15,7 @@ Vue.use(Vuex)
 Vue.use(iView)
 import '../theme/dist/iview.css'
 import "../static/css/main.css";
+import "../static/css/public.css";
 
 new Vue({
     router,

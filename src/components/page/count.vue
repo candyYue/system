@@ -1,6 +1,7 @@
 <template>
-    <div class="temp1">
+    <div>
         <h3>坐席统计</h3>
+        <div class="temp">
         <!-- 选择日期 -->
         <div class="time">
             <DatePicker type="date" placeholder="选择日期" @on-change='startT'></DatePicker>
@@ -22,6 +23,7 @@
                 <Page :total="total" :page-size="pagesize" show-sizer :page-size-opts="[20, 50, 100]" @on-page-size-change="changepagesize" @on-change="changepage"></Page>
             </div>
         </div>
+    </div>
     </div>
 </template>
 

@@ -1,15 +1,14 @@
 <template>
-    <div class="temp1">
+    <div>
         <h3>坐席管理</h3>
+        <div class="temp">
         <div class="manage">
             <div class="handle">
-                <!-- <i></i> -->
-                <input placeholder="搜索" class="sname" v-model='sname' @keyup='osearch'></input>
-                 <!-- <Button type="ghost" icon="ios-search" size='small' @click='osearch'>搜索</Button> -->
-                
+                <Input v-model="sname" placeholder="搜索" class="sname" @keyup='osearch'></Input>
+                 
                 <div class="fr">
-                    <button @click="newseat=true"><Icon type="plus"></Icon>新建坐席</button>
-                    <button class="output" @click="$store.state.importseat=true"><Icon type="forward"></Icon>批量导入</button> 
+                    <Button @click="newseat=true" icon="plus">新建坐席</Button>
+                    <Button type="info" @click="$store.state.importseat=true"><Icon type="forward"></Icon>批量导入</Button>
                 </div>
             </div>
             <div>
@@ -95,6 +94,7 @@
             
             </div>
         </transition>
+    </div>
     </div>
 </template>
 
@@ -386,9 +386,6 @@
 </script>
 
 <style scoped>
-    .manage{
-        margin-top: 10px
-    }
     .handle{
         margin-bottom: 20px;
         overflow: hidden;
@@ -406,13 +403,11 @@
     .sname{
         width: 250px;
         height: 34px;
-        padding-left: 25px;
     }
     .fr{
         float: right;
     }
     .handle button{
-        width: 80px;
         height: 34px;
         border-radius: 3px;
         background-color: #fafafa;

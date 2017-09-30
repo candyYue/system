@@ -1,5 +1,7 @@
 <template>
-    <div class="temp1">
+<div>
+    <h3>通话记录</h3>
+    <div class="temp">
         <div class="handle">
             <Select class="select" @on-change="catselect" >
                 <Option v-for="item in category" :value="item.id"  :key="item.id">{{item.cm_result}}</Option>
@@ -21,6 +23,8 @@
             </div>
         </div>
     </div>
+</div>
+    
 </template>
 
 <script>

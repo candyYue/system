@@ -1,0 +1,10 @@
+h3{
+    font-size: 18px;
+    line-height: 50px;
+    padding-left: 36px;
+    font-weight: 500;
+    box-shadow: 0 2px 3px #ccc
+}
+.temp{
+    margin: 40px 28px 0 36px
+}
