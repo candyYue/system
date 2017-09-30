@@ -7,7 +7,7 @@
             </Select>
             <div class="btns">
                 <Button @click="deleteAction(0)"><Icon type="trash-a"></Icon>清空线索</Button>
-                <Button @click="deleteAction(2)"><Icon type="trash-a"></Icon>批量删除</Button>
+                <Button @click="deleteAction(2)" :disabled="averageCustomerButton"><Icon type="trash-a"></Icon>批量删除</Button>
                 <Button @click="averageCustomer(0)"><Icon type="android-person"></Icon>全部分配</Button>
                 <Button @click="averageCustomer(1)" :disabled="averageCustomerButton"><Icon type="android-person"></Icon>分配线索</Button>
                 <Button @click="clientAction(0)"><Icon type="plus"></Icon>新建线索</Button>
@@ -22,7 +22,7 @@
              v-model="deleteModal" title="删除提醒">
              <div class="item1"> {{deleteMsg}}</div>
              <div slot="footer">
-               <Button type="primary" size="large" @click="deleteComfirm">确定</Button>
+               <Button type="primary" size="large"  :loading="loading" @click="deleteComfirm">确定</Button>
                <Button size="large" @click="cancel">取消</Button>
              </div>
           </Modal>
@@ -72,15 +72,6 @@
                 </FormItem>
               </Form>
 
-              <!-- <div class="item1">客户名称<Input v-model="clientName" ></Input></div> -->
-              <!-- <div class="item1">客户电话<Input v-model="clientTel" ></Input></div> -->
-              <!-- <div class="item1">分配坐席
-                  <Select v-model="oid" :disabled="clientCustomer" @on-change="chooseseatid">
-                      <Option v-for="item in seatlist" :value="item.id" :key="item.number">{{item.name}}</Option>
-                  </Select>
-              </div> -->
-              <!-- <div class="item1">公司名称<Input v-model="clientCompany" ></Input></div> -->
-              <!-- <div class="item1">公司地址<Input v-model="clientAddress" ></Input></div> -->
               <div class="item1"><p>{{tip}}</p></div>
               <div slot="footer">
                 <Button type="primary" size="large" @click="clientModalComfirm">确定</Button>
@@ -91,17 +82,14 @@
         <!-- 线索弹框  end -->
 
         <!-- 批量导入 -->
-        <transition  enter-active-class="animated fadeIn">
-            <div class="mark" v-if="$store.state.importclient" @click="cancelimport"></div>
-        </transition>
-        <transition  enter-active-class="animated fadeIn">
-            <div class="importclient changebox" v-if="$store.state.importclient">
-                <a href="javascript:;" class="delete" @click="cancelimport"></a>
-                <h2>导入线索</h2>
-                <stepone v-if="$store.state.steponemark"></stepone>
-                <steptwo v-if="$store.state.steptwomark"></steptwo>
-                <stepthree v-if="$store.state.stepthreemark"></stepthree>
-            </div>
+        <transition enter-active-class="animated fadeIn">
+          <Modal v-if="$store.state.importclient" v-model="$store.state.importclient" title="导入线索"
+                 :mask-closable="false" width="600" :footer-hide="true"  class="import-modal">
+            <a slot="close" @click="cancelimport"><Icon type="ios-close-empty"></Icon></a>
+            <stepone v-if="$store.state.steponemark"></stepone>
+            <steptwo v-if="$store.state.steptwomark"></steptwo>
+            <stepthree v-if="$store.state.stepthreemark"></stepthree>
+          </Modal>
         </transition>
 
         <div class="content">
@@ -185,8 +173,6 @@
                         label:'未分配'
                     },
                 ],
-
-
                 // 表格相关
                 tablesel:"",   //选择分配的线索id
                 select:0,     // 当前操作id
@@ -297,6 +283,7 @@
                 this.$Modal.warning({content:'请选择要删除的企业'})
                 return false;
               }
+              that.loading=true;
               axios.get('/account/Customer/deleteCustomer',{params: {cid}})
               .then(function(response){
                   if (response.data.status==0) {
@@ -308,6 +295,7 @@
                           }
                       });
                       that.cancel()
+                      that.loading=false;
                   };
               })
               .catch(function(err){
@@ -678,11 +666,6 @@
     .dosth{
         margin-bottom: 20px
     }
-
-    .fr{
-        float: right;
-        overflow: hidden;
-    }
     .changebox{
       height: 608px;
     }
@@ -717,9 +700,7 @@
   .page ul{
        float: right;
    }
-   .newclint,.editclient{
-       height: 400px;
-   }
+
    .importclient{
        height: 300px;
    }
@@ -732,26 +713,8 @@
        bottom: 0;
        right: -30px;
    }
-   .newclint>.item1,.editclient>.item1,.deletedata>.item1{
-       line-height: 34px;
-       overflow: hidden;
-   }
 
-   .newclint>.item1>div,.editclient>.item1>div{
-       width: 438px;
-       height: 34px;
-       background-color: #fff;
-       border-radius: 3px;
-       margin-bottom: 13px;
-       float: right;
-       max-height: 200px
-   }
-   .item1 p{
-       position: absolute;
-       bottom: 75px;
-       left: 115px;
-       color:#ff5e5e;
-   }
+
    .explain{
       margin-top: 30px;
       color: #999

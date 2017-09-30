@@ -23,12 +23,12 @@ export default new Vuex.Store({
         firstlogin:false,
     },
     actions: {
-        
+
     },
     mutations: {
-        
+
     },
     getters: {
-       
+
     }
 });

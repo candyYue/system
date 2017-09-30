@@ -2,16 +2,16 @@
 	<div>
     	<div class="item1">
     	    <ul>
-                <li class="start"><div>1</div>上传文档<span></span></li>
-    	        <li class="doing"><div>2</div>导入数据<span></span></li>
+              <li class="start done"><div>1</div>上传文档</li>
+    	        <li class="doing done"><div>2</div>导入数据</li>
     	        <li class="finish active"><div>3</div>导入完成</li>
     	    </ul>
     	    <Progress :percent="100" status="active"></Progress>
             <p>导入完成，共 {{$store.state.all}} 条，已成功 {{$store.state.already}} 条</p>
     	    <p><a :href="'/account/Customer/getImportreport?hash_code=' + alink" class="downfailure">下载错误报告,</a>&nbsp;查看失败原因</p>
     	</div>
-    	<div class="item4">
-    	    <button class="confirm" @click="finish">完成</button>   
+    	<div slot="footer" class="ivu-modal-footer">
+    	    <Button size="large" type="primary" @click="finish">完成</Button>
     	</div>
     </div>
 </template>

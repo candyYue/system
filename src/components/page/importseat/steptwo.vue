@@ -10,7 +10,7 @@
             <p>正在导入</p>
     	</div>
     	<div class="item4">
-    	    <button class="confirm">正在导入</button>   
+    	    <Button class="confirm">正在导入</Button>   
     	</div>
     </div>
 </template>
@@ -25,7 +25,7 @@
             }
         },
         methods:{
-            
+
         },
         mounted(){
             var importtime=0
@@ -52,7 +52,7 @@
                 .then(function (response) {
                     that.percent=response.data.data.per
                     if (response.data.data.per==100) {
-                        
+
                         clearInterval(that.$store.state.getper)
                         that.$store.state.steptwomark=false
                         that.$store.state.stepthreemark=true

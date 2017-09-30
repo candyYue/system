@@ -1,38 +1,76 @@
+.import-modal .ivu-modal-body{
+  padding: 0;
+}
+.import-modal .ivu-modal-body .item1{
+  padding: 18px;
+  color:#666;
+}
  .item1>ul{
         width: 530px;
-        height: 80px;
+        height: 70px;
         position: relative;
         margin-bottom: 10px;
         overflow: hidden;
+    }
+    .item1 p{
+      color: #999;
     }
     .item1>ul li{
         position: absolute;
         bottom: 0;
     }
-    .item1>ul li span{
-        position: absolute;
-        left: 80px;
-        top: 17px;
-        width: 130px;
-        height: 1px;
-        /* background-color: #00b5ff; */
-        border-top: 1px dashed #00b5ff
-    }
     .item1>ul li div{
-        margin: 0 auto;
+        position: relative;
+        margin: 0 auto 10px;
         width: 35px;
         height: 35px;
-        background-color: #00b5ff;
-        border: 2px solid #00b5ff;
+        border: 1px solid #ddd;
+        background-color: #fafafa;
         border-radius: 50%;
-        color:#fff;
         text-align: center;
         line-height: 33px
     }
-    .item1>ul li.active{
-        background-color: #fff;
-        color:#00b5ff;
+    .item1>ul li.done div{
+        background-color: #00b5ff;
+        border: 1px solid #00b5ff;
+        color:#fff;
     }
+    .item1>ul li.active div{
+        background-color: #fff;
+        border: 2px solid #00b5ff;
+        color:#00b5ff;
+        box-shadow: 0 0 4px #00b5ff;
+    }
+    .item1>ul li.finish div::before,.item1>ul li.finish div::after{
+      content: none;
+    }
+    .item1>ul li div::before{
+      content: '';
+      display: block;
+      width:200px;
+      height: 1px;
+      border-top: 1px dashed #ddd;
+      position:absolute;
+      left: 35px;
+      top: 50%;
+    }
+    .item1>ul li div::after{
+      content: '';
+      display: block;
+      height: 1px;
+      position:absolute;
+      left: 35px;
+      top: 50%;
+    }
+    .item1>ul li.active div::after{
+      width:100px;
+      border-top: 1px dashed #00b5ff;
+    }
+    .item1>ul li.done div::after{
+      width:200px;
+      border-top: 1px dashed #00b5ff;
+    }
+
     .start{
         left: 0;
     }
@@ -48,9 +86,6 @@
     }
     .file{
         margin-top: 5px;
-        border: none;
-    }
-    input[type="file"]:hover{
         border: none;
     }
     .ivu-upload-list{

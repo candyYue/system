@@ -2,16 +2,16 @@
 	<div>
     	<div class="item1">
     	    <ul>
-    	        <li class="start"><div>1</div>上传文档<span></span></li>
+    	        <li class="start done"><div>1</div>上传文档</li>
     	        <li class="doing active"><div>2</div>导入数据</li>
     	        <li class="finish"><div>3</div>导入完成</li>
     	    </ul>
     	    <Progress :percent="percent" status="active"></Progress>
             <p>正在导入</p>
     	</div>
-    	<div class="item4">
-    	    <button class="confirm">正在导入</button>   
-    	</div>
+    	<!-- <div class="item4">
+    	    <Button class="confirm">正在导入</Button>
+    	</div> -->
     </div>
 </template>
 
@@ -25,7 +25,7 @@
             }
         },
         methods:{
-            
+
         },
         mounted(){
             var importtime=0
@@ -52,7 +52,7 @@
                 .then(function (response) {
                     console.log(response)
                     if (response.data.data.per==100) {
-                        
+
                         clearInterval(that.$store.state.getper)
                         that.$store.state.steptwomark=false
                         that.$store.state.stepthreemark=true

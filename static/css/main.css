@@ -11,12 +11,56 @@ html,body,#app,.wrapper{
 .clearfix {
     zoom: 1;
 }
+
+.temp{
+    margin-left: 36px;
+    margin-right: 28px;
+    padding-bottom: 80px;
+}
+
+/* modal */
+.ivu-modal-header .ivu-modal-header-inner{
+  font-size: 18px;
+  font-weight: normal;
+}
+.ivu-modal-content{
+  border-radius: 3px;
+}
+.ivu-modal-body{
+  font-size: 14px;
+  padding: 18px;
+}
 .ivu-modal{
   top: 50%;
   transform: translateY(-65%);
 }
+/* icon */
 .ivu-icon-ios-compose-outline,.ivu-icon-ios-trash-outline{
   font-size: 18px;
+}
+/* 报错 */
+.error p{
+    /*position: absolute;*/
+    bottom: 75px;
+    left: 115px;
+    color:#ff5e5e;
+}
+
+/* 表单*/
+.ivu-form-item{
+  margin-bottom: 0;
+}
+.ivu-form-item + .ivu-form-item{
+  margin-top: 12px;
+}
+.ivu-select-dropdown{
+  position: absolute !important;
+}
+.ivu-btn + .ivu-btn{
+  margin-left: 14px;
+}
+.ivu-transfer-operation .ivu-btn + .ivu-btn{
+  margin-left: 0;
 }
 
 h3{
@@ -25,31 +69,11 @@ h3{
     font-weight: 500;
 }
 
-/* placeholder颜色 */
-/*input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-    color:    #BBBEC7;
-}
-input:-moz-placeholder, textarea:-moz-placeholder {
-    color:    #BBBEC7;
-}
-input::-moz-placeholder, textarea::-moz-placeholder {
-    color:    #BBBEC7;
-}
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-    color:    #BBBEC7;
-}*/
 
-select{
-    border-radius: 4px;
-}
 .page{
     margin-top: 15px;
 }
-.temp{
-    margin-left: 36px;
-    margin-right: 28px;
-    padding-bottom: 80px;
-}
+
 /* 年月日表单 */
 .temp2{
     margin-top: 20px;

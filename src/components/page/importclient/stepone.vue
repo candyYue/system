@@ -6,7 +6,6 @@
     	        <li class="doing"><div>2</div>导入数据</li>
     	        <li class="finish"><div>3</div>导入完成</li>
     	    </ul>
-    	
     	    <p>一、请按照数据模板的格式准备要导入的数据，<a href="../../../../static/customer_templets.xlsx" class="downtemp" download="01">下载导入模板</a></p>
     	    <p>二、准备要导入的excel文件</p>
             <Upload action="/account/Customer/importCustomer" name="ccsv" class="file" :show-upload-list=false :on-success="handleSuccess">
@@ -14,9 +13,9 @@
                 <span class="uptip">{{uptip}}</span>
             </Upload>
     	</div>
-    	<div class="item4">
-    	    <button class="giveup" @click="$store.state.importclient=false">取消</button>
-    	    <button class="confirm" @click="startimport">开始导入</button>   
+    	<div slot="footer" class="ivu-modal-footer">
+				  <Button type="primary" size="large" @click="startimport">开始导入</Button>
+    	    <Button size="large" @click="$store.state.importclient=false">取消</Button>
     	</div>
     </div>
 </template>
@@ -40,7 +39,7 @@
                 }else{
                     this.uptip=res.info;
                 }
-                
+
                 // console.log(file)
             },
             startimport(){
@@ -51,12 +50,12 @@
                         hash_code:hashCode
                     }
                 })
-                .then(function (response) { 
+                .then(function (response) {
                     if(response.data.status===0){
                          that.$store.state.steponemark=false
                          that.$store.state.steptwomark=true
                     }
-                   
+
                 })
                 .catch(function (error) {
                     console.log(error);

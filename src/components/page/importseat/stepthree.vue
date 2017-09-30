@@ -11,7 +11,7 @@
     	    <p><a :href="'/account/Operator/getImportreport?hash_code=' + alink" class="downfailure">下载错误报告,</a>&nbsp;查看失败原因</p>
     	</div>
     	<div class="item4">
-    	    <button class="confirm" @click="finish">完成</button>   
+    	    <Button class="confirm" @click="finish">完成</Button>   
     	</div>
     </div>
 </template>
