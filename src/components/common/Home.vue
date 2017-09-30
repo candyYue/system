@@ -38,16 +38,16 @@
             <Menu theme="dark" width='230px'>
                 <Submenu name="1">
                     <template slot="title">
-                        <Icon type="ios-pie-outline"></Icon>
+                        <i class='center'></i>
                         统计中心
                     </template>
                     <MenuItem name="1-1"><router-link to="/day">统计概况</router-link></MenuItem>
                     <MenuItem name="1-2"><router-link to="/count">坐席统计</router-link></MenuItem>
                 </Submenu>
 
-                <MenuItem name="1-3"><router-link to="/link"><Icon type="ios-paper-outline"></Icon>线索池</router-link></MenuItem>
-                <MenuItem name="1-4"><router-link to="/manage"><Icon type="ios-grid-view-outline"></Icon>坐席管理</router-link></MenuItem>
-                <MenuItem name="1-5"><router-link to="/callhistory"><Icon type="document"></Icon>通话记录</router-link></MenuItem>
+                <MenuItem name="1-3"><router-link to="/link"><i class='client'></i>线索池</router-link></MenuItem>
+                <MenuItem name="1-4"><router-link to="/manage"><i class='seat'></i>坐席管理</router-link></MenuItem>
+                <MenuItem name="1-5"><router-link to="/callhistory"><i class='callhistory'></i>通话记录</router-link></MenuItem>
             </Menu>
         </Col>
         </div>
@@ -82,26 +82,31 @@
 
 
         <!-- 首次登陆修改密码 -->
-        <transition>
-            <div class="mark" v-if="$store.state.firstlogin"></div>
-        </transition>
-        <transition>
-            <div class="changebox" v-if="$store.state.firstlogin">
-                <!-- <a href="javascript:;" class="delete" @click="cancel"></a> -->
-                <h2>修改密码</h2>
-                <div class="item1">用户名<input type="text" v-model="companyname"  disabled="disabled" ></div>
-                <div class="item2"><div class="line"></div>修改密码</div>
-                <div class="item1">原密码<input type="password" v-model="oldpwd"></div>
-                <div class="item1">新密码<input type="password" v-model="newpassword"></div>
-                <div class="item1">确认密码<input type="password" v-model="passwordagain"></div>
-                <span class="tip">{{tip}}</span>
-                <div class="item4">
-                    <button class="confirm" @click="confirmpwd">确认</button>
-                </div>
+        <Modal v-model="$store.state.firstlogin">
+            <p slot="header">
+                <span>修改密码</span>
+            </p>
+            <Form label-position="right" :label-width="80">
+                <FormItem label="用户名">
+                    <Input v-model="companyname"></Input>
+                    <span class='changepwd'>修改密码</span>
+                </FormItem>
+                <FormItem label="原密码">
+                    <Input v-model="oldpwd"></Input>
+                </FormItem>
+                <FormItem label="新密码">
+                    <Input v-model="newpassword"></Input>
+                </FormItem>
+                <FormItem label="确认密码">
+                    <Input v-model="passwordagain"></Input>
+                    <span class="changetip">{{tip}}</span>
+                </FormItem>
+            </Form>
+            <div slot="footer">
+                <Button type="info"  @click="confirmpwd">确认</Button>
+                <Button @click="cancel">取消</Button>
             </div>
-        </transition>
-
-
+        </Modal>
         <!-- 过期提醒 -->
 
     </div>
@@ -355,10 +360,6 @@
         width: 100%;
         height: 100%;
     }
-    .sidebar i{
-        margin-right: 10px;
-        font-size:16px;
-    }
     .content{
         background: none repeat scroll 0 0 #fff;
         position: absolute;
@@ -486,16 +487,25 @@
     .ivu-form-item{
         margin-bottom: 24px
     }
-    .ivu-menu-dark{
-        background-color: #222c3e;
+    
+    .sidebar i{
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        margin-right: 10px;
+        font-size:16px;
+
     }
-    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu){
-            color: #363e4f;
+    .center{
+        background: url(../../../static/img/1.png) 0 -25px;
     }
-    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active:hover{
-        background-color: #3a4f72!important;
+    .client{
+        background: url(../../../static/img/1.png) -75px -25px;
     }
-    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active[data-v-0cbe70e4]:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active[data-v-0cbe70e4]:not(.ivu-menu-submenu){
-        background-color: #3a4f72;
+    .seat{
+        background: url(../../../static/img/1.png) -90px -25px;
+    }
+    .callhistory{
+        background: url(../../../static/img/1.png) -105px -25px;
     }
 </style>

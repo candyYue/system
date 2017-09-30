@@ -39,6 +39,7 @@
     export default {
         data: function(){
             return {
+                mp3play:true,
                 tableheight:0,
                 searchvalue:'',
                 starttime:"",
@@ -88,16 +89,16 @@
                         key: 'audio',
                         render: (h, params) => {
                             return h('div', [
-                                h('progress', {
-                                    attrs: {
-                                        value: '22',
-                                        max: '100',
+                                // h('progress', {
+                                //     attrs: {
+                                //         value: '22',
+                                //         max: '100',
                                         
-                                    },
-                                    'class':{
-                                        progress:true
-                                    },
-                                }),
+                                //     },
+                                //     'class':{
+                                //         progress:true
+                                //     },
+                                // }),
                                 h('p', this.time(params.row.duration_time)),
                             ]);
                         }
@@ -115,6 +116,7 @@
                                         size: 'small',
                                         shape:'circle',
                                         icon:'ios-play-outline',
+                                        disabled:this.mp3play
                                         
                                     },
                                     attrs:{
@@ -252,7 +254,7 @@
             },
             //下载
             download(index,row,column){
-                window.location.href='/account/CallRecord/DownloadVideo?res_token='+this.list[index].res_token+'&id='+this.list[index].id
+                window.location.href=this.list[index].record_filename
                    
             },
             //选择分类

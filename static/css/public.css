@@ -15,9 +15,27 @@ h3{
         float: right;
     }
 /* 修改密码头部 */
-    .ivu-modal-header span{
-        font-size: 18px
-    }
-    .ivu-input{
-        height: 34px
-    }
+.ivu-modal-header span{
+    font-size: 18px
+}
+.ivu-input{
+    height: 34px
+}
+.ivu-menu-dark{
+    background-color: #222c3e;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu){
+        color: #363e4f;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active:hover{
+    background-color: #3a4f72!important;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active[data-v-0cbe70e4]:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active[data-v-0cbe70e4]:not(.ivu-menu-submenu){
+    background-color: #3a4f72;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened .ivu-menu-submenu-title{
+    background-color: #222c3e;
+}
+.ivu-menu-vertical .ivu-menu-item, .ivu-menu-vertical .ivu-menu-submenu-title{
+    background-color: #222c3e;
+}
