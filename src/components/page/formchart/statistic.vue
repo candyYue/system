@@ -318,7 +318,7 @@ export default {
   }
 }
 </script>
-<style>
+<style >
   .overview{
     text-align: center;
   }
@@ -353,9 +353,9 @@ export default {
   }
 
   /* 表格 */
-  .ivu-table{
+  /* .ivu-table{
     overflow: scroll;
-  }
+  } */
   .details h4{
     margin-bottom: 20px;
     font-size: 16px;

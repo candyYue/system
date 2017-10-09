@@ -258,7 +258,7 @@
                     console.log(response)
                     that.tip=response.data.info;
                     if (response.data.status==0) {
-                        that.$Message.info('密码重置成功');
+                        that.$Message.success('密码重置成功');
                         that.cancel()
                         that.$store.state.firstlogin=false
                     }else{
