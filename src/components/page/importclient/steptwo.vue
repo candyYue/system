@@ -51,6 +51,7 @@
                 })
                 .then(function (response) {
                     console.log(response)
+                    that.percent=response.data.data.per
                     if (response.data.data.per==100) {
 
                         clearInterval(that.$store.state.getper)

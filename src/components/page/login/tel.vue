@@ -14,6 +14,7 @@
 </template>
 
 <script>
+    import {trim} from '../../../assets/common.js';
     import axios from 'axios';
     import qs from 'qs';
     export default {
@@ -29,9 +30,10 @@
                     this.wrongTip='请输入手机号'
                     return false;
                 }else{
+                    this.tel=this.tel.trim()
                     var r_this=this
-                axios.post('/account/user/getBelongEps',qs.stringify({phone:this.tel.trim()}))
-                .then(function(response){ 
+                    axios.post('/account/user/getBelongEps',qs.stringify({phone:r_this.tel}))
+                    .then(function(response){ 
                     var res=response.data
                     if (res.status==0) {
                         //存储手机号

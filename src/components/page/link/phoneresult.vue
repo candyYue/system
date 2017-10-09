@@ -82,6 +82,7 @@
                 }
             },
             addlimite(){
+
                 if (this.category.length<=9) {
                     this.classifyModal=true
                     this.classifyTitle="新建分类"
@@ -162,6 +163,10 @@
                 .then(function(response){
                     console.log(response);
                     if (response.data.status==0) {
+                       if(!response.data.data){
+                         that.category = []
+                         return;
+                       }
                        that.category=response.data.data;
                     }
                 })
@@ -226,6 +231,4 @@
       right:-40px;
       top: 0;
     }
-
-
 </style>

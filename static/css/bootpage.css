@@ -7,6 +7,16 @@
     top: 0;
     z-index: 99
 ;}
+
+.side-width{
+	width:230px; 
+	height: 100%;
+	float: left;
+}
+.mask-right{
+	position: relative;
+	/* float: right; */
+}
 .mark1 button,.mark2 button,.mark3 button{
 	position: absolute;
 	width: 184px;
@@ -51,12 +61,11 @@
 }
 .img1{
 	position: absolute;
-	width: 1000px;
-	height: 400px;
-	top: 50%;
-	left: 40%;
-	transform:translate(0,-50%);
-	background:url(../../static/img/bootpage/lead1.png) no-repeat center/contain;
+	width: 1111px;
+	height: 390px;
+	top:270px;
+	right: 180px;
+	background:url(../../static/img/bootpage/lead1.png) no-repeat center;
 }
 .img2{
 	position: absolute;
@@ -71,7 +80,7 @@
 	width: 1000px;
 	height: 400px;
 	top: 55%;
-	left: 22%;
+	left: 30%;
 	transform:translate(0,-50%);
 	background:url(../../static/img/bootpage/lead3.png) no-repeat center/contain;
 }

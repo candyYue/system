@@ -8,7 +8,7 @@
                 <DatePicker type="date" placeholder="选择日期" @on-change='startT'></DatePicker>
                  至
                 <DatePicker type="date" placeholder="选择日期" @on-change='endT'></DatePicker>
-                <Button type="primary" @click='searchdate' size="small">搜索</Button>
+                <Button type="primary" @click='searchdate'>搜索</Button>
             </div>
             <div class="fr">
                 <Input v-model="sname" placeholder="请输入姓名或号码进行模糊匹配" style="width: 280px"></Input>
@@ -17,8 +17,8 @@
             </div>
         </div>
         <!-- 坐席管理 -->
-        <div>
-            <Table :columns="columns" border :data="list" ref="table" ></Table>
+        <div class="tableContent">
+            <Table :columns="columns" border :data="list" ref="table"  size="small"></Table>
             
             <div class="page">
                 <Page :total="total" :page-size="pagesize" show-sizer :page-size-opts="[20, 50, 100]" @on-page-size-change="changepagesize" @on-change="changepage"></Page>
@@ -212,10 +212,6 @@
             width: 15px;
             height: 15px;
             background: url(../../../static/img/2.png) no-repeat 0-30px ;
-        }
-        
-        .searchicon{
-            margin-right: 8px
         }
         /* 导出按钮 */
         .ivu-btn{

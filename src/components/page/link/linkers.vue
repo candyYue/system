@@ -40,7 +40,7 @@
                       @on-change="handleChange" >
             </Transfer>
             <div class="explain">多选情况下线索是按勾选员工的顺序平均分配的,如果无法平均分配,则顺序靠前的员工被分配到的线索多</div>
-            <p class="wrongtip">{{tip}}</p>
+            <div class="error"><p>{{tip}}</p></div>
             <div slot="footer">
               <Button type="primary" size="large" :loading="loading" @click="averageAction">确定</Button>
               <Button size="large" @click="averageAllCancel">取消</Button>
@@ -52,7 +52,7 @@
         <!-- 线索弹框  start -->
         <transition enter-active-class="animated fadeIn">
           <Modal v-if="clientModal" v-model="clientModal" :title="clientTitle">
-              <Form  :label-width="80">
+              <Form  :label-width="69">
                 <FormItem label="客户名称">
                    <Input v-model="clientName" ></Input>
                 </FormItem>
@@ -72,7 +72,7 @@
                 </FormItem>
               </Form>
 
-              <div class="item1"><p>{{tip}}</p></div>
+              <div class="error"><p>{{tip}}</p></div>
               <div slot="footer">
                 <Button type="primary" size="large" @click="clientModalComfirm">确定</Button>
                 <Button size="large" @click="cancel">取消</Button>
@@ -92,7 +92,7 @@
           </Modal>
         </transition>
 
-        <div class="content">
+        <div class="tableContent">
             <!-- 表单 -->
             <Table :columns="columns7" :data="list" @on-selection-change="tableselect" size="small" ref="selection"></Table>
             <!-- 分页 -->
@@ -427,8 +427,8 @@
                   company:that.clientCompany,
                   address:that.clientAddress,
                 }
-                console.log(this.select);
-                console.log(!!this.select);
+                // console.log(this.select);
+                // console.log(!!this.select);
                 if(this.select){
                   url = '/account/Customer/modifyCustomer'
                   config.id = this.select
@@ -446,7 +446,7 @@
                            });
                            that.cancel();
                           //  that.typelaber=''
-                          if(this.select){
+                          if(this.select==0){
                              that.$Message.success('新建线索成功');
                           }
                        }

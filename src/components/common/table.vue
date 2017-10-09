@@ -32,28 +32,30 @@
                     <h3 class="title" v-if='seat'>坐席管理</h3>
                     <h3 class="title" v-if='client'>线索池</h3>
                     <div class="temp">
-                    <div v-if='client'>
-                        <div class="link" v-if='client'>
-                            <router-link to="/link">线索池</router-link>
-                            <router-link to="/phoneresult">通话结果管理</router-link>
+                        <div v-if='client' class="clearfix">
+                            <ul class="link">
+                                <li class='linktab'><router-link to="/link">线索池</router-link></li>
+                                <li class='linktab'><router-link to="/phoneresult">通话结果管理</router-link></li>
+                            </ul>
+                            <div class="temp2 clearfix">
+                                <div><Button icon="trash-a">删除</Button></div>
+                                <div :class={newhighlight:show3}><Button icon="android-person">分配线索</Button></div>
+                                <div><Button icon="plus">新建线索</Button></div>
+                                <div  :class={newhighlight:show2}><Button icon="bluebtn" type="info">批量导入</Button> </div>
+                                <div><Button icon="reply" type="info">全部导出</Button></div>   
+                            </div>
                         </div>
-                        <div class="temp2">
-                        <div><Button icon="trash-a" size="large">删除</Button></div>
-                        <div :class={newhighlight:show3}><Button icon="android-person" size="large">分配线索</Button></div>
-                        <div ref="new"><Button icon="plus" size="large">新建线索</Button></div>
-                        <div ref="import" :class={newhighlight:show2}><Button icon="bluebtn" type="info" size="large">批量导入</Button></div>
-                        <div ref="all"><Button icon="reply" type="info" size="large">全部导出</Button></div>   
+                        <div v-if='seat'  class="clearfix">
+                            <div class="temp2">
+                                <div :class={newhighlight:show1}><Button icon="plus">新建线索</Button></div>
+                                <div ref="page1":class={newhighlight:show1}><Button icon="bluebtn" type="info">批量导入</Button></div> 
+                            </div>
                         </div>
+                        <div class="tableContent">
+                        <Table   :columns="columns7" :data="list" size="small"></Table>
                     </div>
-                    <div v-if='seat'>
-                        
-                        <div class="temp2">
-                            <div ref="new" :class={newhighlight:show1}><Button icon="plus" size="large">新建线索</Button></div>
-                            <div ref="import" :class={newhighlight:show1}><Button icon="bluebtn" type="info" size="large">批量导入</Button></div> 
-                        </div>
                     </div>
-            
-                </div>
+                    
                 </div>
             </transition>
             
@@ -82,11 +84,15 @@
         
         <!-- 新手指导页面1 -->
         <transition  enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-            <div class="mark1" v-if="show1">
-                 <div class="img1" v-if="show1">
-                     <p class="tip1">为了保障坐席人员的使用，建议您先在坐席管理页面新建坐席或批量导入坐席 </p>
-                     <Button type="info" @click="mark2">下一步</Button>
+            <div class="mark1 clearfix" v-if="show1">
+                 <div class="side-width"></div>
+                 <div class="mask-right">
+                     <div class="img1" ref='img1' v-if="show1">
+                         <p class="tip1">为了保障坐席人员的使用，建议您先在坐席管理页面新建坐席或批量导入坐席 </p>
+                         <Button type="info" @click="mark2">下一步</Button>
+                     </div>
                  </div>
+                 
             </div>
         </transition>
         <!-- 新手指导页面2 -->
@@ -127,7 +133,64 @@
                 dropshow:false,
                 changebox:false,
                 tip:"",
-                
+                columns7: [
+                    {
+                        type: 'selection',
+                        width: 60,
+                        align: 'center'
+                    },
+                    {
+                        title: '电话',
+                        key: 'cm_mobile'
+                    },
+                    {
+                        title: '名称',
+                        key: 'cm_name'
+                    },
+                    {
+                        title: '公司名称',
+                        key: 'cm_company'
+                    },
+                    {
+                        title: '坐席',
+                        key: 'seat',
+                        
+                    },
+                    {
+                        title: '通话结果',
+                        key: 'cm_result'
+                    },
+                    {
+                        title: '地址',
+                        key: 'address'
+                    },
+                    {
+                        title: '备注',
+                        key: 'cm_detail'
+                    },
+                    {
+                        title: '操作',
+                        key: 'action',
+                        align: 'center',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                      type: 'text',
+                                      icon: "ios-compose-outline"
+                                    }
+                                }),
+                                h('Button', {
+                                    props: {
+                                      type: 'text',
+                                      icon: "ios-trash-outline"
+                                    },
+                                })
+                            ]);
+                        }
+                    }
+                ],
+                list:[]
             }
         },
         mounted(){
@@ -139,6 +202,12 @@
             var arr = new Array("日", "一", "二", "三", "四", "五", "六");  
             var week = new Date().getDay();  
             this.datemg2 = "星期"+ arr[week];  
+
+            console.log(parseInt(this.$refs.page1.offsetTop+120)+'px')
+            console.log(parseInt(this.$refs.page1.offsetLeft-1000)+'px')
+
+            var img1 = window.getComputedStyle ? window.getComputedStyle(this.$refs.img1,null) : null || this.$refs.img1.currentStyle;
+        
         },
         methods:{
             mark2(){ 
@@ -233,7 +302,6 @@
         top: 0;
         bottom:0;
         left: 230px;
-        width: auto;
         box-sizing: border-box;
         overflow-y: scroll;
     }
@@ -248,24 +316,32 @@
         border-radius: 4px;
     }
     .link{
+        margin:40px 0 20px;
         border-bottom: 1px solid #ccc;
-        overflow: hidden;
     }
-    .link a{
+    .link .linktab{
         float: left;
-        height: 50px;
+        margin-bottom: -1px;
+    }
+    .link .linktab:nth-of-type(1){
+        margin-left: 10px;
+    }
+    a{
+        display: inline-block;
+        line-height: 50px;
+        height: 51px;
         padding: 0 20px;
         border: 1px solid #ccc;
+        border-bottom: none;
         background-color: #f4f4f4;
-        color: #000;
-        font-size: 14px;
+        font-size: 16px;
+        color: #333;
     }
-    .link a:nth-of-type(1){
+    .linktab:nth-of-type(1) a{
         border-right: none;
-        border-top: 3px solid #00b5ff;
-        border-bottom: 1px solid #fff;
-        margin-left: 10px;
         background-color: #fff;
+        border-top: 3px solid #00b5ff;
+        border-bottom: 1px solid #fff
     }
     footer{
         width: 100%;
@@ -288,4 +364,7 @@
     /* .ivu-menu-dark{
         background-color: transparent;
     } */
+    .temp>div{
+        margin-bottom: 20px
+    }
 </style>

@@ -14,6 +14,8 @@ h3{
 .fr{
         float: right;
     }
+
+
 /* 修改密码头部 */
 .ivu-modal-header span{
     font-size: 18px
@@ -26,6 +28,7 @@ h3{
 }
 .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu){
         color: #363e4f;
+        border-right: none;
 }
 .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active:hover{
     background-color: #3a4f72!important;
@@ -38,4 +41,13 @@ h3{
 }
 .ivu-menu-vertical .ivu-menu-item, .ivu-menu-vertical .ivu-menu-submenu-title{
     background-color: #222c3e;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu):hover, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu):hover{
+    background-color: #3a4f72!important;
+}
+.ivu-table th{
+    background-color: #fafafb;
+}
+.ivu-table:after,.ivu-table:before{
+    z-index: 0
 }

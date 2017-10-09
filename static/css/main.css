@@ -54,7 +54,7 @@ html,body,#app,.wrapper{
   margin-top: 12px;
 }
 .ivu-select-dropdown{
-  position: absolute !important;
+  /*position: absolute !important;*/
 }
 .ivu-btn + .ivu-btn{
   margin-left: 14px;
@@ -69,7 +69,10 @@ h3{
     font-weight: 500;
 }
 
-
+.tableContent{
+    position: relative;
+    /* width: 1626px; */
+}
 .page{
     margin-top: 15px;
 }
@@ -90,9 +93,7 @@ h3{
 .page ul{
     float: right;
 }
-.content{
-    position: relative;
-}
 .ivu-date-picker{
     width: 160px;
 }
+

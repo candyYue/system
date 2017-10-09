@@ -2,7 +2,7 @@
 <div>
     <h3>通话记录</h3>
     <div class="temp">
-        <div class="handle">
+        <div class="clearfix handle">
             <div class="fl">
                 <Select class="select" @on-change="catselect" >
                     <Option v-for="item in category" :value="item.id"  :key="item.id">{{item.cm_result}}</Option>
@@ -10,18 +10,16 @@
                 <DatePicker type="date" placeholder="选择日期"  @on-change='startT'></DatePicker>
                  至
                 <DatePicker type="date" placeholder="选择日期" @on-change='endT'></DatePicker>
-                <Button type="primary" @click='searchdate' size="small">搜索</Button>
+                <Button type="primary" @click='searchdate'>搜索</Button>
             </div>
-                <div class="fr">
-                    <Button type="primary" class='search' @click='searchrecord'>搜索</Button>
-                    <Input class='search searchinput' v-model="searchvalue" placeholder="请输入姓名或号码进行模糊匹配"></Input>
-                </div>
-            
-            
+            <div class="fr">
+                <Input class='search searchinput' v-model="searchvalue" placeholder="请输入姓名或号码进行模糊匹配"></Input>
+                <Button type="primary" class='search' @click='searchrecord'>搜索</Button>
+            </div>   
         </div>
         
-        <div class="content">
-            <Table :columns="columns1" :data="list"  ></Table>
+        <div  class="tableContent">
+            <Table :columns="columns1" :data="list"  size="small"></Table>
 
             <div class="page">
                 <Page :total="total" :page-size="pagesize" show-sizer :page-size-opts="[20, 50, 100]" @on-page-size-change="changepagesize" @on-change="changepage"></Page>
@@ -39,7 +37,7 @@
     export default {
         data: function(){
             return {
-                mp3play:true,
+                // mp3play:true,
                 tableheight:0,
                 searchvalue:'',
                 starttime:"",
@@ -116,7 +114,7 @@
                                         size: 'small',
                                         shape:'circle',
                                         icon:'ios-play-outline',
-                                        disabled:this.mp3play
+                                        disabled:true
                                         
                                     },
                                     attrs:{
@@ -127,7 +125,7 @@
                                         btn1:true
                                     },
                                     style: {
-                                        marginRight: '5px'
+                                        marginRight: '22px'
                                     },
                                     on: {
                                         click: () => {
@@ -150,9 +148,12 @@
                                         shape:'circle',
                                         icon:'ios-arrow-thin-down'
                                     },
+                                    'class':{
+                                        btn2:true
+                                    },
                                     on: {
                                         click: () => {
-                                            this.download(params.index)
+                                            this.download(params.index,params.row,params.column)
                                         }
                                     }
                                 }),
@@ -233,9 +234,8 @@
             },
             //播放
             play(index,row,column){
-                
                 var btn1=document.querySelectorAll('.btn1');
-                var downloadaudio='/account/CallRecord/DownloadVideo?res_token='+this.list[index].res_token+'&id='+this.list[index].id
+                // var downloadaudio='/account/CallRecord/DownloadVideo?res_token='+this.list[index].res_token+'&id='+this.list[index].id
                 
                 if (btn1[index].value=="pause") {  // >
                     for (var i = 0; i < btn1.length; i++) {
@@ -243,7 +243,6 @@
                         btn1[index].innerHTML='<i class="ivu-icon ivu-icon-ios-pause-outline"></i>'
                         btn1[index].value="play"
                     };
-
                     document.querySelector('.audio').src=downloadaudio;
                     document.querySelector('.audio').play()
                 }else{
@@ -253,9 +252,13 @@
                 }    
             },
             //下载
-            download(index,row,column){
-                window.location.href=this.list[index].record_filename
-                   
+            download(index){
+
+                var btn2=document.querySelectorAll('.btn2');
+                btn2[index].style.color="#00b5ff"
+                window.location.href=this.list[index].record_filename;   
+                      
+                
             },
             //选择分类
             catselect(value){
@@ -278,7 +281,6 @@
             changepagesize(index){
                 this.pagesize=index;
                 this.getCallRecord()
-
             },
             //切换页数
             changepage(index){
@@ -287,7 +289,6 @@
             },
         },
         mounted(){
-
             this.tableheight=document.body.clientHeight-270;
             var that=this;
             //获取分类
@@ -315,9 +316,7 @@
         margin-bottom: 120px;
     }
     .handle{
-        position: relative;
         margin:20px 0;
-        overflow: hidden;
     }
     
     .fl div{
@@ -343,5 +342,4 @@
     progress{
         border: 1px solid #00b5ff
     }
-
 </style>

@@ -4,14 +4,14 @@
         <div class="temp">
         <div class="manage">
             <div class="handle">
-                <Input v-model="sname" placeholder="搜索" class="sname" @keyup='osearch'></Input>
+                <Input v-model="sname" placeholder="搜索" class="sname" @on-keyup='osearch'></Input>
                  
                 <div class="fr">
-                    <Button @click="newseat=true" icon="plus">新建坐席</Button>
+                    <Button @click="seatAction" icon="plus">新建坐席</Button>
                     <Button type="info" @click="$store.state.importseat=true"><Icon type="forward"></Icon>批量导入</Button>
                 </div>
             </div>
-            <div>
+            <div class="tableContent">
                 <Table   :columns="columns7" :data="list" size="small"></Table>
                             <!-- 分页 -->
                 <div class="page">
@@ -20,65 +20,47 @@
             </div>    
         </div>
         <!-- 新建坐席 -->
-        <Modal v-model="newseat" title="新建坐席">
-            <Form  :label-width="80">
-                <FormItem label="坐席名称">
-                   <Input v-model="newlistname" placeholder='必填'></Input>
-                </FormItem>
-                <FormItem label="坐席号">
-                   <Input v-model="newlistnumber"  placeholder='选填  (首位不为零的6-8个数字)'></Input>
-                </FormItem>
-                <FormItem label="手机号">
-                    <Input v-model="newlistmobile" placeholder='必填'></Input>
-                </FormItem>
-                <FormItem label="登录密码">
-                   <Input v-model="newlistpwd"  placeholder='必填' type='password'></Input>
-                </FormItem>
-                <div class="item1"><p>{{tip}}</p></div>
-              </Form>
-            <div slot="footer">
-                <Button type="info" @click="confirmnew">确认</Button>
-                <Button @click="cancel">取消</Button>
-            </div>
-        </Modal>
-        <!-- 单条删除提醒 -->
-        <transition  enter-active-class="animated fadeIn">
-            <div class="mark" v-if="deleteone" @click="cancel"></div>
-        </transition>
-        <transition  enter-active-class="animated fadeIn">
-            <div class="deletedata changebox" v-if="deleteone">
-                <a href="javascript:;" class="delete" @click="cancel"></a>
-                <h2>删除提醒</h2>
-                <div class="item1">
-                    删除后，线索将无法恢复。确定删除线索？
+         <transition enter-active-class="animated fadeIn">
+            <Modal v-model="seatbox" :title="seattitle" v-if="seatbox">
+                <Form  :label-width="69">
+                    <FormItem label="坐席名称">
+                       <Input v-model="newlistname" placeholder='必填'></Input>
+                    </FormItem>
+                    <FormItem label="坐席号">
+                       <Input v-model="newlistnumber"  placeholder='选填  (首位不为零的6-8个数字)'></Input>
+                    </FormItem>
+                    <FormItem label="手机号">
+                        <Input v-model="newlistmobile" placeholder='必填'></Input>
+                    </FormItem>
+                    <FormItem label="登录密码">
+                       <Input v-model="newlistpwd"  placeholder='必填' type='password'></Input>
+                    </FormItem>
+                    <div class="error"><p>{{tip}}</p></div>
+                  </Form>
+                <div slot="footer">
+                    <Button type="info" @click="confirmnew">确认</Button>
+                    <Button @click="cancel">取消</Button>
                 </div>
-                <div class="item4">
+            </Modal>
+        </transition>
+        <!-- 单条删除提醒 -->
+        <!-- <transition  enter-active-class="animated fadeIn">
+            
+        </transition> -->
+        <transition enter-active-class="animated fadeIn">
+            <Modal v-model="deleteone" width="360" v-if="deleteone">
+                <p slot="header">
+                    <span>删除提醒</span>
+                </p>
+                <div style="text-align:center">
+                    <p>删除后，线索将无法恢复。确定删除线索？</p>
+                </div>
+                <div slot="footer">
                     <Button @click="cancel">取消</Button>
                     <Button type="info" @click="removesingle">确认</Button>
                 </div>
-            </div>
+            </Modal>
         </transition>
-
-        <!-- 编辑坐席 -->
-        <transition  enter-active-class="animated fadeIn">
-            <div class="mark" v-if="editseat" @click="editseat=false"></div>
-        </transition>
-        <transition  enter-active-class="animated fadeIn">
-            <div class="editseat" v-if="editseat">
-                <a href="javascript:;" class="delete" @click="cancel"></a>
-                <h2>编辑坐席</h2>
-                <div class="item1">坐席名称<Input v-model="list[select].name" style="width: 438px"></Input></div>
-                <div class="item1">坐席号<Input v-model="list[select].number" style="width: 438px"></Input></div>
-                <div class="item1">手机号<Input v-model="list[select].mobile" style="width: 438px"></Input></div>
-                <div class="item1">登录密码<Input v-model="list[select].pwd"style="width: 438px"  type='password'></Input></div>
-                <div class="item1"><p>{{tip}}</p></div>
-                <div class="item4">
-                    <Button @click="cancel">取消</Button>
-                    <Button type="info" @click="confirmedit">确认</Button>
-                </div>
-            </div>
-        </transition>
-
         
         <!-- 导入坐席 -->
         <transition enter-active-class="animated fadeIn">
@@ -110,11 +92,13 @@
                 newlistnumber:"",
                 newlistmobile:"",
                 newlistpwd:'',
+                oid:'',
+                seattitle:'',
                 tip:"",
-                select:-1,
-                editseat:false,
+                select:0,
+                // editseat:false,
                 deleteone:false,
-                newseat:false,
+                seatbox:false,
                 pagesize:20,  //每页条数
                 page:1,      //页数
                 total:0,
@@ -151,7 +135,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.edit(params.index)
+                                            this.edit(params.row)
                                         }
                                     }
                                 }),
@@ -191,8 +175,8 @@
                 clearInterval(this.$store.state.getper)
             },
             cancel(){
-                this.newseat=false
-                this.editseat=false
+                this.select=0
+                this.seatbox=false
                 this.deleteone=false
                 this.tip=''
                 this.newlistname=""
@@ -243,7 +227,6 @@
                     count:that.pagesize
                     } 
                })
-
             },
             //切换页数
             changepage(index){
@@ -257,69 +240,56 @@
                     }
                })
             },
-            //编辑
-            confirmedit(){
-                var that=this
-                axios.get('/account/Operator/modifyOperator', {
-                params: {
-                        name:that.list[that.select].name,
-                        number:that.list[that.select].number,
-                        phone:that.list[that.select].mobile,
-                        pwd:that.list[that.select].pwd,
-                        id:that.list[that.select].id,
-                    }
-                })
-                .then(function(response){
-                    if(response.data.status==0){
-                        that.getallmember('/account/Operator/getAllmembers',{
-                            params:{
-                                first_id:(that.page-1)*that.pagesize,
-                                count:that.pagesize,
-                                search:that.sname
-                            } 
-                        })
-                        that.editseat=false;
-                    }else{
-                        if(response.data.status==100000){
-                            that.tip="输入格式不正确"
-                        }else{
-                            that.tip=response.data.info
+            seatAction(){
+                this.seatbox=true
+                this.seattitle='新建坐席'
+                this.tip=''
+                this.newlistname=""
+                this.newlistnumber=""
+                this.newlistmobile=""
+                this.newlistpwd=''
+            },
+            //坐席弹框~
+            confirmnew(){
+                if(this.newlistname.trim()=='') {
+                    this.tip="请输入坐席名称"
+                    return;
+                }
+                if(this.newlistmobile.trim()=='') {
+                    this.tip="请输入坐席手机号"
+                    return;
+                }
+                if(this.newlistpwd.trim()=='') {
+                    this.tip="请输入坐席登录密码"
+                    return;
+                }
+                var that=this; 
+                var url=''
+                if (this.oid=='') {
+                    url='/account/Operator/addOperator'
+                } else {
+                    url='/account/Operator/modifyOperator'
+                }
+                axios.get(url,{
+                    params:{
+                        name:that.newlistname,
+                        number:that.newlistnumber,
+                        phone:that.newlistmobile,
+                        pwd:that.newlistpwd,
+                        id:that.oid
                         }
                     }
-                    
-                })
-                .catch(function(err){
-                    console.log(err);
-                }); 
-            },
-            //新建~
-            confirmnew(){
-                var that=this; 
-                axios.post('/account/Operator/addOperator',qs.stringify({
-                    name:that.newlistname,
-                    number:that.newlistnumber,
-                    phone:that.newlistmobile,
-                    pwd:that.newlistpwd
-
-                }))
+                )
                 .then(function(response){
                     console.log(response)
-                    if(response.data.status==0){
-                        that.newlist={
-                            name:response.data.data.name,
-                            number:response.data.data.number,  
-                            mobile:response.data.data.mobile,
-                            oid:response.data.data.id,
-                        }
-                        
+                    if(response.data.status==0){ 
                         that.cancel()
-                        that.$Message.success('新建坐席成功');
-                    }else{
-                        if(response.data.status==100000){
-                            that.tip="输入格式不正确"
-                        }else{
-                            that.tip=response.data.info
+                        if(this.select){
+                            that.$Message.success('新建坐席成功');
                         }
+                    }else{
+                        that.tip=response.data.info
+                        
                     }
                 })
                 .catch(function(err){
@@ -327,9 +297,18 @@
                 }); 
                 
             },
-            edit (index) {
-                this.select=index;
-                this.editseat=true
+            edit (row) {
+                // console.log(row)
+                this.select=row._index;
+                this.seattitle = "编辑坐席"
+                
+                // this.editseat=true
+                this.newlistname=this.list[this.select].name
+                this.newlistnumber=this.list[this.select].number
+                this.newlistmobile=this.list[this.select].mobile
+                this.newlistpwd=this.list[this.select].pwd
+                this.oid=this.list[this.select].id
+                this.seatbox=true
             },
             //删除
             remove (index) {
@@ -430,9 +409,6 @@
     }
     .newseat,.editseat{
         height: 350px;
-    }
-    .manage>div{
-        position: relative;
     }
     .page{
         position: absolute;

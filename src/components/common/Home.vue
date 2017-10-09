@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <div class="content" :class={bigcontent:isbigcontent}>
+        <div class="RightContent" :class={bigcontent:isbigcontent}>
             <div class="header">
                 <a href="javascript:;" class="toggle" @click="toogle"><Icon type="navicon"></Icon></a>
                 <div class="user-info">
@@ -36,6 +36,7 @@
             <div class="logo"><p>云电销企业后台管理</p></div>
             <Col span="8">
             <Menu theme="dark" width='230px'>
+                <MenuItem name="1-0">菜单栏</MenuItem>
                 <Submenu name="1">
                     <template slot="title">
                         <i class='center'></i>
@@ -360,7 +361,7 @@
         width: 100%;
         height: 100%;
     }
-    .content{
+    .RightContent{
         background: none repeat scroll 0 0 #fff;
         position: absolute;
         right: 0;

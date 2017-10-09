@@ -1,57 +1,64 @@
 <template>
-    <div class="temp1">
+    <div class="">
         <h3>统计概况</h3>
-
-        <ul class="cate">
-            <li><router-link to="/day">日报</router-link></li>
-            <li><router-link to="/month">月报</router-link></li>
-            <li class="choosetime"><router-link to="/year">年报</router-link></li>
-            <!-- <li class="choosetime"><router-link to="/othertime">自定义时间</router-link></li> -->
-        </ul>
-
-        
-        <router-view></router-view >
-        
+        <div class="temp">
+          <ul class="cate clearfix">
+              <li v-for="elem in catalog" :key="elem.key" :class="{'active' : elem.active}"
+                  @click="tabChange(elem)"
+              >{{elem.name}}</li>
+          </ul>
+          <Statistic :type="type"></Statistic>
+        </div>
     </div>
 </template>
 
 <script>
-    // import {myCommon} from '../../assets/common.js';
-    import Schart from 'vue-schart';
+    import Statistic from './formchart/statistic.vue'
     export default {
         data () {
             return {
-                call:[]
+              catalog:[{name:"日报",active:true,key:1},
+                      {name:"月报",active:false,key:30},
+                      {name:"年报",active:false,key:365}],
+              type:1,
+              // this.data
             }
         },
+        components: {
+          Statistic
+        },
+        methods:{
+          tabChange(elem){
+            this.catalog.map(d=>d.active = false)
+            elem.active = true;
+            this.type = elem.key;
+          }
+        }
     }
 </script>
 
 <style scoped>
     .cate{
         margin-top: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        display: inline-block;
     }
     .cate li{
         text-align: center;
         float: left;
         width: 60px;
         line-height: 34px;
-        border: 1px solid #ccc;
         border-right: 0;
         cursor: pointer;
         font-size: 14px;
     }
-    .cate .choosetime{
-        border-right: 1px solid #ccc
+    .cate li+li{
+      border-left:  1px solid #ccc;
     }
-    .router-link-active {
-        color: #fff;
-        background-color: #00b5ff;
+    .active{
+      color: #fff;
+      background-color: #00b5ff;
     }
-    li a{
-        display: block;
-        width: 100%;
-        height: 100%;
-    }
-    
+
 </style>

@@ -15,8 +15,8 @@
                     </Button>
                 </div>
                 <div>
-                    <Input v-model="newpwd" placeholder="请输入6-16位密码" type="password"  style="width: 300px"></Input>
-                    <!-- <input placeholder="" class="newpwd" v-model=""></input> -->
+                    <Input v-model="newpwd" placeholder="请输入6-16位密码" type="password"  style="width: 300px" class="newpwd"></Input>
+                    <!-- <input placeholder="请输入6-16位密码" class="newpwd" v-model="newpwd"></input> -->
                     <div class="pwdeye"></div>
                 </div>
                 <div>
