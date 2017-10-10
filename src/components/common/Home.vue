@@ -10,7 +10,7 @@
                         <img class="user-logo" src="../../../static/img/photo.png">
                         您好！云电销 - 管理员</span>
                     </span>
-                    <transition name="custom-classes-transition" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+                    <transition name="custom-classes-transition" enter-active-class="animated fadeIn">
                         <div class="drop" v-if="dropshow">
                             <div class="dropup">
                                 <img src="../../../static/img/photo.png" alt="" class="userphoto">
@@ -68,10 +68,10 @@
                     <Input v-model="oldpwd"></Input>
                 </FormItem>
                 <FormItem label="新密码">
-                    <Input v-model="newpassword"></Input>
+                    <Input v-model="newpassword" type='password'></Input>
                 </FormItem>
                 <FormItem label="确认密码">
-                    <Input v-model="passwordagain"></Input>
+                    <Input v-model="passwordagain" type='password'></Input>
                     <span class="changetip">{{tip}}</span>
                 </FormItem>
             </Form>
@@ -96,16 +96,15 @@
                     <Input v-model="oldpwd"></Input>
                 </FormItem>
                 <FormItem label="新密码">
-                    <Input v-model="newpassword"></Input>
+                    <Input v-model="newpassword"  type='password'></Input>
                 </FormItem>
                 <FormItem label="确认密码">
-                    <Input v-model="passwordagain"></Input>
+                    <Input v-model="passwordagain"  type='password'></Input>
                     <span class="changetip">{{tip}}</span>
                 </FormItem>
             </Form>
             <div slot="footer">
                 <Button type="info"  @click="confirmpwd">确认</Button>
-                <Button @click="cancel">取消</Button>
             </div>
         </Modal>
         <!-- 过期提醒 -->
@@ -260,6 +259,7 @@
                     if (response.data.status==0) {
                         that.$Message.success('密码重置成功');
                         that.cancel()
+                        that.$router.push("/day") 
                         that.$store.state.firstlogin=false
                     }else{
                         return
@@ -274,7 +274,7 @@
 </script>
 <style scoped>
     @import "../../../static/css/animate.css";
-    @import "../../../static/css/mark.css";
+    /* @import "../../../static/css/mark.css"; */
     @import "../../../static/css/bootpage.css";
     a {
         color: #bfcbd9;
@@ -307,7 +307,7 @@
         height: 54px;
     }
     .user-info .date{
-        font-size: 12px;
+        font-size: 14px;
         color: #999;
     }
     .user-info .el-dropdown-link{
@@ -323,11 +323,10 @@
         padding:0 14px 0 64px;
         position: relative;
         color: #303030;
-        font-size: 12px
+        font-size: 14px
     }
     .user-info .welcome:hover{
         background-color: #fafafb;
-        border-bottom: 1px solid #ccc;
     }
     .user-info .user-logo{
         position: absolute;
@@ -385,12 +384,12 @@
         bottom: 0;
         height: 50px;
         padding-left: 36px;
-        font-size: 12px;
+        font-size: 14px;
         line-height: 50px;
         color: #666;
         background-color: #fafafb;
         border: 1px solid #e6e6e6;
-        /*z-index: 99;*/
+        z-index: 99;
     }
     .drop{
         width: 260px;
@@ -425,7 +424,7 @@
         line-height: 20px;
     }
     .dropup p{
-        font-size: 12px;
+        font-size: 14px;
         color: #c6e3f5;
         line-height: 14px;
         margin-top: 10px;
@@ -433,7 +432,7 @@
     }
     .dropdown{
         height: 56px;
-        padding: 12px;
+        padding: 14px;
         position: relative;
     }
     .dropdown button{

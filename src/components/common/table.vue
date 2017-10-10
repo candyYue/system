@@ -244,10 +244,6 @@
         line-height: 54px;
         border-bottom: 1px solid #ccc;
     }
-    .header a{
-        font-size: 36px;
-        margin-left: 20px
-    }
     .logo{
         line-height: 54px;
         width:230px;
@@ -372,5 +368,14 @@
     } */
     .temp>div{
         margin-bottom: 20px
+    }
+    .toggle{
+        display: inline-block;
+        width: 54px;
+        text-align: center;
+    }
+    .toggle i{
+        font-size: 28px;
+        line-height: 50px;
     }
 </style>

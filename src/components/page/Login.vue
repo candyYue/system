@@ -3,10 +3,9 @@
         <div class="ms-login">
             <div class="loginLeft">
                 <img src="../../../static/img/login/logo.png" height="80" width="80" alt="">
+                <p class="title">云电销管理后台</p>
                 <p class='logotext'>
-                  
                     <span>南京易米云通网络科技有限公司 版权所有</span>
-                  
                 </p>
             </div>
             <div class="loginRight">
@@ -63,6 +62,13 @@ import findpassword from './login/findpassword.vue'
         width:1066px;
         height:600px;
         box-shadow: 5px 5px  10px 0 #a5c8df
+    }
+    .title{
+        font-size: 30px;
+        position: absolute;
+        top: 200px;
+        left: 50%;
+        transform:translateX(-50%) 
     }
     .loginLeft{
         float: left;

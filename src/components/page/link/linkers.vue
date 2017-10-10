@@ -2,20 +2,19 @@
     <div>
         <!-- 操作栏 -->
         <div class="dosth clearfix">
-            <Select class="select" @on-change="catselect" v-model='typelaber'>
+            <Select class="select" @on-change="catselect" v-model='typevalue'>
                 <Option v-for="item in category" :value="item.value"  :key="item.value">{{item.label}}</Option>
             </Select>
             <div class="btns">
                 <Button @click="deleteAction(0)"><Icon type="trash-a"></Icon>清空线索</Button>
-                <Button @click="deleteAction(2)" :disabled="averageCustomerButton"><Icon type="trash-a"></Icon>批量删除</Button>
-                <Button @click="averageCustomer(0)"><Icon type="android-person"></Icon>全部分配</Button>
+                <Button @click="deleteAction(2)"><Icon type="trash-a"></Icon>批量删除</Button>
+                <Button @click="averageCustomer(0)" :disabled="averageCustomerButton"><Icon type="android-person"></Icon>全部分配</Button>
                 <Button @click="averageCustomer(1)" :disabled="averageCustomerButton"><Icon type="android-person"></Icon>分配线索</Button>
                 <Button @click="clientAction(0)"><Icon type="plus"></Icon>新建线索</Button>
                 <Button type="primary" @click="$store.state.importclient=true"><Icon type="forward"></Icon>批量导入</Button>
                 <Button type="primary" @click="exportData"><Icon :type="exporticon"></Icon>{{exportcsv}}</Button>
             </div>
         </div>
-
         <!-- 删除弹框  start -->
         <transition enter-active-class="animated fadeIn">
           <Modal v-if="deleteModal"
@@ -40,7 +39,9 @@
                       @on-change="handleChange" >
             </Transfer>
             <div class="explain">多选情况下线索是按勾选员工的顺序平均分配的,如果无法平均分配,则顺序靠前的员工被分配到的线索多</div>
-            <div class="error"><p>{{tip}}</p></div>
+            <div class="error">
+                <p>{{tip}}</p>
+            </div>
             <div slot="footer">
               <Button type="primary" size="large" :loading="loading" @click="averageAction">确定</Button>
               <Button size="large" @click="averageAllCancel">取消</Button>
@@ -51,7 +52,7 @@
 
         <!-- 线索弹框  start -->
         <transition enter-active-class="animated fadeIn">
-          <Modal v-if="clientModal" v-model="clientModal" :title="clientTitle">
+          <Modal v-if="clientModal" v-model="clientModal" :title="clientTitle"  class-name='linker-modal'>
               <Form  :label-width="69">
                 <FormItem label="客户名称">
                    <Input v-model="clientName" ></Input>
@@ -60,9 +61,9 @@
                    <Input v-model="clientTel" ></Input>
                 </FormItem>
                 <FormItem label="分配坐席">
-                  <Select v-model="oid" :disabled="clientCustomer" @on-change="chooseseatid">
-                      <Option v-for="item in seatlist" :value="item.id" :key="item.number">{{item.name}}</Option>
-                  </Select>
+                    <Select v-model="oid" :disabled="clientCustomer" @on-change="chooseseatid">
+                        <Option v-for="item in seatlist" :value="item.id" :key="item.number">{{item.name}}</Option>
+                    </Select>
                 </FormItem>
                 <FormItem label="公司名称">
                    <Input v-model="clientCompany" ></Input>
@@ -88,11 +89,11 @@
             <a slot="close" @click="cancelimport"><Icon type="ios-close-empty"></Icon></a>
             <stepone v-if="$store.state.steponemark"></stepone>
             <steptwo v-if="$store.state.steptwomark"></steptwo>
-            <stepthree v-if="$store.state.stepthreemark"></stepthree>
+            <stepthree v-if="$store.state.stepthreemark" :render="renderInit"></stepthree>
           </Modal>
         </transition>
 
-        <div class="tableContent">
+        <div class="content">
             <!-- 表单 -->
             <Table :columns="columns7" :data="list" @on-selection-change="tableselect" size="small" ref="selection"></Table>
             <!-- 分页 -->
@@ -135,7 +136,7 @@
                 // 坐席弹框 customerModal
                 customerModal:false,
                 customerTitle:'一键分配',
-                averageCustomerButton:true,
+                averageCustomerButton:false,
                 averageAction:()=>{},
                   //分配坐席穿梭框
                 data: [],   //所有坐席
@@ -157,7 +158,7 @@
 
                 editlistseatindex:"",//编辑线索默认显示的value值
                 typelaber:'',
-                typevalue:-1,
+                typevalue:0,
                 deletedata:false,
                 averageoid:'',  //选择分配的坐席id
                 ExportCustomerhashcode:'',
@@ -271,6 +272,10 @@
                 this.deleteComfirm = this.removesingle;
               }
               else{           // 批量删除
+                if (this.tablesel=='') {
+                    this.$Message.warning('请选择需要删除的线索');
+                    return;
+                };
                 this.deleteComfirm = this.removemore;
               }
               this.deleteModal = true
@@ -332,15 +337,21 @@
                 newTargetKeys.length ? (this.tip = '') : (this.tip = '请勾选需要分配的坐席')
             },
             averageCustomer(type){
-              this.customerModal = true
+              
               if(type===0){   // 一键分配
                 this.customerTitle = "一键分配"
                 this.averageAction = this.averageAll
                 this.$refs.selection.selectAll(true);
               }else{          // type==1 分配线索
+                if (this.tablesel=='') {
+                    this.$Message.warning('请选择需要分配的线索');
+                    return;
+                };
                 this.customerTitle = "分配坐席"
                 this.averageAction = this.averageSeleted
               }
+
+              this.customerModal = true
             },
             // 一键分配关闭
             averageAllCancel(){
@@ -394,7 +405,6 @@
             tableselect(selection){
                 let selArr = selection.map(item=>{return item.id});
                 this.tablesel=selArr.join(",")
-                selection.length ? (this.averageCustomerButton=false) : (this.averageCustomerButton=true)
             },
             //新建线索分配坐席时选择坐席id
             chooseseatid(value){
@@ -427,8 +437,8 @@
                   company:that.clientCompany,
                   address:that.clientAddress,
                 }
-                // console.log(this.select);
-                // console.log(!!this.select);
+                console.log(this.select);
+                console.log(!!this.select);
                 if(this.select){
                   url = '/account/Customer/modifyCustomer'
                   config.id = this.select
@@ -438,17 +448,19 @@
                 axios.get(url,{params:config})
                      .then((response)=>{
                        if(response.data.status===0){
-                          that.getclientlist({
-                               params:{
-                                   first_id:(that.page-1)*that.pagesize,
-                                   count:that.pagesize
-                               }
-                           });
-                           that.cancel();
-                          //  that.typelaber=''
                           if(this.select==0){
                              that.$Message.success('新建线索成功');
                           }
+                          that.getclientlist({
+                               params:{
+                                   first_id:(that.page-1)*that.pagesize,
+                                   count:that.pagesize,
+                                   type:that.typevalue
+                               }
+                          });
+                          that.cancel();
+                          //  that.typelaber=''
+                          
                        }
                        else{
                           that.tip=response.data.info
@@ -466,19 +478,10 @@
                 this.deleteModal = false
                 this.customerModal = false
                 this.clientModal = false
-
                 this.targetKeys=[]
-                // this.total=0
                 this.tip=''
                 this.select=0
                 this.loading=false
-                // this.getclientlist({
-                //     params:{
-                //         first_id:(this.page-1)*this.pagesize,
-                //         count:this.pagesize,
-                //         type:this.typevalue
-                //     }
-                // });
             },
             cancelimport(){
                 this.$store.state.importclient=false;
@@ -514,8 +517,11 @@
             /* 操作栏操作   start*/
             //分类选择：已分配、未分配
             catselect(value){
+              // console.log(value)
                 var that=this;
                 this.typevalue=value;
+
+                value==0 ? (this.averageCustomerButton=false) : (this.averageCustomerButton=true)
                 this.page = 1
                 this.getclientlist({
                     params:{
@@ -550,7 +556,7 @@
                 params:{
                     first_id:(that.page-1)*that.pagesize,
                     count:that.pagesize,
-                    value:that.typevalue
+                    type:that.typevalue
                     }
                })
             },
@@ -569,6 +575,17 @@
                 .catch(function (error) {
                     console.log(error);
                 });
+            },
+            // 初始获取线索
+            renderInit(){
+              var that = this;
+              this.getclientlist({
+                  params:{
+                      first_id:(that.page-1)*that.pagesize,
+                      count:that.pagesize,
+                      type:that.typevalue
+                  }
+              });
             },
             //导出csv
             exportData () {
@@ -612,12 +629,7 @@
         mounted(){
             var that=this;
             //获取线索
-            this.getclientlist({
-                params:{
-                    first_id:(that.page-1)*that.pagesize,
-                    count:that.pagesize,
-                }
-            });
+            this.renderInit();
             //获取坐席
             axios.get('/account/Operator/getAllmembers')
             .then(function (response) {
@@ -636,7 +648,11 @@
         }
     }
 </script>
-
+<style>
+.linker-modal .ivu-select-dropdown{
+  position: absolute !important;
+}
+</style>
 <style scoped>
     .spin{
       position: absolute;
@@ -684,14 +700,14 @@
       padding-left: 18px;
       margin-bottom: 24px;
   }
-  .seat{
+  /* .seat{
       margin-top: 24px;
   }
   .seat label{
       display: block;
       margin-bottom: 16px;
 
-  }
+  } */
   input[type="checkbox"]{
       vertical-align: middle;
       margin-right: 12px
@@ -700,21 +716,6 @@
   .page ul{
        float: right;
    }
-
-   .importclient{
-       height: 300px;
-   }
-   .deletedata{
-       width: 400px;
-       height: 200px;
-   }
-   .deletedata .item4{
-       position: fixed;
-       bottom: 0;
-       right: -30px;
-   }
-
-
    .explain{
       margin-top: 30px;
       color: #999
@@ -725,4 +726,6 @@
       left: 30px;
       color:#ff5e5e;
   }
+
+
 </style>

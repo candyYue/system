@@ -44,6 +44,7 @@
                     console.log(res);
                     if (res.status==0) {
                         window.localStorage.setItem("username",res.data.username);
+                        //首次登陆跳转引导页，强制修改密码弹窗出现
                         if (res.data.has_first_logined==0) {
                             r_this.$store.state.firstlogin=true
                             r_this.$router.push("/bootpage") 

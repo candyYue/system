@@ -118,20 +118,17 @@
                     {
                         title: '操作',
                         key: 'action',
-                        width:150,
+                        align: 'center',
                         render: (h, params) => {
                             return h('div', [
                                 h('Button', {
                                     props: {
-                                        type: 'ghost',
+                                        type: 'text',
                                         size: 'small',
                                         icon:"ios-compose-outline"
                                     },
                                     style: {
-                                        border:'none',
-                                        marginRight: '1.5rem',
-                                        paddingLeft: '0.3rem',
-                                        paddingRight: '0.3rem',
+                                        marginRight: '8px',
                                     },
                                     on: {
                                         click: () => {
@@ -142,7 +139,7 @@
                                 h('Button', {
                                     props: {
                                         
-                                        type: 'ghost',
+                                        type: 'text',
                                         size: 'small',
                                         icon:"ios-trash-outline"
                                     },
@@ -401,55 +398,15 @@
         margin-right: 8px;
         transition: color .2s linear,background-color .2s linear,border .2s linear;
     }
-    .item1 p{
-        position: absolute;
-        bottom: 80px;
-        left: 140px;
-        color:#ff5e5e;
-    }
-    .newseat,.editseat{
-        height: 350px;
-    }
     .page{
         position: absolute;
         right: 0;
         bottom: -50px;
-    }
-    .temp1{
-        margin-bottom: 120px
     }
     .ivu-btn{
         border-color: none;
     }
     .ivu-btn-ghost{
         border-color: none;
-    }
-    .importseat{
-        position: absolute;
-        width: 600px;
-        height: 300px;
-        background-color: #fff;
-        top: 200px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 999;
-        font-size: 14px;
-        color: #333;
-    }
-    .importseat>div{
-        padding: 0 30px;
-    }
-    .importseat h2{
-        font-weight: 500;
-        font-size: 24px;
-        height: 50px;
-        border-bottom: 1px solid #f6f6f6;
-        padding-left: 20px;
-        line-height: 50px;
-        margin-bottom: 14px;
-    }
-    .deletedata{
-        width: 400px;
-        height: 200px;
     }
 </style>

@@ -23,6 +23,9 @@
                  <Button shape="circle" icon="android-add" @click="addinput" class="add-input-btn" v-if="addBtn"></Button>
              </FormItem>
             </Form>
+            <div class="error">
+                <p>{{tip}}</p>
+            </div>
             <div slot="footer">
               <Button type="primary" size="large" @click="classifyAction">确定</Button>
               <Button size="large" @click="cancel">取消</Button>
@@ -63,7 +66,8 @@
                 type:'',
                 addtype:[],
                 category:[],
-                inputs:[]
+                inputs:[],
+                tip:''
             }
         },
         methods: {
@@ -97,6 +101,12 @@
                 let categroy_name = this.newClassify.map(item=>{
                   return item.name
                 })
+                for (var i = 0; i < categroy_name.length; i++) {
+                  if (categroy_name[i].trim()=='') {
+                      this.tip='请输入分类名称'
+                      return;
+                  };
+                };
                 categroy_name.length===1 ? categroy_name=categroy_name.toString() : categroy_name=JSON.stringify(categroy_name);
                 axios.get('/account/Customer/addCallResult',{params: { categroy_name}})
                       .then(function(response){

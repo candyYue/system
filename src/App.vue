@@ -16,10 +16,20 @@
         watch: {
           '$route' (to, from) {
                 var that=this
-                axios.get('/account/Customer/GetCallresult')
+                axios.get('/account/CallRecord/getCallRecord',{
+                    params:{
+                        first_id:0,
+                        count:20
+                    }
+                })
                 .then(function (response) {
+                    console.log(response)
                     if (response.data.status=='102002') {
                        window.location.hash="/login"
+                    };
+                    if (response.data.status=='102005') {
+                       that.$store.state.firstlogin=true
+                       console.log(that.$store.state.firstlogin)
                     };
                 })
                 .catch(function (error) {

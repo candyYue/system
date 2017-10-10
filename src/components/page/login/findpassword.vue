@@ -15,12 +15,13 @@
                     </Button>
                 </div>
                 <div>
-                    <Input v-model="newpwd" placeholder="请输入6-16位密码" type="password"  style="width: 300px" class="newpwd"></Input>
+                    <Input v-model="newpwd" placeholder="请输入6-16位密码" type="password"  style="width: 300px" class="newpwd" @on-focus="eyedisable" @on-blur='eyeable'></Input>
                     <!-- <input placeholder="请输入6-16位密码" class="newpwd" v-model="newpwd"></input> -->
-                    <div class="pwdeye"></div>
+                    <!-- <div class="pwdeye"></div> -->
+                    <Icon :type="pwdeye" class='pwdeye'></Icon>
                 </div>
                 <div>
-                    <Input v-model="pwdagain" placeholder="请再次输入密码" type="password"  style="width: 300px" @blur="check"></Input>
+                    <Input v-model="pwdagain" placeholder="请再次输入密码" type="password"  style="width: 300px"></Input>
                 </div>
                 <span class="wrong">{{checkmsg}}</span>
             </div>
@@ -43,6 +44,8 @@
                 checkmsg:"",
                 time:60,
                 sendMsgDisabled:false,
+                pwdeye:'eye'
+                // <Icon type="eye-disabled"></Icon>
             }
         },
         methods: {
@@ -59,7 +62,12 @@
                 this.loginvcode()
 
             },
-
+            eyedisable(){
+                this.pwdeye='eye-disabled'
+            },
+            eyeable(){
+                this.pwdeye='eye'
+            },
             loginvcode(){
                 var r_this=this
                 axios.get('/account/user/resetPwd',{
@@ -74,7 +82,7 @@
                   console.log(response)
                   if (response.data.status==0) {
                         r_this.$Message.success('密码重置成功');
-                        // r_this.$router.push("/bootpage")
+                        r_this.$router.push("/day")
                   }else{
                         this.checkmsg=response.data.info
                   }
@@ -83,38 +91,38 @@
                   console.log(error);
                 })
             },
-            login(){
-                var r_this=this
-                axios.post('/account/user/Login', qs.stringify({
-                    phone:window.localStorage.getItem("phone"),
-                    eid:window.localStorage.getItem("eid"),
-                    pwd:this.newpwd
-                }))
-                  .then(function (response) {
-                    var res=response.data
-                    console.log(res);
-                    if (res.status==0) {
-                        window.localStorage.setItem("username",res.data.username);
-                        if (res.data.last_login_time==""||res.data.last_login_ip=="") {
-                            r_this.$store.state.firstlogin=true
-                            r_this.$router.push("/bootpage") 
-                        }else{
-                            r_this.$router.push("/day") 
-                        }
+            // login(){
+            //     var r_this=this
+            //     axios.post('/account/user/Login', qs.stringify({
+            //         phone:window.localStorage.getItem("phone"),
+            //         eid:window.localStorage.getItem("eid"),
+            //         pwd:this.newpwd
+            //     }))
+            //       .then(function (response) {
+            //         var res=response.data
+            //         console.log(res);
+            //         if (res.status==0) {
+            //             window.localStorage.setItem("username",res.data.username);
+            //             if (res.data.last_login_time==""||res.data.last_login_ip=="") {
+            //                 r_this.$store.state.firstlogin=true
+            //                 r_this.$router.push("/bootpage") 
+            //             }else{
+            //                 r_this.$router.push("/day") 
+            //             }
                         
                         
-                    }else if (res.status==102001) {
-                        r_this.$router.push("/day") 
+            //         }else if (res.status==102001) {
+            //             r_this.$router.push("/day") 
                         
-                    }else{
-                        r_this.wrongtip=res.info
-                    };
-                  })
-                  .catch(function (error) {
-                    console.log(error);
-                  })
+            //         }else{
+            //             r_this.wrongtip=res.info
+            //         };
+            //       })
+            //       .catch(function (error) {
+            //         console.log(error);
+            //       })
                 
-            },
+            // },
             getvcode(){
                 let that = this;
                 that.sendMsgDisabled = true;
@@ -210,14 +218,16 @@
         background-color: #fff;
     }
     .pwdeye{
-        width: 32px;
-        height: 32px;
-        background:url(../../../../static/img/login/da.png) no-repeat center;
+        /* width: 32px; */
+        /* height: 32px; */
+        /* background:url(../../../../static/img/login/da.png) no-repeat center; */
+        font-size: 18px;
+        color: #999;
         position: absolute;
-        right: 85px;
-        top: 0;
+        right: 90px;
+        top: 2px;
     }
-    .newpwd:focus~.pwdeye{
+    /* .newpwd:focus~.pwdeye{
         background:url(../../../../static/img/login/mr.png) no-repeat center;
-    }
+    } */
 </style>

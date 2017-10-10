@@ -1,11 +1,15 @@
 <template>
-    <div class="temp">
-        <ul class="link clearfix">
-            <li class='linktab'><router-link to="/link">线索池</router-link></li>
-            <li class='linktab'><router-link to="/phoneresult">通话结果管理</router-link></li>
-        </ul>
-        <router-view></router-view>
+    <div>
+        <h3>线索池</h3>
+        <div class="temp">
+            <ul class="link clearfix">
+                <li class='linktab'><router-link to="/link">线索池</router-link></li>
+                <li class='linktab'><router-link to="/phoneresult">通话结果管理</router-link></li>
+            </ul>
+            <router-view></router-view>
+        </div>
     </div>
+    
 </template>
 
 <script>

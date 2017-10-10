@@ -129,14 +129,7 @@
             },
             //模糊匹配
             snamefilter(){
-                var that=this
-                this.getOperatorsStatistic('/account/CallRecord/getOperatorStatistic',{
-                params:{
-                    first_id:(that.page-1)*that.pagesize,
-                    count:that.pagesize,
-                    search:that.sname
-                    } 
-                })
+                this.initstatistic()
             },
 
             //进入获取所有坐席信息
@@ -145,15 +138,30 @@
                 axios.get(url,config)
                 .then(function (response) {
                     console.log(response)
+                    if (response.data.data==null) {
+                        that.list=[];
+                        return
+                    };
                     if (response.data.status==0) {
                         that.total=response.data.data.total;
                         that.list=response.data.data.content
+                       
                     };
                     
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
+            },
+            initstatistic(){
+                var that=this;
+                this.getOperatorsStatistic('account/CallRecord/getOperatorStatistic',{
+                    params:{
+                        first_id:(that.page-1)*that.pagesize,
+                        count:that.pagesize,
+                        search:that.sname
+                    } 
+                })
             },
             //每页多少条
             changepagesize(index){
@@ -184,15 +192,7 @@
             }
         },
         mounted () {
-            // this.tableheight=document.body.clientHeight-277.5;
-            var that=this;
-            this.getOperatorsStatistic('account/CallRecord/getOperatorStatistic',{
-                params:{
-                    first_id:(that.page-1)*that.pagesize,
-                    count:that.pagesize,
-                    search:that.sname
-                } 
-            })
+            this.initstatistic()
   　　  }
     }
 </script>
@@ -221,15 +221,9 @@
         .ivu-btn .ivu-icon{
             color: #fff
         }
-        .temp1>div:nth-of-type(2){
-            position: relative;
-        }
         .page{
             position: absolute;
             right: 20px;
-        }
-        .temp1{
-            margin-bottom: 120px
         }
 
 </style>

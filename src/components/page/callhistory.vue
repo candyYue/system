@@ -13,7 +13,7 @@
                 <Button type="primary" @click='searchdate'>搜索</Button>
             </div>
             <div class="fr">
-                <Input class='search searchinput' v-model="searchvalue" placeholder="请输入姓名或号码进行模糊匹配"></Input>
+                <Input class='search searchinput' v-model="searchvalue" placeholder="请输入姓名或号码进行模糊匹配" style="width: 280px"></Input>
                 <Button type="primary" class='search' @click='searchrecord'>搜索</Button>
             </div>   
         </div>
@@ -312,9 +312,6 @@
     }
 </script>
 <style scoped>
-    .temp1{
-        margin-bottom: 120px;
-    }
     .handle{
         margin:20px 0;
     }

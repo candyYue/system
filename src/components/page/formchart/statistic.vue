@@ -37,10 +37,18 @@
     <div class="details">
         <h4>统计明细</h4>
         <Table :columns="detailsColumns" :data="detailsData" size="small"></Table>
-
-        <Button type="primary" class="exportcsv" @click='exportdetail'><Icon type="forward"></Icon> 导出 </Button>
-
+        <div class="clearfix">
+          <Button type="primary" class="exportcsv" @click='exportdetail'><Icon type="forward"></Icon> 导出 </Button>
+        </div>
     </div>
+    <!-- <div class="details">
+      <h4>统计明细</h4>
+      <div class="tables clearfix">
+          <Table :columns="detailsColumns" :data="detailsData"></Table>
+          <Table :columns="tableColumns" :data="tableData" class="data"></Table>
+      </div>
+    </div> -->
+
   </div>
 </template>
 <script>
@@ -55,7 +63,11 @@ export default {
       this.renderData(this.totalData[this.type])
     }
   },
-  data: () => ({
+
+
+  data () {
+   const self = this;
+   return {
     totalData:{},       // 年月日所有数据
     overviewData:{      // 概况预览数据
       outcall_count:0,
@@ -67,13 +79,13 @@ export default {
     statisticList:[
       {
         value:0,
-        key:'outcall_count',
+        key:'outcall_total_count',
         label:'拨打次数',
         color:'#8e66e1',
         unit:'（次）'
       },{
         value:1,
-        key:'outcall_total_count',
+        key:'outcall_count',
         label:'接听次数',
         color:'#0cb8ff',
         unit:'（次）'
@@ -95,7 +107,10 @@ export default {
     seletChart:0,  // 当前选中折线图
     ChartX:[],
     ChartY:[],
-
+    // 表格 new
+    // tableColumns:[],
+    // tableData:[],
+    sort:1,   // 1由大到小，2有小到大
     // 表格
     detailsColumns:[{
       title:"栏目",
@@ -105,30 +120,35 @@ export default {
       render: (h, params) => {
           return h('div', [
               h('span', params.row.column),
-              h('Button', {
-                  props: {
-                      icon: 'arrow-swap',
-                      type:'text'
-                  },
-                  on: {
-                      click: () => {
-                        this.default.methods.detailSort(params);
-                      }
-                  }
-              })
+              h('span', [
+                h('Button', {
+                    props: {
+                        icon: 'ios-arrow-thin-left',
+                        type:'text'
+                    },
+                    on: {
+                        click: () => {
+                          this.detailSort(params,2);
+                        }
+                    }
+                }),
+                h('Button', {
+                    props: {
+                        icon: 'ios-arrow-thin-right',
+                        type:'text'
+                    },
+                    on: {
+                        click: () => {
+                          this.detailSort(params,1);
+                        }
+                    }
+                })
+              ])
           ]);
       }
     }],
-    detailsData:[{
-      "column":"拨打次数"
-    },{
-      "column":"接听次数"
-    },{
-      "column":"接通率"
-    },{
-      "column":"通话时长"
-    }]
-  }),
+    detailsData:[{"column":"拨打次数"},{"column":"接听次数"},{"column":"接通率"},{"column":"通话时长"}]
+  }},
   methods: {
     // 初次加载，渲染全部数据
     renderAllData(){
@@ -139,16 +159,23 @@ export default {
             }
         })
         .then(res=>{
+          if (res.data.status=='102002') {
+             window.location.hash="/login"
+          };
           if(res.status===200){
             this.totalData[d] = res.data.data;
-            this.renderData(this.totalData[this.type]);
+            if(d==this.type){
+              this.renderData(this.totalData[d]);
+            }
           }
         })
         .catch(()=>{})
       })
     },
-    detailSort(params){
-      console.log(params);
+    detailSort(params,sort){
+      this.sort = sort
+      this.calculateTable(this.sort,params.index);
+      console.log(this.sort);
     },
     formatTime(second_time){
       var time = parseInt(second_time) + "秒";
@@ -174,45 +201,18 @@ export default {
     },
     renderData(data) {
           const self = this;
-          // console.log(data);
           this.overviewData = data[0]
-
-          // this.ChartX = Object.keys(data).slice(1);     // x 轴
-          // this.statisticList.map((item,j)=>{
-          //   item.list = Object.values(data).map(d=>{return d[item.key]}).slice(1)
-          //   // item.list.map((d,i)=>{
-          //   //   this.detailsData[j][i]= d
-          //   // })
-          // })
-          // this.ChartY = this.statisticList[0].list      // y 轴
-          // this.drawLine();
-
-          new Promise((resole,reject)=>{
-            self.ChartX = Object.keys(data).slice(1);     // x 轴
-            self.statisticList.map((item,j)=>{
-              item.list = Object.values(data).map(d=>{return d[item.key]}).slice(1)
-              item.list.map((d,i)=>{
-                this.detailsData[j][i]= d
-              })
-            })
-            self.ChartY = this.statisticList[0].list      // y 轴
-            resole(self.ChartY)
-          }).then((value)=>{
-            self.drawLine();
-          }).then((value)=>{
-            let detailsColumn = Object.keys(data).map((d,i)=>{
-              return ({
-                "title":d,
-                "key":i-1,
-                "width":179
-              })
-            });
-            detailsColumn.slice(1).map(d=>{
-              this.detailsColumns.push(d)   //时间
-            })
+          this.statisticList.map((item,j)=>{
+            item.list = Object.values(data).slice(1).map(d=>{return d[item.key]})
           })
 
+          // 绘折线图
+          this.ChartX = Object.keys(data).slice(1);     // x 轴
+          this.ChartY = this.statisticList[this.seletChart].list      // y 轴
+          this.drawLine();
 
+          // 表格
+          this.calculateTable()
     },
     changeChart(selet){
       this.seletChart = selet;
@@ -310,7 +310,49 @@ export default {
       .catch(function(err){
           console.log(err);
       });
+    },
+    calculateTable(sort,index){
+      let itemMap = ['outcall_total_count','outcall_count','outcall_rate','outcall_time'];
+      let arr = []
+      for (let [k, v] of Object.entries(this.totalData[this.type])) {
+        arr.push({time:k,data:v})
+      }
+      arr = arr.slice(1)
+
+
+      if(sort){    // 排序
+        var len = arr.length;
+        arr.sort((a,b)=>{
+          let flag = (Number(a.data[itemMap[index]]) - Number(b.data[itemMap[index]]))>=0 ? -1 : 1;
+          if(sort==2){
+            return flag;
+          }else{
+            return -flag;
+          }
+        })
+      }
+
+      let detailsColumns = arr.map((d,i)=>{
+        return ({
+          title:d.time,
+          key:d.time,    // arr 第几项，key就是多少
+          width:179
+        })
+      })
+      itemMap.map((item,i)=>{
+        arr.map((d)=>{
+          if(i==2){   // 通话率
+            this.detailsData[i][d.time] = Number(d.data[item]).toFixed(2)
+          }else {
+            this.detailsData[i][d.time] = d.data[item]
+          }
+        })
+      })
+      this.detailsColumns = this.detailsColumns.slice(0,1).concat(detailsColumns)
+      arr = []
+      // console.log(this.detailsData);
     }
+
   },
   mounted() {
     this.chart = echarts.init(document.getElementById('myChart'))
@@ -318,7 +360,8 @@ export default {
   }
 }
 </script>
-<style >
+
+<style>
   .overview{
     text-align: center;
   }
@@ -339,9 +382,9 @@ export default {
   .overview .ivu-card-body span{
     font-size: 15px;
   }
-
   .chartbox{
     margin-top: 20px;
+    position: relative;
   }
   .chartbox .ivu-select{
     width: 148px;
@@ -353,7 +396,7 @@ export default {
   }
 
   /* 表格 */
-  /* .ivu-table{
+ /*  .details .ivu-table{
     overflow: scroll;
   } */
   .details h4{
@@ -361,12 +404,30 @@ export default {
     font-size: 16px;
     font-weight: normal;
   }
-  .ivu-btn-text{
-    float: right;
-    color: #ccc;
+  .details .ivu-table-cell{
+    line-height: 36px;
   }
-  .exportcsv{
+  .details  .ivu-table-cell span:last-child{
+    float: right;
+    padding-top: 2px;
+  }
+  .details .ivu-btn-text{
+    border: 0;
+    font-size: 15px;
+    display: block;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    /*margin-top: 5px;*/
+  }
+  /*.details .ivu-btn-text*/
+
+  .details .ivu-btn-text + .ivu-btn-text{
+    /*margin-top: -10px;*/
+  }
+  .details .exportcsv{
     margin-top: 20px;
   }
+
 
 </style>
