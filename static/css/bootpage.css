@@ -27,15 +27,15 @@
 }
 .mark1 button{
 	bottom: 0;
-	left: 150px;
+	left: 180px;
 }
 .mark2 button{
 	bottom: -50px;
-	left: 200px;
+	left: 230px;
 }
 .mark3 button{
 	bottom: 0;
-	left: 300px;
+	left: 350px;
 }
 .newhighlight{
 	z-index: 999
@@ -48,16 +48,16 @@
 	font-size: 16px;
 }
 .tip1{
-	bottom: 50px;
+	bottom: 40px;
 	left: 60px;
 }
 .tip2{
-	bottom: 0;
-	left: 60px;
+	bottom: -10px;
+	left: 100px;
 }
 .tip3{
 	bottom: 70px;
-	left: 200px;
+	left: 250px;
 }
 .img1{
 	position: absolute;
@@ -69,19 +69,18 @@
 }
 .img2{
 	position: absolute;
-	width: 1000px;
-	height: 400px;
-	top: 25%;
-	left: 30%;
+	width: 1111px;
+	height: 390px;
+	top:200px;
+	right: 300px;
 	background:url(../../static/img/bootpage/lead2.png) no-repeat center/contain;
 }
 .img3{
 	position: absolute;
-	width: 1000px;
-	height: 400px;
-	top: 55%;
-	left: 30%;
-	transform:translate(0,-50%);
+	width: 1111px;
+	height: 390px;
+	top:270px;
+	right: 300px;
 	background:url(../../static/img/bootpage/lead3.png) no-repeat center/contain;
 }
 

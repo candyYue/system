@@ -97,20 +97,26 @@
         </transition>
         <!-- 新手指导页面2 -->
         <transition  enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-            <div class="mark2" v-if="show2">
+            <div class="mark2 clearfix" v-if="show2">
+            <div class="side-width"></div>
+            <div class="mask-right">
                  <div class="img2" v-if="show2">
                      <p class="tip2">创建完坐席后，您可以在线索池页面批量导入客户号码 </p>
                      <Button type="info" @click="mark3">下一步</Button>
                  </div>
             </div>
+            </div>
         </transition>
         <!-- 新手指导页面3 -->
         <transition  enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-            <div class="mark3" v-if="show3">
-                 <div class="img3" v-if="show3">
+            <div class="mark3 clearfix" v-if="show3">
+            <div class="side-width"></div>
+            <div class="mask-right">
+                <div class="img3" v-if="show3">
                      <p class="tip3">导入完客户列表后，您可以选择客户，点击分配坐席，将选择的客户分配给对应的坐席，分配完成之后，坐席登录客户端就可以直接使用 </p>
                      <Button type="info" @click="markend">完成</Button>
                  </div>
+            </div>
             </div>
         </transition>
 
@@ -221,8 +227,8 @@
                 this.show3=true;
             },
             markend(){
-                this.show3=false;
                 this.$router.push("/day")
+                this.show3=false;
             }
         }
     }

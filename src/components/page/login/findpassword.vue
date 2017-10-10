@@ -74,7 +74,7 @@
                   console.log(response)
                   if (response.data.status==0) {
                         r_this.$Message.success('密码重置成功');
-                        r_this.$router.push("/bootpage")
+                        // r_this.$router.push("/bootpage")
                   }else{
                         this.checkmsg=response.data.info
                   }
