@@ -6,7 +6,7 @@
     	        <li class="doing"><div>2</div>导入数据</li>
     	        <li class="finish"><div>3</div>导入完成</li>
     	    </ul>
-    	    <p>一、请按照数据模板的格式准备要导入的数据，<a href="../../../../static/customer_templets.xlsx" class="downtemp" download="01">下载导入模板</a></p>
+    	    <p>一、请按照数据模板的格式准备要导入的数据，<a href="/downloads/customer_templets.xlsx" class="downtemp" download="01">下载导入模板</a></p>
     	    <p>二、准备要导入的excel文件</p>
             <Upload action="/account/Customer/importCustomer" name="ccsv" class="file" :show-upload-list=false :on-success="handleSuccess">
                 <Button type="ghost" icon="ios-cloud-upload-outline">上传文件</Button>

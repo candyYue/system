@@ -298,18 +298,7 @@ export default {
         });
     },
     exportdetail(){
-      axios.get('/account/CallRecord/getStatistic?type=cc_day_callinout_statistic',{
-          params: {
-              searchType:this.type,
-              needExport:this.type
-          }
-      })
-      .then(function(err){
-          console.log(err);
-      })
-      .catch(function(err){
-          console.log(err);
-      });
+      window.location.href='/account/CallRecord/getStatistic?type=cc_day_callinout_statistic？searchType='+this.type+'&needExport='+this.type
     },
     calculateTable(sort,index){
       let itemMap = ['outcall_total_count','outcall_count','outcall_rate','outcall_time'];

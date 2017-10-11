@@ -24,6 +24,9 @@
             <div class="page">
                 <Page :total="total" :page-size="pagesize" show-sizer :page-size-opts="[20, 50, 100]" @on-page-size-change="changepagesize" @on-change="changepage"></Page>
             </div>
+            <div class="spin" v-if="spinShow">
+                <Spin size="large" fix></Spin>
+            </div>
         </div>
     </div>
 </div>
@@ -37,6 +40,7 @@
     export default {
         data: function(){
             return {
+                spinShow:false,
                 // mp3play:true,
                 tableheight:0,
                 searchvalue:'',
@@ -196,6 +200,7 @@
             //所有
             getCallRecord(config){
                 var that=this;
+                that.spinShow = true;
                 axios.get('/account/CallRecord/getCallRecord',{
                     params:{
                         first_id:(this.page-1)*this.pagesize,
@@ -216,6 +221,7 @@
                         that.total=response.data.data.total;
                         that.list=response.data.data.content 
                     };
+                    that.spinShow = false;
                     
                 })
                 .catch(function(err){
