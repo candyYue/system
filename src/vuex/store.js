@@ -21,6 +21,11 @@ export default new Vuex.Store({
         getper:null,
         // importtime:0,
         firstlogin:false,
+
+        clientlist:[],
+        clienttotal:0,
+        seatlist:[],
+        seattotal:0
     },
     actions: {
         

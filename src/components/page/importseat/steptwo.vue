@@ -2,7 +2,7 @@
 	<div>
     	<div class="item1">
     	    <ul>
-    	        <li class="start"><div>1</div>上传文档<span></span></li>
+    	        <li class="start done"><div>1</div>上传文档<span></span></li>
     	        <li class="doing active"><div>2</div>导入数据</li>
     	        <li class="finish"><div>3</div>导入完成</li>
     	    </ul>
@@ -58,6 +58,24 @@
                         that.$store.state.stepthreemark=true
                         that.$store.state.all=response.data.data.result.total
                         that.$store.state.already=response.data.data.result.success
+
+
+                        axios.get('/account/Customer/getCustomer',{
+                            params:{
+                                first_id:0,
+                                count:20,
+                                type:0
+                            }
+                        })
+                        .then(function (response) {
+                            if (response.data.status==0) {
+                                that.$store.state.seattotal=response.data.data.total;
+                                that.$store.state.seatlist=response.data.data.content;
+                            };
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
                     };
                 })
                 .catch(function (error) {

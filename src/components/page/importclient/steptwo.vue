@@ -21,6 +21,7 @@
     export default {
         data: function(){
             return {
+
                 percent:0
             }
         },
@@ -45,12 +46,11 @@
                 };
 
                 axios.get('/account/Customer/getPercent',{
-                params:{
-                    hash_code:hashCode
-                }
+                    params:{
+                        hash_code:hashCode
+                    }
                 })
                 .then(function (response) {
-                    console.log(response)
                     that.percent=response.data.data.per
                     if (response.data.data.per==100) {
 
@@ -59,6 +59,23 @@
                         that.$store.state.stepthreemark=true
                         that.$store.state.all=response.data.data.result.total
                         that.$store.state.already=response.data.data.result.success
+
+                        axios.get('/account/Customer/getCustomer',{
+                            params:{
+                                first_id:0,
+                                count:20,
+                                type:0
+                            }
+                        })
+                        .then(function (response) {
+                            if (response.data.status==0) {
+                                that.$store.state.clienttotal=response.data.data.total;
+                                that.$store.state.clientlist=response.data.data.content;
+                            };
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
                     };
                 })
                 .catch(function (error) {

@@ -12,10 +12,10 @@
                 </div>
             </div>
             <div class="tableContent">
-                <Table   :columns="columns7" :data="list" size="small"></Table>
+                <Table   :columns="columns7" :data="$store.state.seatlist" size="small"></Table>
                             <!-- 分页 -->
                 <div class="page">
-                    <Page :total="total" :page-size="pagesize" show-sizer @on-page-size-change="changepagesize" @on-change="changepage" :page-size-opts="[20, 50, 100]"></Page>
+                    <Page :total="$store.state.seattotal" :page-size="pagesize" show-sizer @on-page-size-change="changepagesize" @on-change="changepage" :page-size-opts="[20, 50, 100]"></Page>
                 </div>
             </div>    
         </div>
@@ -101,7 +101,7 @@
                 seatbox:false,
                 pagesize:20,  //每页条数
                 page:1,      //页数
-                total:0,
+                // total:0,
                 columns7: [
                     {
                         title: '姓名',
@@ -150,7 +150,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.remove(params.index)
+                                            this.remove(params.index,params.row)
                                         }
                                     }
                                 })
@@ -205,8 +205,8 @@
                 axios.get(url,config)
                 .then(function (response) {
                     if (response.data.status==0) {
-                       that.total=response.data.data.total;
-                        that.list=response.data.data.content
+                       that.$store.state.seattotal=response.data.data.total;
+                       that.$store.state.seatlist=response.data.data.content
                     };
                     
                 })
@@ -300,25 +300,25 @@
                 this.seattitle = "编辑坐席"
                 
                 // this.editseat=true
-                this.newlistname=this.list[this.select].name
-                this.newlistnumber=this.list[this.select].number
-                this.newlistmobile=this.list[this.select].mobile
-                this.newlistpwd=this.list[this.select].pwd
-                this.oid=this.list[this.select].id
+                this.newlistname=row.name
+                this.newlistnumber=row.number
+                this.newlistmobile=row.mobile
+                this.newlistpwd=row.pwd
+                this.oid=row.id
                 this.seatbox=true
             },
             //删除
-            remove (index) {
+            remove (index,row) {
                 this.select=index;
                 this.deleteone=true
-                
+                this.oid=row.id
             },
             removesingle(){
                 var that=this;
                 
                 axios.get('/account/Operator/deleteOperator',{
                     params: {
-                        oid:that.list[that.select].id,
+                        oid:that.oid,
                     }
                 })
                 .then(function(response){

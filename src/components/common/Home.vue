@@ -389,7 +389,7 @@
         color: #666;
         background-color: #fafafb;
         border: 1px solid #e6e6e6;
-        z-index: 99;
+        /* z-index: 99; */
     }
     .drop{
         width: 260px;

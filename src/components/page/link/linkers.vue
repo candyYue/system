@@ -95,12 +95,10 @@
 
         <div class="content">
             <!-- 表单 -->
-            <Table :columns="columns7" :data="list" @on-selection-change="tableselect" size="small" ref="selection"></Table>
+            <Table :columns="columns7" :data="$store.state.clientlist" @on-selection-change="tableselect" size="small" ref="selection"></Table>
             <!-- 分页 -->
             <div class="page clearfix">
-                <Page :total="total" :current="page"
-                      :page-size="pagesize" show-sizer @on-page-size-change="changepagesize" :page-size-opts="[20, 50, 100]"
-                      @on-change="changepage"></Page>
+                <Page :total="$store.state.clienttotal" :current="page" :page-size="pagesize" show-sizer @on-page-size-change="changepagesize" :page-size-opts="[20, 50, 100]"  @on-change="changepage"></Page>
             </div>    
         </div>
         <div class="spin" v-if="spinShow">
@@ -121,7 +119,7 @@
                 // 分页
                 pagesize:20,   // 每页条数
                 page:1,        // 当前页数
-                total:0,       // 数据总数目
+                // total:0,       // 数据总数目
 
                 // 弹框loading
                 loading:false,
@@ -177,7 +175,7 @@
                 // 表格相关
                 tablesel:"",   //选择分配的线索id
                 select:0,     // 当前操作id
-                list: [],      // 线索列表
+                // list: [],      // 线索列表
                 columns7: [
                     {
                         type: 'selection',
@@ -260,12 +258,13 @@
             steptwo,
             stepthree,
         },
+        // props: ['page','pagesize','typevalue'],
         methods: {
             /* 删除弹框 start*/
             deleteAction(type){
               this.deleteMsg = '删除后，线索将无法恢复。确定删除线索？'
               if(type===0){   // 清空线索
-                this.deleteMsg = `删除后，线索将无法恢复。确认删除${this.total}条线索？`;
+                this.deleteMsg = `删除后，线索将无法恢复。确认删除${this.$store.state.clienttotal}条线索？`;
                 this.deleteComfirm = this.deleteall;
               }
               else if(type==1){  // 单条数据删除
@@ -567,8 +566,8 @@
                 axios.get('/account/Customer/getCustomer',config)
                 .then(function (response) {
                     if (response.data.status==0) {
-                        that.total=response.data.data.total;
-                        that.list=response.data.data.content;
+                        that.$store.state.clienttotal=response.data.data.total;
+                        that.$store.state.clientlist=response.data.data.content;
                     };
                     that.spinShow = false;
                 })

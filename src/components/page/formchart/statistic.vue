@@ -325,15 +325,18 @@ export default {
         return ({
           title:d.time,
           key:d.time,    // arr 第几项，key就是多少
-          width:179
+          width:179,
+          align:'center'
         })
       })
       itemMap.map((item,i)=>{
         arr.map((d)=>{
+          this.detailsData[i][d.time] = `${d.data[item]}次`
           if(i==2){   // 通话率
-            this.detailsData[i][d.time] = Number(d.data[item]).toFixed(2)
-          }else {
-            this.detailsData[i][d.time] = d.data[item]
+            this.detailsData[i][d.time] =  `${Number(d.data[item]).toFixed(2)}%`
+          }
+          if(i==3){   // 通话时长
+            this.detailsData[i][d.time] = this.formatTime(d.data[item])
           }
         })
       })
@@ -396,7 +399,7 @@ export default {
   .details .ivu-table-cell{
     line-height: 36px;
   }
-  .details  .ivu-table-cell span:last-child{
+  .details  .ivu-table-cell span:nth-child(2){
     float: right;
     padding-top: 2px;
   }
@@ -415,7 +418,7 @@ export default {
     /*margin-top: -10px;*/
   }
   .details .exportcsv{
-    margin-top: 20px;
+      margin-top: 20px;
   }
 
 

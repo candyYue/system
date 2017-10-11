@@ -25,11 +25,12 @@
                 .then(function (response) {
                     console.log(response)
                     if (response.data.status=='102002') {
-                       window.location.hash="/login"
+                       window.location.hash="/login";
+                       return;
                     };
                     if (response.data.status=='102005') {
-                       that.$store.state.firstlogin=true
-                       console.log(that.$store.state.firstlogin)
+                       that.$store.state.firstlogin=true;
+                       return;
                     };
                 })
                 .catch(function (error) {

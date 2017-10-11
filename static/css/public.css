@@ -54,3 +54,6 @@ h3{
 .ivu-table:after,.ivu-table:before{
     z-index: 0
 }
+.ivu-table-fixed, .ivu-table-fixed-right{
+    z-index: 0
+}
