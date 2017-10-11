@@ -101,10 +101,10 @@
                 <Page :total="total" :current="page"
                       :page-size="pagesize" show-sizer @on-page-size-change="changepagesize" :page-size-opts="[20, 50, 100]"
                       @on-change="changepage"></Page>
-            </div>
-            <div class="spin" v-if="spinShow">
-                <Spin size="large" fix></Spin>
-            </div>
+            </div>    
+        </div>
+        <div class="spin" v-if="spinShow">
+            <Spin size="large" fix></Spin>
         </div>
     </div>
 </template>

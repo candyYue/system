@@ -83,7 +83,7 @@
 
 
         <!-- 首次登陆修改密码 -->
-        <Modal v-model="$store.state.firstlogin">
+        <Modal v-model="$store.state.firstlogin" :closable="false" :mask-closable="false">
             <p slot="header">
                 <span>修改密码</span>
             </p>

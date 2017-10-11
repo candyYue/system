@@ -84,45 +84,13 @@
                         r_this.$Message.success('密码重置成功');
                         r_this.$router.push("/day")
                   }else{
-                        this.checkmsg=response.data.info
+                        r_this.checkmsg=response.data.info
                   }
                 })
                 .catch(function (error) {
                   console.log(error);
                 })
             },
-            // login(){
-            //     var r_this=this
-            //     axios.post('/account/user/Login', qs.stringify({
-            //         phone:window.localStorage.getItem("phone"),
-            //         eid:window.localStorage.getItem("eid"),
-            //         pwd:this.newpwd
-            //     }))
-            //       .then(function (response) {
-            //         var res=response.data
-            //         console.log(res);
-            //         if (res.status==0) {
-            //             window.localStorage.setItem("username",res.data.username);
-            //             if (res.data.last_login_time==""||res.data.last_login_ip=="") {
-            //                 r_this.$store.state.firstlogin=true
-            //                 r_this.$router.push("/bootpage") 
-            //             }else{
-            //                 r_this.$router.push("/day") 
-            //             }
-                        
-                        
-            //         }else if (res.status==102001) {
-            //             r_this.$router.push("/day") 
-                        
-            //         }else{
-            //             r_this.wrongtip=res.info
-            //         };
-            //       })
-            //       .catch(function (error) {
-            //         console.log(error);
-            //       })
-                
-            // },
             getvcode(){
                 let that = this;
                 that.sendMsgDisabled = true;
@@ -202,7 +170,7 @@
     }
      .wrong{
         position: absolute;
-        bottom: -25px;
+        bottom: -40px;
         left: 85px;
         font-size:14px;
         color: #ff5e5e;
