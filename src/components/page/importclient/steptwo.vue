@@ -47,7 +47,8 @@
 
                 axios.get('/account/Customer/getPercent',{
                     params:{
-                        hash_code:hashCode
+                        hash_code:hashCode,
+                        type:'customer'
                     }
                 })
                 .then(function (response) {

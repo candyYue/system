@@ -26,7 +26,7 @@
                 <span class="wrong">{{checkmsg}}</span>
             </div>
             <div class="login-btn">
-                <Button type="info"  @click="check">登录</Button>
+                <Button type="info"  @click="check"  :loading="loading">登录</Button>
             </div>
     </div>
 </template>
@@ -44,7 +44,8 @@
                 checkmsg:"",
                 time:60,
                 sendMsgDisabled:false,
-                pwdeye:'eye'
+                pwdeye:'eye',
+                loading:false,
                 // <Icon type="eye-disabled"></Icon>
             }
         },
@@ -69,6 +70,7 @@
                 this.pwdeye='eye'
             },
             loginvcode(){
+                this.loading=true;
                 var r_this=this
                 axios.get('/account/user/resetPwd',{
                     params:{
@@ -82,10 +84,11 @@
                   console.log(response)
                   if (response.data.status==0) {
                         r_this.$Message.success('密码重置成功');
-                        r_this.$router.push("/day")
+                        r_this.$router.push("/summary")
                   }else{
                         r_this.checkmsg=response.data.info
                   }
+                  r_this.loading=false;
                 })
                 .catch(function (error) {
                   console.log(error);

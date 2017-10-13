@@ -14,7 +14,7 @@
         </Col>
         <Col span="6">
           <Card :dis-hover='true'>
-            <p slot="title">接通率</p><p>{{overviewData.outcall_rate}}<span>%</span></p>
+            <p slot="title">接通率</p><p>{{overviewData.outcall_rate}}%</p>
           </Card>
         </Col>
         <Col span="6">
@@ -36,7 +36,7 @@
     <!-- 统计明细 -->
     <div class="details">
         <h4>统计明细</h4>
-        <Table :columns="detailsColumns" :data="detailsData" size="small"></Table>
+        <Table :columns="detailsColumns" :data="detailsData" size="small" border></Table>
         <div class="clearfix">
           <Button type="primary" class="exportcsv" @click='exportdetail'><Icon type="forward"></Icon> 导出 </Button>
         </div>
@@ -54,7 +54,7 @@
 <script>
 import axios from 'axios';
 import echarts from 'echarts'
-
+import Bus from '../../../../static/js/bus.js';
 export default {
   name: "statistic",
   props: ['type'],
@@ -298,7 +298,19 @@ export default {
         });
     },
     exportdetail(){
-      window.location.href='/account/CallRecord/getStatistic?type=cc_day_callinout_statistic？searchType='+this.type+'&needExport='+this.type
+      var downloadStatistic='/account/CallRecord/getStatistic?type=cc_day_callinout_statistic&searchType='+this.type+'&needExport='+this.type
+      // axios.get(downloadStatistic)
+      //   .then(function (response) {
+      //     console.log(response)
+      //       if (response.data.data==null) {
+      //          console.log(0)
+      //       };
+            
+      //   })
+      //   .catch(function (error) {
+      //       console.log(error);
+      //   });
+      window.location.href=downloadStatistic
     },
     calculateTable(sort,index){
       let itemMap = ['outcall_total_count','outcall_count','outcall_rate','outcall_time'];
@@ -343,10 +355,11 @@ export default {
       this.detailsColumns = this.detailsColumns.slice(0,1).concat(detailsColumns)
       arr = []
       // console.log(this.detailsData);
-    }
-
+    },
   },
   mounted() {
+    Bus.$on('renderSummary',this.renderAllData)
+    
     this.chart = echarts.init(document.getElementById('myChart'))
     this.renderAllData();
   }
@@ -370,9 +383,6 @@ export default {
     line-height: 115px;
     font-size: 30px;
     color: #00b5ff;
-  }
-  .overview .ivu-card-body span{
-    font-size: 15px;
   }
   .chartbox{
     margin-top: 20px;
@@ -419,6 +429,7 @@ export default {
   }
   .details .exportcsv{
       margin-top: 20px;
+      float: right;
   }
 
 

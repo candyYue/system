@@ -23,7 +23,7 @@
                     }
                 })
                 .then(function (response) {
-                    console.log(response)
+                    // console.log(response)
                     if (response.data.status=='102002') {
                        window.location.hash="/login";
                        return;

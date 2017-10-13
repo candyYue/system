@@ -5,7 +5,7 @@
         <div class="manage">
             <div class="handle">
                 <Input v-model="sname" placeholder="搜索" class="sname" @on-keyup='osearch'></Input>
-                 
+                <i></i>
                 <div class="fr">
                     <Button @click="seatAction" icon="plus">新建坐席</Button>
                     <Button type="info" @click="$store.state.importseat=true"><Icon type="forward"></Icon>批量导入</Button>
@@ -56,8 +56,9 @@
                     <p>删除后，线索将无法恢复。确定删除线索？</p>
                 </div>
                 <div slot="footer">
-                    <Button @click="cancel">取消</Button>
                     <Button type="info" @click="removesingle">确认</Button>
+                    <Button @click="cancel">取消</Button>
+                    
                 </div>
             </Modal>
         </transition>
@@ -117,6 +118,7 @@
                     },
                     {
                         title: '操作',
+                        width:120,
                         key: 'action',
                         align: 'center',
                         render: (h, params) => {
@@ -256,10 +258,10 @@
                     this.tip="请输入坐席手机号"
                     return;
                 }
-                if(this.newlistpwd.trim()=='') {
-                    this.tip="请输入坐席登录密码"
-                    return;
-                }
+                // if(this.newlistpwd.trim()=='') {
+                //     this.tip="请输入坐席登录密码"
+                //     return;
+                // }
                 var that=this; 
                 var url=''
                 if (this.oid=='') {
@@ -295,7 +297,7 @@
                 
             },
             edit (row) {
-                // console.log(row)
+                console.log(row)
                 this.select=row._index;
                 this.seattitle = "编辑坐席"
                 
@@ -303,7 +305,7 @@
                 this.newlistname=row.name
                 this.newlistnumber=row.number
                 this.newlistmobile=row.mobile
-                this.newlistpwd=row.pwd
+                // this.newlistpwd=row.pwd
                 this.oid=row.id
                 this.seatbox=true
             },
@@ -358,6 +360,7 @@
 </script>
 
 <style scoped>
+
     .handle{
         margin-bottom: 20px;
         overflow: hidden;
@@ -365,12 +368,16 @@
     }
     .handle>i{
         position: absolute;
-        left: 6px; 
+        left: 8px; 
         top: 10px;
         width: 15px;
         height: 15px;
         background: url(../../../static/img/2.png) no-repeat 0-30px ;
         z-index: 99
+    }
+    .handle .ivu-input-icon{
+        position: absolute;
+        left: 0;
     }
     .sname{
         width: 250px;

@@ -43,11 +43,22 @@
                 <p>{{tip}}</p>
             </div>
             <div slot="footer">
-              <Button type="primary" size="large" :loading="loading" @click="averageAction">确定</Button>
+              <Button type="primary" size="large"  :loading="loading" @click="averageAction">确定</Button>
               <Button size="large" @click="averageAllCancel">取消</Button>
             </div>
           </Modal>
         </transition>
+
+        <!-- <transition enter-active-class="animated fadeIn">
+          <Modal v-if="maxCustomModal"
+             v-model="maxCustomModal" title="提醒">
+             <div class="item1">单次分配坐席，最多只能分配2000人，选择继续分配将分配2000人给该坐席。</div>
+             <div slot="footer">
+               <Button type="primary" size="large" @click='maxCustomModal=false'>继续分配</Button>
+               <Button size="large" @click="averageAllCancel">取消</Button>
+             </div>
+          </Modal>
+        </transition> -->
         <!-- 客服弹框  end -->
 
         <!-- 线索弹框  start -->
@@ -92,7 +103,7 @@
             <stepthree v-if="$store.state.stepthreemark" :render="renderInit"></stepthree>
           </Modal>
         </transition>
-
+        
         <div class="content">
             <!-- 表单 -->
             <Table :columns="columns7" :data="$store.state.clientlist" @on-selection-change="tableselect" size="small" ref="selection"></Table>
@@ -133,6 +144,7 @@
 
                 // 坐席弹框 customerModal
                 customerModal:false,
+                maxCustomModal:false,
                 customerTitle:'一键分配',
                 averageCustomerButton:false,
                 averageAction:()=>{},
@@ -221,12 +233,14 @@
                     },
                     {
                         title: '操作',
+                        width:120,
                         key: 'action',
                         align: 'center',
                         render: (h, params) => {
                             return h('div', [
                                 h('Button', {
                                     props: {
+                                      size:'small',
                                       type: 'text',
                                       icon: "ios-compose-outline"
                                     },
@@ -238,6 +252,7 @@
                                 }),
                                 h('Button', {
                                     props: {
+                                      size:'small',
                                       type: 'text',
                                       icon: "ios-trash-outline"
                                     },
@@ -284,7 +299,7 @@
               console.log(cid);
               var that=this;
               if(!cid){
-                this.$Modal.warning({content:'请选择要删除的企业'})
+                this.$Modal.warning({content:'请选择要删除的线索'})
                 return false;
               }
               that.loading=true;
@@ -380,7 +395,7 @@
               axios.get('/account/Customer/AverageCustomer',{params:config})
                    .then(function (response) {
                         if (response.data.status==0) {
-                            that.$Message.success('坐席分配成功');
+                            
                             that.getclientlist({
                                 params:{
                                     first_id:(that.page-1)*that.pagesize,
@@ -389,6 +404,7 @@
                                 }
                             });
                             that.cancel();
+                            that.$Message.success('坐席分配成功');
                         }else{
                             that.tip=response.data.info
                         }
@@ -481,6 +497,7 @@
                 this.tip=''
                 this.select=0
                 this.loading=false
+                this.maxCustomModal=false
             },
             cancelimport(){
                 this.$store.state.importclient=false;

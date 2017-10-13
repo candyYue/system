@@ -2,10 +2,10 @@
     <div class="wrapper">
         <div class="RightContent" :class={bigcontent:isbigcontent}>
             <div class="header">
-                <a href="javascript:;" class="toggle" @click="toogle"><Icon type="navicon"></Icon></a>
+                <a href="javascript:;" class="toggle" @click="toogle"><i></i></a>
                 <div class="user-info">
                     <span class="el-dropdown-link">
-                        <span class="date">今 天 是 {{datemg1}}，{{datemg2}}</span>
+                        <span class="date">今天是 {{datemg1}}，{{datemg2}}</span>
                         <span class="welcome" @click="dropshow=!dropshow">
                         <img class="user-logo" src="../../../static/img/photo.png">
                         您好！云电销 - 管理员</span>
@@ -22,7 +22,7 @@
                                 <Button class="signOut"  @click="signOut">退出登录</Button>
                             </div>
                         </div>
-                </transition>
+                    </transition>
                 </div>
             </div>
 
@@ -36,14 +36,14 @@
             <div class="logo"><p>云电销企业后台管理</p></div>
             <Col span="8">
             <Menu theme="dark" width='230px'>
-                <MenuItem name="1-0">菜单栏</MenuItem>
+                <MenuItem name="1-0"><a href="javascript:;">菜单栏</a></MenuItem>
                 <Submenu name="1">
                     <template slot="title">
                         <i class='center'></i>
                         统计中心
                     </template>
-                    <MenuItem name="1-1"><router-link to="/day">统计概况</router-link></MenuItem>
-                    <MenuItem name="1-2"><router-link to="/count">坐席统计</router-link></MenuItem>
+                    <MenuItem name="1-1"><router-link to="/summary" class='innertext'>统计概况</router-link></MenuItem>
+                    <MenuItem name="1-2"><router-link to="/count" class='innertext'>坐席统计</router-link></MenuItem>
                 </Submenu>
 
                 <MenuItem name="1-3"><router-link to="/link"><i class='client'></i>线索池</router-link></MenuItem>
@@ -53,6 +53,7 @@
         </Col>
         </div>
 
+
         <!-- 修改密码 -->
 
         <Modal v-model="changebox">
@@ -61,7 +62,7 @@
             </p>
             <Form label-position="right" :label-width="80">
                 <FormItem label="用户名">
-                    <Input v-model="companyname"></Input>
+                    <span>{{username}}</span>
                     <span class='changepwd'>修改密码</span>
                 </FormItem>
                 <FormItem label="原密码">
@@ -89,7 +90,7 @@
             </p>
             <Form label-position="right" :label-width="80">
                 <FormItem label="用户名">
-                    <Input v-model="companyname"></Input>
+                    <span>{{username}}</span>
                     <span class='changepwd'>修改密码</span>
                 </FormItem>
                 <FormItem label="原密码">
@@ -115,10 +116,13 @@
 <script>
     import axios from 'axios';
     import qs from 'qs';
+    import Bus from '../../../static/js/bus.js';
+
     export default {
         data() {
             return {
                 companyname:'',
+                username:'',
                 tablewidthsmall:'',
                 tablewidthlarge:'',
                 datemg1: '',
@@ -126,7 +130,6 @@
                 dropshow:false,
                 changebox:false,
                 tip:"",
-                // username:"",
                 oldpwd:"",
                 newpassword:"",
                 passwordagain:"",
@@ -134,7 +137,6 @@
                 isbigcontent:false,
                 ivuTablestyle:null,
                 sidebarstyle:null
-
             }
         },
 
@@ -150,9 +152,10 @@
             this.datemg1=year+'年'+month+'月'+day+'日';
             var arr = new Array("日", "一", "二", "三", "四", "五", "六");
             var week = new Date().getDay();
-            this.datemg2 = " 星 期 "+ arr[week];
+            this.datemg2 = "星期"+ arr[week];
             // this.username=window.localStorage.getItem("username");
             this.companyname=window.localStorage.getItem("companyname");
+            this.username=window.localStorage.getItem("username");
 
 
 
@@ -165,15 +168,16 @@
 
             this.tablewidthlarge=(parseInt(this.ivuTablestyle.width)+180)+'px'
 
-            if (this.$store.state.firstlogin) {
-
-            };
-            // this.instance()  //过期提醒
+            
+            // console.log(this.$store.state.endday)
+            if (0<this.$store.state.endday&&this.$store.state.endday<=30) {
+                this.instance()  //过期提醒
+            }
         },
         methods:{
             instance () {
                 const title = '过期提醒';
-                const content = '<p>您的云电销将于30天后到期，为了不影响您的继续使用，请联系客户经理进行续费。</p>';
+                const content = '<p>您的云电销将于'+this.$store.state.endday+'天后到期，为了不影响您的继续使用，请联系客户经理进行续费。</p>';
                 this.$Modal.warning({
                     title: title,
                     content: content
@@ -187,6 +191,7 @@
                 this.tip="";
             },
             toogle(){
+                
                 this.issmallsidebar=!this.issmallsidebar;
                 this.isbigcontent=!this.isbigcontent;
 
@@ -222,11 +227,13 @@
                 });
             },
             changepwd(){
+                
                 this.changebox=!this.changebox;
                 this.dropshow=false;
             },
             // 提交新密码
             confirmpwd(){
+
                 console.log(this.newpassword)
                 if(this.oldpwd.trim()==''){
                     this.tip="旧密码不能为空";
@@ -244,6 +251,7 @@
 
             },
             changepassword(){
+
                 var that=this;
                 axios.get('/account/user/resetPwd',{
                     params:{
@@ -254,14 +262,17 @@
                     }
                 })
                 .then(function(response){
-                    console.log(response)
-                    that.tip=response.data.info;
+                    
                     if (response.data.status==0) {
                         that.$Message.success('密码重置成功');
                         that.cancel()
-                        that.$router.push("/day") 
-                        that.$store.state.firstlogin=false
+                       
+                        that.$store.state.firstlogin=false;
+                        // that.$router.push("/summary") 
+                        // window.location.reload();
+                        Bus.$emit('renderSummary')
                     }else{
+                        that.tip=response.data.info;
                         return
                     }
                 })
@@ -279,9 +290,9 @@
     a {
         color: #bfcbd9;
     }
-    a:hover {
+    /* a:hover {
         color: #2d8cf0;
-    }
+    } */
     .header {
         position: relative;
         box-sizing: border-box;
@@ -340,11 +351,16 @@
     .toggle{
         display: inline-block;
         width: 54px;
+        height: 54px;
         text-align: center;
+        
     }
     .toggle i{
-        font-size: 28px;
-        line-height: 50px;
+        display: block;
+        width: 15px;
+        height: 12px;
+        margin: 19px auto;
+        background: url(../../../static/img/1.png) no-repeat 0 -69px;
     }
     .sidebar{
         display: block;
@@ -355,10 +371,21 @@
         bottom:0;
         background-color: #222c3e;
     }
+    .ivu-menu-vertical .ivu-menu-item, .ivu-menu-vertical .ivu-menu-submenu-title{
+        padding:0;
+    }
     .sidebar a{
         display: block;
         width: 100%;
         height: 100%;
+        padding: 14px 24px;
+        cursor: pointer;
+    }
+    .sidebar a i{
+        line-height: 20px
+    }
+    .sidebar .innertext{
+        padding: 14px 49px;
     }
     .RightContent{
         background: none repeat scroll 0 0 #fff;
@@ -424,11 +451,11 @@
         line-height: 20px;
     }
     .dropup p{
-        font-size: 14px;
+        font-size: 12px;
         color: #c6e3f5;
         line-height: 14px;
-        margin-top: 10px;
-        padding-bottom: 14px
+        margin-top: 8px;
+        padding-bottom: 20px
     }
     .dropdown{
         height: 56px;
@@ -475,8 +502,9 @@
     .changetip{
         position: absolute;
         left: 0;
-        bottom: -35px;
+        top: 35px;
         color: #ff5e5e; 
+        line-height: 20px;
     }
     .ivu-btn{
         width: 80px;

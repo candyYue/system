@@ -39,7 +39,6 @@
 
 <style scoped>
     .cate{
-        margin-top: 10px;
         margin-bottom: 20px;
         border: 1px solid #ccc;
         display: inline-block;
@@ -59,6 +58,7 @@
     .active{
       color: #fff;
       background-color: #00b5ff;
+
     }
 
 </style>

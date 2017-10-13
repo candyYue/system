@@ -45,7 +45,9 @@
                             //对应一个企业
                             if (res.data.length==1) {  
                                 //企业id 
+                                // console.log(res.data[0])
                                 window.localStorage.setItem("eid",res.data[0].id);
+                                window.localStorage.setItem("companyname",res.data[0].name); 
                                 // r_this.$router.push("/password") 
                                 r_this.$store.state.tel=false
                                 r_this.$store.state.password=true

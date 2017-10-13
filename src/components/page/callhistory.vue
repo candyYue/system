@@ -10,11 +10,11 @@
                 <DatePicker type="date" placeholder="选择日期"  @on-change='startT'></DatePicker>
                  至
                 <DatePicker type="date" placeholder="选择日期" @on-change='endT'></DatePicker>
-                <Button type="primary" @click='searchdate'>搜索</Button>
+                <Button @click='searchdate'>搜索</Button>
             </div>
             <div class="fr">
                 <Input class='search searchinput' v-model="searchvalue" placeholder="请输入姓名或号码进行模糊匹配" style="width: 280px"></Input>
-                <Button type="primary" class='search' @click='searchrecord'>搜索</Button>
+                <Button class='search' @click='searchrecord'>搜索</Button>
             </div>   
         </div>
         
@@ -42,7 +42,6 @@
             return {
                 spinShow:false,
                 // mp3play:true,
-                tableheight:0,
                 searchvalue:'',
                 starttime:"",
                 endtime:"",
@@ -108,7 +107,7 @@
                     {
                         title: '操作',
                         key: 'action',
-                        // width: 150,
+                        width: 120,
                         align: 'center',
                         render: (h, params) => {
                             return h('div', [
@@ -129,6 +128,7 @@
                                         btn1:true
                                     },
                                     style: {
+                                        paddingLeft:'3px',
                                         marginRight: '22px'
                                     },
                                     on: {
@@ -147,16 +147,17 @@
                                 }),
                                 h('Button', {
                                     props: {
-                                        type: 'ghost',
+                                        type: 'text',
                                         size: 'small',
-                                        shape:'circle',
-                                        icon:'ios-arrow-thin-down'
+                                        icon:'android-arrow-down',
+                                        disabled:params.row.record_filename==''?true:false
                                     },
                                     'class':{
                                         btn2:true
                                     },
                                     on: {
                                         click: () => {
+                                            // console.log(params.row.record_filename)
                                             this.download(params.index,params.row,params.column)
                                         }
                                     }
@@ -167,7 +168,8 @@
                 ],
                 list: [],
                 start_time:'',
-                end_time:''
+                end_time:'',
+                // downloadstate:true
             }
         },
         methods: {
@@ -214,13 +216,16 @@
                 .then(function(response){
                     console.log(response)
                     if (response.data.data==null) {
+                        that.spinShow = false;
                         that.list=[]
                         return
                     }
                     if (response.data.status==0) {
                         that.total=response.data.data.total;
                         that.list=response.data.data.content 
-                    };
+                    }else{
+                        that.$Message.warning(response.data.data);
+                    }
                     that.spinShow = false;
                     
                 })
@@ -258,13 +263,15 @@
                 }    
             },
             //下载
-            download(index){
-
-                var btn2=document.querySelectorAll('.btn2');
-                btn2[index].style.color="#00b5ff"
-                window.location.href=this.list[index].record_filename;   
-                      
-                
+            download(index,row){
+                if (row.record_filename=='') {
+                    this.$Message.warning('通话录音不存在');
+                    return;
+                }else{
+                    var btn2=document.querySelectorAll('.btn2');
+                    btn2[index].classList.add('btn-finish')
+                    window.location.href=this.list[index].record_filename;
+                }    
             },
             //选择分类
             catselect(value){
@@ -295,7 +302,6 @@
             },
         },
         mounted(){
-            this.tableheight=document.body.clientHeight-270;
             var that=this;
             //获取分类
             axios.get('/account/Customer/GetCallresult')
@@ -317,7 +323,27 @@
         }
     }
 </script>
+<style>
+     .btn-finish{
+        color: #00b5ff;
+    }
+    .btn-finish:after{
+        content: '完成';
+        position: absolute;
+        margin-left: 5px;
+    }
+    .btn2:before{
+        content:'-';
+        color: #00b5ff;
+        width:20px;
+        height:1px;
+    }
+</style>
 <style scoped>
+    .ivu-btn{
+        color: #fff;
+        background-color: #00b5ff;
+    }
     .handle{
         margin:20px 0;
     }
@@ -332,7 +358,7 @@
     .select{
         width: 198px;
         height: 34px;
-        padding: 0 14px;
+        padding-right: 14px;
         overflow: hidden;
         margin-right: 20px;
     }
@@ -345,4 +371,5 @@
     progress{
         border: 1px solid #00b5ff
     }
+   
 </style>

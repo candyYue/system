@@ -9,7 +9,7 @@
                 <a href="javascript:;" class="forgetpwd" @click="find">忘记密码?</a>
             </div>
             <div class="login-btn">
-                <Button type="info"  @click="login">登录</Button>
+                <Button type="info"  @click="login" :loading="loading">登录</Button>
             </div>
     </div>
 </template>
@@ -21,7 +21,8 @@
         data: function(){
             return {
                 pwd: '',
-                wrongtip:""
+                wrongtip:"",
+                loading:false,
             }
         },
         methods: {
@@ -33,6 +34,7 @@
                 this.$store.state.findpassword=true
             },
             login(){
+                this.loading=true;
                 var r_this=this
                 axios.post('/account/user/Login', qs.stringify({
                     phone:window.localStorage.getItem("phone"),
@@ -49,20 +51,24 @@
                             r_this.$store.state.firstlogin=true
                             r_this.$router.push("/bootpage") 
                         }else{
-                            r_this.$router.push("/day") 
+                            r_this.$router.push("/summary") 
                         }
                         
                         
-                    }else if (res.status==102001) {
-                        r_this.$router.push("/day") 
+                    }else if (res.status=='102001') {
+                        r_this.$router.push("/summary") 
                         
                     }else{
                         r_this.wrongtip=res.info
                     };
+
+                    r_this.loading=false;
+
                   })
                   .catch(function (error) {
                     console.log(error);
                   })
+
             }
         }
     }

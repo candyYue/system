@@ -4,6 +4,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
+        endday:-1,
         eid:'',
         company:[],
         importclient:false,

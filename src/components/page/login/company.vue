@@ -28,12 +28,22 @@ import axios from 'axios';
                 company:[],
                 choose:-1,
                 wrongTip:'',
-                model: ""
+                model: "",
+                nowdate:'' //当前时间戳
             }
         },
         methods: {
             getcid(index){
-                console.log(this.company[index])
+                // console.log(this.company[index])
+                var date=this.company[index].end_run_time+' 23:59:59';
+                
+                date = new Date(Date.parse(date.replace(/-/g, "/")));
+                date = date.getTime(); //到期时间戳
+
+                // 截止到期时间
+                this.$store.state.endday=Math.floor((date/1000-this.nowdate)/86400)
+                // console.log(this.$store.state.endday)
+
                 window.localStorage.setItem("eid",this.company[index].id); 
                 window.localStorage.setItem("companyname",this.company[index].name); 
                 this.choose=index;  
@@ -55,9 +65,9 @@ import axios from 'axios';
         mounted(){
             var r_this=this
                 var phone=window.localStorage.getItem("phone")
-                console.log(phone)
                 axios.post('/account/user/getBelongEps', qs.stringify({phone:phone}))
                   .then(function (response) {
+                    r_this.nowdate=response.data.time
                     r_this.company=response.data.data
                   })
                 if(this.$store.state.eid){

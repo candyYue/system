@@ -8,7 +8,7 @@
                 <DatePicker type="date" placeholder="选择日期" @on-change='startT'></DatePicker>
                  至
                 <DatePicker type="date" placeholder="选择日期" @on-change='endT'></DatePicker>
-                <Button type="primary" @click='searchdate'>搜索</Button>
+                <Button @click='searchdate'>搜索</Button>
             </div>
             <div class="fr">
                 <Input v-model="sname" placeholder="请输入姓名或号码进行模糊匹配" style="width: 280px"></Input>
@@ -117,7 +117,10 @@
                 this.end_time=b
             },
             searchdate(){
+
+                // console.log(this.start_time-this.end_time)  nan
                 var that=this
+
                 this.getOperatorsStatistic('/account/CallRecord/getOperatorStatistic',{
                     params:{
                         first_id:(that.page-1)*that.pagesize,
@@ -223,7 +226,7 @@
         }
         .page{
             position: absolute;
-            right: 20px;
+            right: 0px;
         }
 
 </style>

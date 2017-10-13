@@ -1,15 +1,16 @@
 <template>
-    <div class="temp clearfix">
+    <div class="clearfix">
         <div class="phoneresult" v-for="(item, index) in category" v-if="category.length">
             <img src="../../../../static/img/editphoneresult.gif" alt="">
             <p>{{item.cm_result}}</p>
             <div>
-                <Button type="primary" size="small" @click='editmark(index)'>编辑</Button>
-                <Button size="small" @click='removemark(index)'>删除</Button>
+                <Button type="primary" @click='editmark(index)'>编辑</Button>
+                <Button  @click='removemark(index)'>删除</Button>
             </div>
         </div>
         <a class="phoneresult newphoneresult" @click="addlimite">
-            <i>+</i>
+            <!-- <i>+</i> -->
+            <Icon type="ios-plus-empty"></Icon>
             <p>新建分类</p>
         </a>
 
@@ -209,6 +210,7 @@
     }
     .phoneresult:hover{
       box-shadow: 0 0 12px rgba(0,0,0,.12);
+
     }
     .phoneresult p{
         margin: 5px 0 10px;
@@ -216,6 +218,11 @@
     }
     .phoneresult img{
         width: 38px;
+    }
+    .phoneresult .ivu-btn{
+        width: 60px;
+        height: 26px;
+        padding:0;
     }
     /* 新建分类卡片 */
     .newphoneresult{
@@ -226,8 +233,16 @@
     .newphoneresult i{
       font-size: 60px;
       line-height: 1;
-      margin-top: 20px;
-      font-weight: 300;
+      transition: all linear .35s;
+    }
+    .newphoneresult:hover{
+      background-color: #fff;
+    }
+    .newphoneresult:hover>i{
+      color: #00b5ff
+    }
+    .newphoneresult:hover>p{
+      color: #333
     }
     /* 弹框 */
     .ivu-form-item{

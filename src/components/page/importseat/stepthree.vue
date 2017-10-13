@@ -8,7 +8,7 @@
     	    </ul>
     	    <Progress :percent="100" status="active"></Progress>
             <p>导入完成，共 {{$store.state.all}} 条，已成功 {{$store.state.already}} 条</p>
-    	    <p><a :href="'/account/Operator/getImportreport?hash_code=' + alink" class="downfailure">下载错误报告,</a>&nbsp;查看失败原因</p>
+    	    <p v-if='errorReport'><a :href="'/account/Operator/getImportreport?hash_code=' + alink" class="downfailure">下载错误报告,</a>&nbsp;查看失败原因</p>
     	</div>
         <div slot="footer" class="ivu-modal-footer">
             <Button size="large" type="primary" @click="finish">完成</Button>
@@ -22,7 +22,8 @@
     export default {
         data: function(){
             return {
-                alink:''
+                alink:'',
+                errorReport:false
             }
         },
         methods:{
@@ -35,6 +36,11 @@
         },
         mounted(){
              this.alink=this.$store.state.hash_code;
+             if (this.$store.state.all>this.$store.state.already) {
+                this.errorReport=true
+             }else{
+                this.errorReport=false
+             }
         }
     }
 </script>

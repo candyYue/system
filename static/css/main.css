@@ -32,11 +32,19 @@ html,body,#app,.wrapper{
 .ivu-modal-body{
   font-size: 14px;
   padding: 18px;
+  padding-right:30px 
+}
+.ivu-modal-footer{
+      padding-right: 30px;
 }
 .ivu-modal{
   top: 50%;
   transform: translateY(-65%);
 }
+.ivu-modal-wrap{
+  height: 100%;
+}
+
 /* icon */
 .ivu-icon-ios-compose-outline,.ivu-icon-ios-trash-outline{
   font-size: 18px;
@@ -48,7 +56,10 @@ html,body,#app,.wrapper{
     left: 115px;
     color:#ff5e5e;
 }
-
+/* 分配icon */
+.ivu-input-wrapper-small .ivu-input-icon{
+  line-height: 34px
+}
 /* 表单*/
 .ivu-form-item{
   margin-bottom: 0;
@@ -59,13 +70,28 @@ html,body,#app,.wrapper{
 .ivu-select-dropdown{
   /*position: absolute !important;*/
 }
-.ivu-btn + .ivu-btn{
-  margin-left: 14px;
+/* .ivu-btn{
+  margin-left: 8px 
+} */
+.ivu-icon{
+    margin-right: 8px;
 }
+/* .ivu-btn-primary .ivu-icon{
+    transform:rotate(180deg) 
+} */
+
+.ivu-btn + .ivu-btn{
+  margin-left: 8px;
+  font-size: 14px
+}
+
+
 .ivu-transfer-operation .ivu-btn + .ivu-btn{
   margin-left: 0;
 }
-
+.handle .ivu-input-icon+.ivu-input{
+    padding-left: 30px
+}
 /* h3{
     font-size: 18px;
     line-height: 50px;
@@ -111,3 +137,11 @@ html,body,#app,.wrapper{
 .spin .ivu-spin-fix{
   background-color: rgba(255,255,255,.6);
 }
+
+/* 图标 */
+/* .ivu-icon-trash-a:before {
+    content: "";
+    width: 15px;
+    height: 15px;
+    background: url;
+} */

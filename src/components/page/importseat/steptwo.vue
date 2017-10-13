@@ -46,7 +46,8 @@
 
                 axios.get('/account/Operator/getPercent',{
                 params:{
-                    hash_code:hashCode
+                    hash_code:hashCode,
+                    type:'operator'
                 }
                 })
                 .then(function (response) {
@@ -60,7 +61,7 @@
                         that.$store.state.already=response.data.data.result.success
 
 
-                        axios.get('/account/Customer/getCustomer',{
+                        axios.get('/account/Operator/getAllmembers',{
                             params:{
                                 first_id:0,
                                 count:20,

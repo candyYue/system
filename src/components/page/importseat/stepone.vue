@@ -11,7 +11,8 @@
     	    <p>二、准备要导入的csv文件</p>
             <Upload action="/account/Operator/ImportOperator" name="ccsv" class="file" :show-upload-list=false :on-success="handleSuccess">
                 <Button type="ghost" icon="ios-cloud-upload-outline">上传文件</Button>
-                <span class="uptip">{{uptip}}</span>
+                <span class="uptip" v-if='wronguptip'>{{uptip}}</span>
+                <span class="uptip2" v-if='!wronguptip'>{{uptip}}</span>
             </Upload>
     	</div>
         <div slot="footer" class="ivu-modal-footer">
@@ -27,6 +28,7 @@
     export default {
         data: function(){
             return {
+                wronguptip:true,
                 uptip:'',
                 upres:null
             }
@@ -37,22 +39,26 @@
             handleSuccess (res, file) {
                 this.upres=res
                 if (res.status==0) {
+                    this.wronguptip=false;
                     this.uptip="csv文件上传成功";
                     this.$store.state.hash_code=res.data.hash_code
                 }else{
+                    this.wronguptip=true;
                     this.uptip=res.info;
                 }
             },
             startimport(){
                 if (this.upres==null) {
-                  this.uptip='请上传csv'
-                  return;
+                    this.wronguptip=true;
+                    this.uptip='请上传csv'
+                    return;
                 }
                 var that=this
                 var hashCode=this.$store.state.hash_code
                 axios.get('/account/Operator/getPercent',{
                     params:{
-                        hash_code:hashCode
+                        hash_code:hashCode,
+                        type:'operator'
                     }
                 })
                 .then(function (response) {

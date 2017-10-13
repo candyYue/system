@@ -116,10 +116,10 @@ import findpassword from './login/findpassword.vue'
         height:1px;
         background-color:#fff;
         position:absolute;
-           bottom:50%;
-           z-index:1;
-           right:60px;
-           opacity: .8
+        bottom:50%;
+        z-index:1;
+        right:60px;
+        opacity: .8
     }
     .loginRight{
         text-align: center;

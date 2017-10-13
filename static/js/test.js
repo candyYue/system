@@ -13,6 +13,6 @@ function myTest() {
                 });
             }
 }
-export { //很关键
+export { 
   myfun
 }

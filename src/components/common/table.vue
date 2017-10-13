@@ -227,7 +227,7 @@
                 this.show3=true;
             },
             markend(){
-                this.$router.push("/day")
+                this.$router.push("/summary")
                 this.show3=false;
             }
         }

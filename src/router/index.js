@@ -16,24 +16,24 @@ export default new Router({
                 {   // 统计概况
                     path: '/summary',
                     component: resolve => require(['../components/page/summary.vue'], resolve),
-                    children:[
-                        {
-                        path: '/',
-                        component: resolve => require(['../components/page/formchart/day.vue'], resolve)   // 默认日报组件
-                        },
-                        {
-                        path: '/day',
-                        component: resolve => require(['../components/page/formchart/day.vue'], resolve)   // 日报组件
-                        },
-                        {
-                        path: '/month',
-                        component: resolve => require(['../components/page/formchart/month.vue'], resolve)   // 月报组件
-                        },
-                        {
-                        path: '/year',
-                        component: resolve => require(['../components/page/formchart/year.vue'], resolve)   // 年报组件
-                        }
-                    ]
+                    // children:[
+                    //     {
+                    //     path: '/',
+                    //     component: resolve => require(['../components/page/formchart/day.vue'], resolve)   // 默认日报组件
+                    //     },
+                    //     {
+                    //     path: '/day',
+                    //     component: resolve => require(['../components/page/formchart/day.vue'], resolve)   // 日报组件
+                    //     },
+                    //     {
+                    //     path: '/month',
+                    //     component: resolve => require(['../components/page/formchart/month.vue'], resolve)   // 月报组件
+                    //     },
+                    //     {
+                    //     path: '/year',
+                    //     component: resolve => require(['../components/page/formchart/year.vue'], resolve)   // 年报组件
+                    //     }
+                    // ]
                 },
                 {   // 坐席统计
                     path: '/count',
