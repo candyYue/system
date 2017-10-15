@@ -3,7 +3,7 @@
         <h3>坐席管理</h3>
         <div class="temp">
         <div class="manage">
-            <div class="handle">
+            <div class="handle handle2">
                 <Input v-model="sname" placeholder="搜索" class="sname" @on-keyup='osearch'></Input>
                 <i></i>
                 <div class="fr">
@@ -27,13 +27,13 @@
                        <Input v-model="newlistname" placeholder='必填'></Input>
                     </FormItem>
                     <FormItem label="坐席号">
-                       <Input v-model="newlistnumber"  placeholder='选填  (首位不为零的6-8个数字)'></Input>
+                       <Input v-model="newlistnumber"  placeholder='选填 (首位不为零的6-8个数字)'></Input>
                     </FormItem>
                     <FormItem label="手机号">
                         <Input v-model="newlistmobile" placeholder='必填'></Input>
                     </FormItem>
                     <FormItem label="登录密码">
-                       <Input v-model="newlistpwd"  placeholder='必填' type='password'></Input>
+                       <Input v-model="newlistpwd" type='password' placeholder='必填 (8-16位且须包含字母)' ></Input>
                     </FormItem>
                     <div class="error"><p>{{tip}}</p></div>
                   </Form>
@@ -358,7 +358,11 @@
         }
     }
 </script>
-
+<style>
+    .handle2 .ivu-input-icon+.ivu-input{
+    padding-left: 30px
+}
+</style>
 <style scoped>
 
     .handle{

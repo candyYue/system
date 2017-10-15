@@ -1,6 +1,9 @@
 <template>
     <div class="wrapper">
         <div class="RightContent" :class={bigcontent:isbigcontent}>
+            <transition name="custom-classes-transition" enter-active-class="animated fadeIn">
+                <div class='mask' v-if="dropshow" @click='dropshow=false'></div>
+            </transition>
             <div class="header">
                 <a href="javascript:;" class="toggle" @click="toogle"><i></i></a>
                 <div class="user-info">
@@ -24,13 +27,17 @@
                         </div>
                     </transition>
                 </div>
+
+                
             </div>
 
             <!-- 主体部分 -->
             <transition name="move" mode="out-in"><router-view></router-view></transition>
 
             <footer>copyright@20142015</footer>
+            
 
+            
         </div>
         <div class="sidebar":class={smallsidebar:issmallsidebar}>
             <div class="logo"><p>云电销企业后台管理</p></div>
@@ -53,7 +60,7 @@
         </Col>
         </div>
 
-
+        
         <!-- 修改密码 -->
 
         <Modal v-model="changebox">
@@ -69,7 +76,7 @@
                     <Input v-model="oldpwd"></Input>
                 </FormItem>
                 <FormItem label="新密码">
-                    <Input v-model="newpassword" type='password'></Input>
+                    <Input v-model="newpassword" type='password' placeholder='8-16位且须包含字母'></Input>
                 </FormItem>
                 <FormItem label="确认密码">
                     <Input v-model="passwordagain" type='password'></Input>
@@ -96,7 +103,7 @@
                 <FormItem label="原密码">
                     <Input v-model="oldpwd"></Input>
                 </FormItem>
-                <FormItem label="新密码">
+                <FormItem label="新密码" placeholder='8-16位且须包含字母'>
                     <Input v-model="newpassword"  type='password'></Input>
                 </FormItem>
                 <FormItem label="确认密码">
@@ -290,9 +297,14 @@
     a {
         color: #bfcbd9;
     }
-    /* a:hover {
-        color: #2d8cf0;
-    } */
+    .mask{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        opacity: 0;
+        z-index: 1
+    }
     .header {
         position: relative;
         box-sizing: border-box;
@@ -329,7 +341,7 @@
     }
     .user-info .welcome{
         display: inline-block;
-        height: 53px;
+        height: 52px;
         width: 260px;
         padding:0 14px 0 64px;
         position: relative;
@@ -381,8 +393,8 @@
         padding: 14px 24px;
         cursor: pointer;
     }
-    .sidebar a i{
-        line-height: 20px
+    .sidebar i{
+        vertical-align: middle;
     }
     .sidebar .innertext{
         padding: 14px 49px;

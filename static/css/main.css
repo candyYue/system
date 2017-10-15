@@ -68,18 +68,14 @@ html,body,#app,.wrapper{
   margin-top: 12px;
 }
 .ivu-select-dropdown{
-  /*position: absolute !important;*/
 }
-/* .ivu-btn{
-  margin-left: 8px 
-} */
+button .ivu-icon{
+  margin-right: 8px;
+}
 .ivu-icon{
-    margin-right: 8px;
+    
     vertical-align: middle;
 }
-/* .ivu-btn-primary .ivu-icon{
-    transform:rotate(180deg) 
-} */
 
 .ivu-btn + .ivu-btn{
   margin-left: 8px;
@@ -90,9 +86,7 @@ html,body,#app,.wrapper{
 .ivu-transfer-operation .ivu-btn + .ivu-btn{
   margin-left: 0;
 }
-.handle .ivu-input-icon+.ivu-input{
-    padding-left: 30px
-}
+
 /* h3{
     font-size: 18px;
     line-height: 50px;
@@ -140,38 +134,35 @@ html,body,#app,.wrapper{
 }
 
 /* 图标 */
-.ivu-icon-trash-a:before {
+.ivu-icon-trash-a:before,.ivu-icon-android-person:before, 
+.ivu-icon-plus:before,.ivu-icon-reply:before,.ivu-icon-forward:before{
     content: "";
     width: 14px;
     height: 14px;
     display: inline-block;
-    background: url(../img/3.png) no-repeat 0 -6px;
+    background-image: url(../img/3.png);
+    background-repeat: no-repeat;
+    transition: all .2s linear;
+}
+.ivu-icon-trash-a:before{
+    
+    background-position: 0 -6px;
 }
 .ivu-icon-android-person:before {
-    content: "";
-    width: 14px;
-    height: 14px;
-    display: inline-block;
-    background: url(../img/3.png) no-repeat -15px -6px;
+    background-position:-15px -6px;
 }
 .ivu-icon-plus:before {
-    content: "";
-    width: 14px;
-    height: 14px;
-    display: inline-block;
-    background: url(../img/3.png) no-repeat -30px -6px;
+    background-position: -30px -6px;
 }
 .ivu-icon-reply:before {
-    content: "";
-    width: 16px;
-    height: 11px;
-    display: inline-block;
-    background: url(../img/1.png) no-repeat 0 -90px;
+    background-position: -15px -20px;
 }
 .ivu-icon-forward:before {
-    content: "";
-    width: 16px;
-    height: 11px;
-    display: inline-block;
-    background: url(../img/1.png) no-repeat 0 -90px;
+    background-position: 0 -20px;
+}
+ 
+
+.ivu-btn:hover .ivu-icon-trash-a:before,.ivu-btn:hover .ivu-icon-android-person:before, 
+.ivu-btn:hover .ivu-icon-plus:before{
+  background-image: url(../img/3after.png);
 }

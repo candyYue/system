@@ -26,16 +26,16 @@
 	position: relative;
 }
 .mark1 button{
-	bottom: 0;
-	left: 180px;
+	bottom: -26px;
+	left: 200px;
 }
 .mark2 button{
-	bottom: -50px;
-	left: 230px;
+	bottom: -76px;
+	left: 250px;
 }
 .mark3 button{
-	bottom: 0;
-	left: 350px;
+	bottom: -26px;
+	left: 370px;
 }
 .newhighlight{
 	z-index: 999

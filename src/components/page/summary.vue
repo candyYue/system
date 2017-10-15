@@ -40,10 +40,10 @@
 <style scoped>
     .cate{
         margin-bottom: 20px;
-        border: 1px solid #ccc;
         display: inline-block;
     }
     .cate li{
+        border:  1px solid #ccc;
         text-align: center;
         float: left;
         width: 60px;
@@ -52,13 +52,13 @@
         cursor: pointer;
         font-size: 14px;
     }
-    .cate li+li{
-      border-left:  1px solid #ccc;
+    .cate li:nth-of-type(3){
+      border-right:  1px solid #ccc;
     }
-    .active{
+    .cate .active{
       color: #fff;
+      border:  1px solid #00b5ff;
       background-color: #00b5ff;
-
     }
 
 </style>

@@ -44,7 +44,7 @@
         height: 51px;
         padding: 0 20px;
         border: 1px solid #ccc;
-        border-bottom: none;
+        /* border-bottom: none; */
         background-color: #f4f4f4;
         font-size: 16px;
         color: #333;

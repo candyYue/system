@@ -30,7 +30,7 @@
           <Option v-for="item in statisticList" :value="item.value" :key="item.value">{{ item.label }}</Option>
       </Select>
 
-      <div id="myChart" :style="{width: '100%', height: '300px'}"></div>
+      <div id="myChart" :style="{width: '100%', height: '350px'}"></div>
     </div>
 
     <!-- 统计明细 -->
@@ -100,7 +100,7 @@ export default {
         key:'outcall_time',
         label:'通话时长',
         color:'#f5a100',
-        unit:'（秒）'
+        unit:'（时长）'
       }
     ],
     chart:null,
@@ -221,11 +221,21 @@ export default {
     },
     drawLine(){
         const self = this;
+        let format = null,ChartX=this.ChartX;
+        if(self.seletChart==3){
+          format = self.formatTime.bind(self)
+        }
+        if(this.type==1){
+          ChartX = self.ChartX.map((item)=>{return self.formatXAxis(item)})
+        }
+
         // 绘制图表
         this.chart.setOption({
+
+
             grid: {
-              left: '3%',
-              right: '3%'
+                left: '60',
+                right: '0'
             },
             title: {
                show:false,
@@ -245,13 +255,17 @@ export default {
                 data:[{
                   name: self.statisticList[self.seletChart].label,
                   icon:'circle'
-                }]
+                }],
+                selectedMode:false,
             },
             xAxis: {
-                data:self.ChartX,
+              boundaryGap:['20%', '20%'], 
+              axisTick:{
+                  show:false
+                },
+                data:ChartX,
                 type: 'category',
                 nameGap:10,  //名称与X轴的距离
-                boundaryGap : false,//坐标的刻度是否在中间
                 axisLine:{//坐标轴线条相关设置(颜色等)
                     lineStyle:{
                         color:'#ccc'
@@ -267,6 +281,7 @@ export default {
             },
             color:[self.statisticList[self.seletChart].color],
             yAxis: {
+                // splitNumber:5,
                 type: 'value',
                 nameGap:10,  //名称与Y轴的距离
                 name:self.statisticList[self.seletChart].unit,    //坐标轴名称
@@ -278,9 +293,7 @@ export default {
                     length:'0' //设置成0了
                 },
                 axisLine:{//坐标轴线条相关设置(颜色等)
-                    lineStyle:{
-                        color:'#ccc'
-                    }
+                    show:false
                 },
                 axisLabel:{//坐标轴标签相关设置,距离颜色等
                     margin:7,
@@ -288,6 +301,8 @@ export default {
                         color:"#999",  //坐标轴刻度文字的颜色
                         fontSize:'12px' //坐标轴刻度文字的大小
                     },
+                    formatter:format,
+                    interval:100
                 }
             },
             series: [ {
@@ -297,19 +312,18 @@ export default {
             }]
         });
     },
+    formatXAxis(data){
+      let base = Number(data.slice(11,13));
+      function zero(x){
+        if(x<9){
+          return `0${x}`
+        }
+        return x
+      }
+      return `${zero(base)}:00 - ${zero(base+1)}:59`
+    },
     exportdetail(){
       var downloadStatistic='/account/CallRecord/getStatistic?type=cc_day_callinout_statistic&searchType='+this.type+'&needExport='+this.type
-      // axios.get(downloadStatistic)
-      //   .then(function (response) {
-      //     console.log(response)
-      //       if (response.data.data==null) {
-      //          console.log(0)
-      //       };
-            
-      //   })
-      //   .catch(function (error) {
-      //       console.log(error);
-      //   });
       window.location.href=downloadStatistic
     },
     calculateTable(sort,index){
@@ -367,6 +381,9 @@ export default {
 </script>
 
 <style>
+  #myChart{
+  margin-top: -20px;
+}
   .overview{
     text-align: center;
   }
@@ -389,7 +406,9 @@ export default {
     position: relative;
   }
   .chartbox .ivu-select{
+    position: relative;
     width: 148px;
+    z-index: 9;
   }
   .chartbox .ivu-select-selection{
     border-radius: 2px;

@@ -118,7 +118,6 @@
                                         shape:'circle',
                                         icon:'ios-play-outline',
                                         disabled:true
-                                        
                                     },
                                     attrs:{
                                         ref:'btn1',
@@ -128,7 +127,7 @@
                                         btn1:true
                                     },
                                     style: {
-                                        paddingLeft:'3px',
+                                        paddingLeft:'8px',
                                         marginRight: '22px'
                                     },
                                     on: {
@@ -330,7 +329,7 @@
     .btn-finish:after{
         content: '完成';
         position: absolute;
-        margin-left: 5px;
+        margin-left: -3px;
     }
     .btn2:before{
         content:'-';
@@ -361,9 +360,6 @@
         padding-right: 14px;
         overflow: hidden;
         margin-right: 20px;
-    }
-    .search{
-        margin:0 5px;
     }
     .searchinput{
         width: 208px;

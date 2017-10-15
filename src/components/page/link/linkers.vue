@@ -6,13 +6,13 @@
                 <Option v-for="item in category" :value="item.value"  :key="item.value">{{item.label}}</Option>
             </Select>
             <div class="btns">
-                <Button @click="deleteAction(0)"><Icon type="trash-a"></Icon>清空线索</Button>
+                <Button @click="deleteAction(0)"><Icon type="trash-a" :class='icon'></Icon>清空线索</Button>
                 <Button @click="deleteAction(2)"><Icon type="trash-a"></Icon>批量删除</Button>
-                <Button @click="averageCustomer(0)" :disabled="averageCustomerButton"><Icon type="android-person"></Icon>全部分配</Button>
-                <Button @click="averageCustomer(1)" :disabled="averageCustomerButton"><Icon type="android-person"></Icon>分配线索</Button>
+                <Button @click="averageCustomer(0)" v-if="averageCustomerButton"><Icon type="android-person"></Icon>全部分配</Button>
+                <Button @click="averageCustomer(1)" v-if="averageCustomerButton"><Icon type="android-person"></Icon>分配线索</Button>
                 <Button @click="clientAction(0)"><Icon type="plus"></Icon>新建线索</Button>
                 <Button type="primary" @click="$store.state.importclient=true"><Icon type="forward"></Icon>批量导入</Button>
-                <Button type="primary" @click="exportData"><Icon :type="exporticon"></Icon>{{exportcsv}}</Button>
+                <Button type="primary" @click="exportData"  :loading="loadingreply"><Icon type="reply" v-if='exporticon'></Icon>{{exportcsv}}</Button>
             </div>
         </div>
         <!-- 删除弹框  start -->
@@ -30,7 +30,7 @@
 
         <!-- 客服弹框  start -->
         <transition enter-active-class="animated fadeIn">
-          <Modal v-model="customerModal" v-if="customerModal" :title="customerTitle" width="600" :mask-closable="false" :loading="true">
+          <Modal v-model="customerModal" v-if="customerModal" :title="customerTitle" width="602" :mask-closable="false" :loading="true">
             <a slot="close" @click="averageAllCancel"><i class="ivu-icon ivu-icon-ios-close-empty"></i></a>
             <Transfer :data="seatlist"
                       :target-keys="targetKeys"
@@ -126,6 +126,7 @@
     export default {
         data() {
             return {
+              loadingreply:false,
                 spinShow:false,
                 // 分页
                 pagesize:20,   // 每页条数
@@ -146,7 +147,7 @@
                 customerModal:false,
                 maxCustomModal:false,
                 customerTitle:'一键分配',
-                averageCustomerButton:false,
+                averageCustomerButton:true,
                 averageAction:()=>{},
                   //分配坐席穿梭框
                 data: [],   //所有坐席
@@ -173,7 +174,7 @@
                 averageoid:'',  //选择分配的坐席id
                 ExportCustomerhashcode:'',
                 exportcsv:'全部导出',
-                exporticon:'reply',
+                exporticon:true,
                 category: [
                     {
                         value:1,
@@ -310,7 +311,8 @@
                       that.getclientlist({
                           params:{
                               first_id:(that.page-1)*that.pagesize,
-                              count:that.pagesize
+                              count:that.pagesize,
+                              type:that.typevalue
                           }
                       });
                       that.cancel()
@@ -537,7 +539,7 @@
                 var that=this;
                 this.typevalue=value;
 
-                value==0 ? (this.averageCustomerButton=false) : (this.averageCustomerButton=true)
+                value==0 ? (this.averageCustomerButton=true) : (this.averageCustomerButton=false)
                 this.page = 1
                 this.getclientlist({
                     params:{
@@ -605,14 +607,16 @@
             },
             //导出csv
             exportData () {
+                this.loadingreply=true;
+                this.exporticon=false;
                 var that=this;
                 axios.get('/account/Customer/ExportCustomer')
                 .then(function (response) {
 
                     if (response.data.status==0) {
                         that.ExportCustomerhashcode=response.data.data.hash_code;
-                        that.exportcsv='正在导出'
-                        that.exporticon='load-d'
+                        // that.exportcsv='正在导出'
+                        // that.exporticon='load-d'
                         //导出进度
                         console.log(that.ExportCustomerhashcode)
                         var getper=setInterval(function () {
@@ -624,8 +628,10 @@
                             .then(function (response) {
                                 console.log(response)
                                 if (response.data.data.per==100) {
-                                    that.exportcsv='全部导出'
-                                    that.exporticon='reply'
+                                    // that.exportcsv='全部导出'
+                                    // that.exporticon='reply'
+                                    that.loadingreply=false
+                                    that.exporticon=true
                                     clearInterval(getper)
                                     window.location.href='/account/Customer/getExportFile?hash_code=' +that.ExportCustomerhashcode
                                 };

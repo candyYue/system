@@ -59,10 +59,12 @@
                         r_this.$router.push("/summary") 
                         
                     }else{
-                        r_this.wrongtip=res.info
+                        r_this.wrongtip=res.info;
+
+                        r_this.loading=false;
                     };
 
-                    r_this.loading=false;
+                
 
                   })
                   .catch(function (error) {

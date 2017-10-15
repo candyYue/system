@@ -21,7 +21,8 @@
             <Form :label-width="110">
               <FormItem label="结果分类名称：">
                  <Input v-for="item in newClassify" :key="item.key" v-model="item.name"/>
-                 <Button shape="circle" icon="android-add" @click="addinput" class="add-input-btn" v-if="addBtn"></Button>
+                 <div @click="addinput" ><Icon type="ios-plus-outline" class="add-input-btn" v-if="addBtn"></Icon></div>
+                 <!-- <Button shape="circle" icon="android-add" @click="addinput" class="add-input-btn" v-if="addBtn"></Button> -->
              </FormItem>
             </Form>
             <div class="error">
@@ -78,6 +79,7 @@
               this.removebox=false
             },
             addinput(){
+              console.log(1)
                 var all=this.category.length+this.newClassify.length
                 if (all<10) {
                   this.newClassify.push({key:this.newClassify.length,name:""})
@@ -252,8 +254,15 @@
       margin-bottom: 12px;
     }
     .add-input-btn{
+      font-size: 36px;
+      color: #999;
+      cursor: pointer;
       position: absolute;
       right:-40px;
       top: 0;
+      transition:all 0.2s;
+    }
+    .add-input-btn:hover{
+        color: #00b5ff;
     }
 </style>
