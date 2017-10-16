@@ -33,7 +33,7 @@
                         <Input v-model="newlistmobile" placeholder='必填'></Input>
                     </FormItem>
                     <FormItem label="登录密码">
-                       <Input v-model="newlistpwd" type='password' placeholder='必填 (8-16位且须包含字母)' ></Input>
+                       <Input v-model="newlistpwd" type='password' placeholder='必填 (坐席密码为8-16位且须包含字母)' ></Input>
                     </FormItem>
                     <div class="error"><p>{{tip}}</p></div>
                   </Form>
@@ -66,7 +66,7 @@
         <!-- 导入坐席 -->
         <transition enter-active-class="animated fadeIn">
           <Modal v-if="$store.state.importseat" v-model="$store.state.importseat" title="导入坐席"
-                 :mask-closable="false" width="600" :footer-hide="true"  class="import-modal">
+                 :mask-closable="false" width="580" :footer-hide="true"  class="import-modal">
             <a slot="close" @click="cancelimport"><Icon type="ios-close-empty"></Icon></a>
             <stepone v-if="$store.state.steponemark"></stepone>
             <steptwo v-if="$store.state.steptwomark"></steptwo>
@@ -129,9 +129,6 @@
                                         size: 'small',
                                         icon:"ios-compose-outline"
                                     },
-                                    style: {
-                                        marginRight: '8px',
-                                    },
                                     on: {
                                         click: () => {
                                             this.edit(params.row)
@@ -144,11 +141,6 @@
                                         type: 'text',
                                         size: 'small',
                                         icon:"ios-trash-outline"
-                                    },
-                                    style: {
-                                        border:'none',
-                                        paddingLeft: '0.3rem',
-                                        paddingRight: '0.3rem',
                                     },
                                     on: {
                                         click: () => {
@@ -191,7 +183,7 @@
                 })
             },
             osearch(){
-                console.log(this.sname)
+                this.page=1
                 var that=this
                 this.getallmember('/account/Operator/getAllmembers',{
                 params:{

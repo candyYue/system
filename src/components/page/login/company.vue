@@ -42,7 +42,6 @@ import axios from 'axios';
 
                 // 截止到期时间
                 this.$store.state.endday=Math.floor((date/1000-this.nowdate)/86400)
-                // console.log(this.$store.state.endday)
 
                 window.localStorage.setItem("eid",this.company[index].id); 
                 window.localStorage.setItem("companyname",this.company[index].name); 

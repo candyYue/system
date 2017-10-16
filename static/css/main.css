@@ -31,15 +31,17 @@ html,body,#app,.wrapper{
 }
 .ivu-modal-body{
   font-size: 14px;
-  padding: 18px;
-  padding-right:30px 
+  padding: 18px 30px;
+  /* padding-right:30px  */
 }
 .ivu-modal-footer{
       padding-right: 30px;
 }
 .ivu-modal{
-  top: 50%;
-  transform: translateY(-65%);
+  top: 50%; 
+}
+.ivu-modal-content{
+   transform: translateY(-65%);
 }
 .ivu-modal-wrap{
   height: 100%;

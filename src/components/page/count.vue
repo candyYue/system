@@ -66,7 +66,7 @@
                         "sortable": true,
                          render: (h, params) => {
 
-                            return h('div',params.row.outcall_rate+'%');  
+                            return h('div',Number(params.row.outcall_rate).toFixed(2)+'%');  
                         }
                     },
                     {
@@ -79,8 +79,7 @@
                         }
                     }
                 ],
-                list: [],
-                sortlist:[]
+                list: []
             }
         },
         methods:{
@@ -118,7 +117,7 @@
             },
             searchdate(){
 
-                // console.log(this.start_time-this.end_time)  nan
+                this.page=1
                 var that=this
 
                 this.getOperatorsStatistic('/account/CallRecord/getOperatorStatistic',{
@@ -132,6 +131,7 @@
             },
             //模糊匹配
             snamefilter(){
+                this.page=1
                 this.initstatistic()
             },
 
@@ -147,7 +147,19 @@
                     };
                     if (response.data.status==0) {
                         that.total=response.data.data.total;
-                        that.list=response.data.data.content
+                        // that.list=response.data.data.content
+                        let newList=[];
+                        response.data.data.content.map((item,index)=>{
+                          newList[index] = {}
+                          for(var prop in item){
+                            if(prop=='name'){
+                              newList[index][prop] = item[prop]
+                            }else{
+                              newList[index][prop] = Number(item[prop])
+                            }
+                          }
+                        })
+                        that.list = newList;
                        
                     };
                     

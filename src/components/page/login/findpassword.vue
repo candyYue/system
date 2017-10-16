@@ -15,7 +15,7 @@
                     </Button>
                 </div>
                 <div>
-                    <Input v-model="newpwd" placeholder="请输入6-16位密码" type="password"  style="width: 300px" class="newpwd" @on-focus="eyedisable" @on-blur='eyeable'></Input>
+                    <Input v-model="newpwd" placeholder="请输入8-16位密码" type="password"  style="width: 300px" class="newpwd" @on-focus="eyedisable" @on-blur='eyeable'></Input>
                     <!-- <input placeholder="请输入6-16位密码" class="newpwd" v-model="newpwd"></input> -->
                     <!-- <div class="pwdeye"></div> -->
                     <Icon :type="pwdeye" class='pwdeye'></Icon>
@@ -87,8 +87,8 @@
                         r_this.$router.push("/summary")
                   }else{
                         r_this.checkmsg=response.data.info
+                        r_this.loading=false;
                   }
-                  r_this.loading=false;
                 })
                 .catch(function (error) {
                   console.log(error);

@@ -76,7 +76,7 @@
                     <Input v-model="oldpwd"></Input>
                 </FormItem>
                 <FormItem label="新密码">
-                    <Input v-model="newpassword" type='password' placeholder='8-16位且须包含字母'></Input>
+                    <Input v-model="newpassword" type='password' placeholder='新密码为8-16位且须包含字母'></Input>
                 </FormItem>
                 <FormItem label="确认密码">
                     <Input v-model="passwordagain" type='password'></Input>
@@ -103,8 +103,8 @@
                 <FormItem label="原密码">
                     <Input v-model="oldpwd"></Input>
                 </FormItem>
-                <FormItem label="新密码" placeholder='8-16位且须包含字母'>
-                    <Input v-model="newpassword"  type='password'></Input>
+                <FormItem label="新密码">
+                    <Input v-model="newpassword"  type='password'  placeholder='新密码为8-16位且须包含字母'></Input>
                 </FormItem>
                 <FormItem label="确认密码">
                     <Input v-model="passwordagain"  type='password'></Input>
@@ -319,7 +319,7 @@
         text-align: center;
         font-size: 16px;
         padding-left: 30px;
-        background: url(../../../static/img/01.png) no-repeat 30px center;
+        background: url(../../../static/img/smalllogo.png) no-repeat 30px center;
         background-color: #00b5ff;
         color: #fff;
     }
@@ -501,7 +501,7 @@
     .changepwd:after{
         content: '';
         display: inline-block;
-        width:400px;
+        width:380px;
         height:1px;
         background-color:#ccc;
         position:absolute;

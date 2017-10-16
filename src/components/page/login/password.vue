@@ -60,7 +60,6 @@
                         
                     }else{
                         r_this.wrongtip=res.info;
-
                         r_this.loading=false;
                     };
 

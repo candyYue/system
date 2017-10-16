@@ -7,13 +7,13 @@
                     <span class="el-dropdown-link">
                         <span class="date">今天是{{datemg1}}，{{datemg2}}</span>
                         <span class="welcome" @click="dropshow=!dropshow">
-                        <img class="user-logo" src="../../../static/img/img.jpg">
+                        <img class="user-logo" src="../../../static/img/photo.png">
                         您好！电销通-云总机产品线管理员</span> 
                     </span>
                     <transition name="custom-classes-transition" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                         <div class="drop" v-if="dropshow">
                             <div class="dropup">
-                                <img src="../../../static/img/img.jpg" alt="" class="userphoto">
+                                <img src="../../../static/img/photo.png" class="userphoto">
                                 <h4>电销通 - 云总机产品线管理员</h4>
                                 <p>登陆时间：{{datemg1}}，{{datemg2}}</p>
                             </div>

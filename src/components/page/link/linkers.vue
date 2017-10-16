@@ -30,7 +30,7 @@
 
         <!-- 客服弹框  start -->
         <transition enter-active-class="animated fadeIn">
-          <Modal v-model="customerModal" v-if="customerModal" :title="customerTitle" width="602" :mask-closable="false" :loading="true">
+          <Modal v-model="customerModal" v-if="customerModal" :title="customerTitle" width="615" :mask-closable="false" :loading="true">
             <a slot="close" @click="averageAllCancel"><i class="ivu-icon ivu-icon-ios-close-empty"></i></a>
             <Transfer :data="seatlist"
                       :target-keys="targetKeys"
@@ -96,7 +96,7 @@
         <!-- 批量导入 -->
         <transition enter-active-class="animated fadeIn">
           <Modal v-if="$store.state.importclient" v-model="$store.state.importclient" title="导入线索"
-                 :mask-closable="false" width="600" :footer-hide="true"  class="import-modal">
+                 :mask-closable="false" width="580" :footer-hide="true"  class="import-modal">
             <a slot="close" @click="cancelimport"><Icon type="ios-close-empty"></Icon></a>
             <stepone v-if="$store.state.steponemark"></stepone>
             <steptwo v-if="$store.state.steptwomark"></steptwo>
@@ -377,10 +377,12 @@
             // 一键分配
             averageAll(){
               this.average(0);
+              this.page=1
             },
             // 分配线索
             averageSeleted(){
               this.average(1);
+              this.page=1
             },
             // 分配坐席
             average(type){
@@ -615,10 +617,7 @@
 
                     if (response.data.status==0) {
                         that.ExportCustomerhashcode=response.data.data.hash_code;
-                        // that.exportcsv='正在导出'
-                        // that.exporticon='load-d'
                         //导出进度
-                        console.log(that.ExportCustomerhashcode)
                         var getper=setInterval(function () {
                             axios.get('/account/Customer/getPercent',{
                                 params:{
@@ -628,8 +627,6 @@
                             .then(function (response) {
                                 console.log(response)
                                 if (response.data.data.per==100) {
-                                    // that.exportcsv='全部导出'
-                                    // that.exporticon='reply'
                                     that.loadingreply=false
                                     that.exporticon=true
                                     clearInterval(getper)

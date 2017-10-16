@@ -56,11 +56,12 @@
                         align: 'center'
                     },
                     {
-                        title: '号码',
-                        key: 'callee_number'
+                        title: '客户号码',
+                        key: 'callee_number',
+                        // className:'tablenumber'
                     },
                     {
-                        title: '姓名',
+                        title: '客户名称',
                         key: 'callee'
                     },
                     {
@@ -68,7 +69,8 @@
                         key: 'caller'
                     },
                     {
-                        title: '时间',
+                        title: '通话时间',
+                        width: 230,
                         key: 'time',
                         render: (h, params) => {
                             return h('div',[
@@ -78,14 +80,14 @@
                         }
                     },
                     {
-                        title: '结果',
+                        title: '通话结果',
                         key: 'result',
                         render: (h, params) => {
                             return h('div',params.row.result.cm_result);
                         }
                     },
                     {
-                        title: '录音时长',
+                        title: '通话时长',
                         // width: 250,
                         key: 'audio',
                         render: (h, params) => {
@@ -111,39 +113,39 @@
                         align: 'center',
                         render: (h, params) => {
                             return h('div', [
-                                h('Button', {
-                                    props: {
-                                        type: 'ghost',
-                                        size: 'small',
-                                        shape:'circle',
-                                        icon:'ios-play-outline',
-                                        disabled:true
-                                    },
-                                    attrs:{
-                                        ref:'btn1',
-                                        value:'pause'
-                                    },
-                                    'class':{
-                                        btn1:true
-                                    },
-                                    style: {
-                                        paddingLeft:'8px',
-                                        marginRight: '22px'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.play(params.index,params.row,params.column)
-                                        }
-                                    }
-                                }),
-                                h('audio',{
-                                    // attrs:{
-                                    //     src:this.data[params.index].id
-                                    // },
-                                    'class':{
-                                        audio:true
-                                    },
-                                }),
+                                // h('Button', {
+                                //     props: {
+                                //         type: 'ghost',
+                                //         size: 'small',
+                                //         shape:'circle',
+                                //         icon:'ios-play-outline',
+                                //         disabled:true
+                                //     },
+                                //     attrs:{
+                                //         ref:'btn1',
+                                //         value:'pause'
+                                //     },
+                                //     'class':{
+                                //         btn1:true
+                                //     },
+                                //     style: {
+                                //         paddingLeft:'8px',
+                                //         marginRight: '22px'
+                                //     },
+                                //     on: {
+                                //         click: () => {
+                                //             this.play(params.index,params.row,params.column)
+                                //         }
+                                //     }
+                                // }),
+                                // h('audio',{
+                                //     // attrs:{
+                                //     //     src:this.data[params.index].id
+                                //     // },
+                                //     'class':{
+                                //         audio:true
+                                //     },
+                                // }),
                                 h('Button', {
                                     props: {
                                         type: 'text',
@@ -234,11 +236,13 @@
             },
             //日期搜索
             searchdate(){
-                this.getCallRecord()
+                this.page=1
+                this.getCallRecord();
+
             },
             //关键字搜索
             searchrecord(){
-                
+                this.page=1
                 this.getCallRecord()
                 
             },

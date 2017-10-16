@@ -84,7 +84,7 @@ import findpassword from './login/findpassword.vue'
         top: 112px;
         left: 50%;
         transform:translate(-50%);
-        box-shadow: 5px 5px  10px 0 #76c3e7
+        box-shadow: 5px 5px  10px #76c3e7
     }
     .logotext{
         width: 100%;

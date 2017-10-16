@@ -38,7 +38,7 @@
         <h4>统计明细</h4>
         <Table :columns="detailsColumns" :data="detailsData" size="small" border></Table>
         <div class="clearfix">
-          <Button type="primary" class="exportcsv" @click='exportdetail'><Icon type="forward"></Icon> 导出 </Button>
+          <Button type="primary" class="exportcsv" @click='exportdetail'><Icon type="reply"></Icon> 导出 </Button>
         </div>
     </div>
     <!-- <div class="details">

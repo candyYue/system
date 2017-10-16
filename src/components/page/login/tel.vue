@@ -33,7 +33,7 @@
                     this.tel=this.tel.trim()
                     var r_this=this
                     axios.post('/account/user/getBelongEps',qs.stringify({phone:r_this.tel}))
-                    .then(function(response){ 
+                    .then(function(response){
                     var res=response.data
                     if (res.status==0) {
                         //存储手机号
@@ -44,8 +44,13 @@
                             window.localStorage.setItem("phone",r_this.tel);
                             //对应一个企业
                             if (res.data.length==1) {  
-                                //企业id 
-                                // console.log(res.data[0])
+                                //企业到期时间
+                                var date=res.data[0].end_run_time+' 23:59:59';
+                                date = new Date(Date.parse(date.replace(/-/g, "/")));
+                                date = date.getTime(); //到期时间戳
+                                r_this.$store.state.endday=Math.floor((date/1000-res.time)/86400)
+
+
                                 window.localStorage.setItem("eid",res.data[0].id);
                                 window.localStorage.setItem("companyname",res.data[0].name); 
                                 // r_this.$router.push("/password") 
