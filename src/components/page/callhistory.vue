@@ -13,8 +13,8 @@
                 <Button @click='searchdate'>搜索</Button>
             </div>
             <div class="fr">
-                <Input class='search searchinput' v-model="searchvalue" placeholder="请输入姓名或号码进行模糊匹配" style="width: 280px"></Input>
-                <Button class='search' @click='searchrecord'>搜索</Button>
+                <Input class='search searchinput' v-model="searchvalue" placeholder="请输入姓名或号码进行模糊匹配" style="width: 280px" @on-keyup="keyCode($event)"></Input>
+                <Button class='search' @click='searchAction'>搜索</Button>
             </div>   
         </div>
         
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    // import {myCommon} from '../../assets/common.js';
+    // import {keyCode} from '../../assets/common.js';
     import axios from 'axios';
     import qs from 'qs';
     export default {
@@ -200,6 +200,12 @@
   
             return time;
             },
+            keyCode(ev){
+                console.log(ev.keyCode)
+                if(ev.keyCode==13){
+                    this.searchAction()
+                }
+            },
             //所有
             getCallRecord(config){
                 var that=this;
@@ -241,7 +247,7 @@
 
             },
             //关键字搜索
-            searchrecord(){
+            searchAction(){
                 this.page=1
                 this.getCallRecord()
                 

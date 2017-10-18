@@ -6,7 +6,7 @@
                 <Option v-for="item in category" :value="item.value"  :key="item.value">{{item.label}}</Option>
             </Select>
             <div class="btns">
-                <Button @click="deleteAction(0)"><Icon type="trash-a" :class='icon'></Icon>清空线索</Button>
+                <Button @click="deleteAction(0)"><Icon type="trash-a"></Icon>清空线索</Button>
                 <Button @click="deleteAction(2)"><Icon type="trash-a"></Icon>批量删除</Button>
                 <Button @click="averageCustomer(0)" v-if="averageCustomerButton"><Icon type="android-person"></Icon>全部分配</Button>
                 <Button @click="averageCustomer(1)" v-if="averageCustomerButton"><Icon type="android-person"></Icon>分配线索</Button>
@@ -213,7 +213,7 @@
                         render: (h, params) => {
                             if(params.row.operator){
                                 return h('div',[
-                                    h('span', params.row.operator.name    ),
+                                    h('span', params.row.operator.name),
                                     h('span', '  ('+params.row.operator.number+')')
                                 ]);
                             }

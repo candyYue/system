@@ -20,7 +20,7 @@
             <a slot="close" @click="cancel"><Icon type="ios-close-empty"></Icon></a>
             <Form :label-width="110">
               <FormItem label="结果分类名称：">
-                 <Input v-for="item in newClassify" :key="item.key" v-model="item.name"/>
+                 <Input v-for="item in newClassify" :key="item.key" v-model="item.name"  @on-keyup="keyCode($event)"/>
                  <div @click="addinput" ><Icon type="ios-plus-outline" class="add-input-btn" v-if="addBtn"></Icon></div>
                  <!-- <Button shape="circle" icon="android-add" @click="addinput" class="add-input-btn" v-if="addBtn"></Button> -->
              </FormItem>
@@ -73,10 +73,17 @@
             }
         },
         methods: {
+            keyCode(ev){
+                var ev = ev || window.event;
+                if(ev.keyCode==13){
+                    this.classifyAction()
+                }
+            },
             cancel(){
               this.classifyModal=false
               this.newClassify=[{key:0,name:""}]
-              this.removebox=false
+              this.removebox=false;
+              this.tip=''
             },
             addinput(){
               console.log(1)
@@ -154,6 +161,10 @@
                 this.newClassify=[{key:this.select,name:this.category[index].cm_result}]
             },
             editcategroy(){
+                if (this.newClassify[0].name.trim()=='') {
+                      this.tip='请输入分类名称'
+                      return;
+                };
                 var that=this;
                 var config = {
                   rid:that.category[that.select].id,

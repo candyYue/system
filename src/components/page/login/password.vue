@@ -3,8 +3,9 @@
         <h1>输入密码</h1>
         <p>欢迎回来</p>
             <div class="password">
-                <img src="../../../../static/img/login/password.png" height="20" width="20" alt="">
+                
                 <Input v-model="pwd" placeholder="请输入密码" type="password" style="width: 300px"></Input>
+                <img src="../../../../static/img/login/password.png" height="20" width="20" alt="">
                 <span class="wrongPWD">{{wrongtip}}</span>
                 <a href="javascript:;" class="forgetpwd" @click="find">忘记密码?</a>
             </div>
@@ -17,6 +18,7 @@
 <script>
     import axios from 'axios';
     import qs from 'qs';
+    import {trim} from '../../../assets/common.js';
     export default {
         data: function(){
             return {
@@ -27,14 +29,18 @@
         },
         methods: {
             find(){
-                // this.$router.push("/findpassword")
                 this.$store.state.tel=false
                 this.$store.state.password=false
                 this.$store.state.company=false
                 this.$store.state.findpassword=true
             },
             login(){
+                if (this.pwd.trim()=='') {
+                    this.wrongtip='请输入密码'
+                    return false;
+                }
                 this.loading=true;
+                this.pwd=trim(this.pwd)
                 var r_this=this
                 axios.post('/account/user/Login', qs.stringify({
                     phone:window.localStorage.getItem("phone"),
@@ -56,6 +62,7 @@
                         
                         
                     }else if (res.status=='102001') {
+
                         r_this.$router.push("/summary") 
                         
                     }else{

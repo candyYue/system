@@ -42,7 +42,7 @@
         <div class="sidebar":class={smallsidebar:issmallsidebar}>
             <div class="logo"><p>云电销企业后台管理</p></div>
             <Col span="8">
-            <Menu theme="dark" width='230px'>
+            <Menu theme="dark">
                 <MenuItem name="1-0"><a href="javascript:;">菜单栏</a></MenuItem>
                 <Submenu name="1">
                     <template slot="title">
@@ -115,6 +115,7 @@
                 <Button type="info"  @click="confirmpwd">确认</Button>
             </div>
         </Modal>
+
         <!-- 过期提醒 -->
 
     </div>
@@ -176,7 +177,6 @@
             this.tablewidthlarge=(parseInt(this.ivuTablestyle.width)+180)+'px'
 
             
-            // console.log(this.$store.state.endday)
             if (0<this.$store.state.endday&&this.$store.state.endday<=30) {
                 this.instance()  //过期提醒
             }
@@ -187,7 +187,10 @@
                 const content = '<p>您的云电销将于'+this.$store.state.endday+'天后到期，为了不影响您的继续使用，请联系客户经理进行续费。</p>';
                 this.$Modal.warning({
                     title: title,
-                    content: content
+                    content: content,
+                    onOk: () => {
+                        this.$store.state.endday=0
+                    },
                 });
             },
             cancel(){
@@ -204,9 +207,8 @@
 
                 var logotext=document.querySelector('.logo p')
                 var tables=document.querySelectorAll('.ivu-table-wrapper table')
-
                 if (this.sidebarstyle.left=='0px') {
-                    logotext.innerText='云电销'
+                    logotext.innerText=''
                     for (var i = 0; i < tables.length-1; i++) {
                         tables[i].style.width=this.tablewidthlarge
                     };
@@ -214,18 +216,21 @@
                     logotext.innerText='云电销企业后台管理'
                     for (var i = 0; i < tables.length-1; i++) {
                         tables[i].style.width=this.tablewidthsmall
+                        
                     };
                 }
 
 
             },
             signOut(){
+                this.$store.state.endday=0
                 var that=this;
                 axios.get('/account/user/logout')
                 .then(function(response){
                     console.log(response.data);
                     if(response.data.status==0){
                         window.localStorage.clear();  //清除localstorage
+
                         that.$router.push("/login")
                     }
                 })
@@ -275,8 +280,6 @@
                         that.cancel()
                        
                         that.$store.state.firstlogin=false;
-                        // that.$router.push("/summary") 
-                        // window.location.reload();
                         Bus.$emit('renderSummary')
                     }else{
                         that.tip=response.data.info;
@@ -313,13 +316,14 @@
         border-bottom: 1px solid #ccc;
     }
     .logo{
+        height: 54px;
         line-height: 54px;
         width:230px;
         font-weight: 700;
         text-align: center;
         font-size: 16px;
         padding-left: 30px;
-        background: url(../../../static/img/smalllogo.png) no-repeat 30px center;
+        background: url(../../../static/img/smalllogo.png) no-repeat 25px center;
         background-color: #00b5ff;
         color: #fff;
     }
@@ -375,6 +379,7 @@
         background: url(../../../static/img/1.png) no-repeat 0 -69px;
     }
     .sidebar{
+        overflow: hidden;
         display: block;
         position: absolute;
         width: 230px;
@@ -390,7 +395,7 @@
         display: block;
         width: 100%;
         height: 100%;
-        padding: 14px 24px;
+        padding: 14px 21px;
         cursor: pointer;
     }
     .sidebar i{
@@ -410,7 +415,7 @@
         box-sizing: border-box;
         overflow-y: scroll;
     }
-    .smallsidebar{left: -180px;}
+    .smallsidebar{left: -180px}
     .bigcontent{left: 50px;}
     li>a{
         display: block;

@@ -2,8 +2,8 @@
 	<div>
     	<div class="item1">
     	    <ul>
-                <li class="start"><div>1</div>上传文档<span></span></li>
-    	        <li class="doing"><div>2</div>导入数据<span></span></li>
+                <li class="start done"><div>1</div>上传文档<span></span></li>
+    	        <li class="doing done"><div>2</div>导入数据<span></span></li>
     	        <li class="finish active"><div>3</div>导入完成</li>
     	    </ul>
     	    <Progress :percent="100" status="active"></Progress>

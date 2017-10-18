@@ -15,6 +15,7 @@
 
         watch: {
           '$route' (to, from) {
+                
                 var that=this
                 axios.get('/account/CallRecord/getCallRecord',{
                     params:{
@@ -23,11 +24,17 @@
                     }
                 })
                 .then(function (response) {
-                    // console.log(response)
+                    console.log(that.$store.state.endday)
+                    // if (0<that.$store.state.endday&&that.$store.state.endday<=30) {
+                    //     that.instance()  //过期提醒
+                    // }
+                    // 账号未登录
                     if (response.data.status=='102002') {
-                       window.location.hash="/login";
-                       return;
+                        that.$store.state.endday=0
+                        window.location.hash="/login";
+                        return;
                     };
+                    // 账号首次登录
                     if (response.data.status=='102005') {
                        that.$store.state.firstlogin=true;
                        return;
@@ -38,5 +45,19 @@
                 });
             }
         },
+
+        methods:{
+            // instance () {
+            //     const title = '过期提醒';
+            //     const content = '<p>您的云电销将于'+this.$store.state.endday+'天后到期，为了不影响您的继续使用，请联系客户经理进行续费。</p>';
+            //     this.$Modal.warning({
+            //         title: title,
+            //         content: content,
+            //         onOk: () => {
+            //             this.$store.state.endday=0
+            //         },
+            //     });
+            // },
+        }
     }
 </script>

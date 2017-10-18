@@ -16,8 +16,7 @@
                 </div>
                 <div>
                     <Input v-model="newpwd" placeholder="请输入8-16位密码" type="password"  style="width: 300px" class="newpwd" @on-focus="eyedisable" @on-blur='eyeable'></Input>
-                    <!-- <input placeholder="请输入6-16位密码" class="newpwd" v-model="newpwd"></input> -->
-                    <!-- <div class="pwdeye"></div> -->
+                    
                     <Icon :type="pwdeye" class='pwdeye'></Icon>
                 </div>
                 <div>
@@ -189,16 +188,10 @@
         background-color: #fff;
     }
     .pwdeye{
-        /* width: 32px; */
-        /* height: 32px; */
-        /* background:url(../../../../static/img/login/da.png) no-repeat center; */
         font-size: 18px;
-        color: #999;
+        color: #ccc;
         position: absolute;
         right: 90px;
         top: 2px;
     }
-    /* .newpwd:focus~.pwdeye{
-        background:url(../../../../static/img/login/mr.png) no-repeat center;
-    } */
 </style>

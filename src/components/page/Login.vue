@@ -42,7 +42,11 @@ import findpassword from './login/findpassword.vue'
             
         },
         mounted(){
-            // console.log(this.$store.state.phone)
+            //禁止页面后退
+            history.pushState(null, null, document.URL);
+            window.addEventListener('popstate', function () {
+                history.pushState(null, null, document.URL);
+            });
         }
     }
 </script>

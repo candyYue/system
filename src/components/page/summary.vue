@@ -3,9 +3,7 @@
         <h3>统计概况</h3>
         <div class="temp">
           <ul class="cate clearfix">
-              <li v-for="elem in catalog" :key="elem.key" :class="{'active' : elem.active}"
-                  @click="tabChange(elem)"
-              >{{elem.name}}</li>
+              <li v-for="elem in catalog" :key="elem.key" :class="{'active' : elem.active}" @click="tabChange(elem)">{{elem.name}}</li>
           </ul>
           <Statistic :type="type"></Statistic>
         </div>

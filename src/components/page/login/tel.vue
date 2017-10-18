@@ -3,8 +3,8 @@
         <h1>手机号登录</h1>
         <p>欢迎回来</p>
             <div class="phone">
-                <img src="../../../../static/img/login/cell.png" height="20" width="20" alt="">
                 <Input v-model="tel" placeholder="请输入手机号" style="width: 300px"></Input>
+                <img src="../../../../static/img/login/cell.png" height="20" width="20" alt="">
                 <span class="wrongTel">{{wrongTip}}</span>
             </div>
             <div class="login-btn">
@@ -17,6 +17,7 @@
     import {trim} from '../../../assets/common.js';
     import axios from 'axios';
     import qs from 'qs';
+    import Bus from '../../../../static/js/bus.js';
     export default {
         data: function(){
             return {
@@ -30,7 +31,7 @@
                     this.wrongTip='请输入手机号'
                     return false;
                 }else{
-                    this.tel=this.tel.trim()
+                    this.tel=trim(this.tel)
                     var r_this=this
                     axios.post('/account/user/getBelongEps',qs.stringify({phone:r_this.tel}))
                     .then(function(response){
@@ -81,10 +82,9 @@
                 });
                 }
                 
-            }
+            },
         },
         mounted(){
-            
         }
     }
 </script>
@@ -94,10 +94,7 @@
     .phone{
         position: relative;
     }
-    .phone input{
-        padding-left: 30px;
-        color: #000;
-    }
+    
     .wrongTel{
         position: absolute;
         top: 32px;

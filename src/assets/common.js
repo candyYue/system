@@ -28,14 +28,18 @@ const config = {
 }
 
 
-const DingConf = function(data){
-   console.log(1)
-}
+// const keyCode = function(ev){
+//     console.log(13)
+//     if(ev.keyCode==13){
+//         this.searchAction()
+//     }
+// }
 
+//去除所有空格
 const trim = function(s){
-    return s.replace(/(^\s*)|(\s*$)/g, "");
+    return s.replace(/\s+/g, "");
 }
 
 export { 
-  config,DingConf,trim
+  config,keyCode,trim
 }

@@ -320,7 +320,7 @@ export default {
         }
         return x
       }
-      return `${zero(base)}:00 - ${zero(base+1)}:59`
+      return `${zero(base)}:00 - ${zero(base)}:59`
     },
     exportdetail(){
       var downloadStatistic='/account/CallRecord/getStatistic?type=cc_day_callinout_statistic&searchType='+this.type+'&needExport='+this.type
@@ -383,7 +383,7 @@ export default {
 <style>
   #myChart{
   margin-top: -20px;
-}
+  }
   .overview{
     text-align: center;
   }
@@ -450,6 +450,4 @@ export default {
       margin-top: 20px;
       float: right;
   }
-
-
 </style>

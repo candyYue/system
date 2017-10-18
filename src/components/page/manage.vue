@@ -4,7 +4,7 @@
         <div class="temp">
         <div class="manage">
             <div class="handle handle2">
-                <Input v-model="sname" placeholder="搜索" class="sname" @on-keyup='osearch'></Input>
+                <Input v-model="sname" placeholder="搜索" class="sname" @on-keyup='searchAction'></Input>
                 <i></i>
                 <div class="fr">
                     <Button @click="seatAction" icon="plus">新建坐席</Button>
@@ -182,7 +182,7 @@
                     } 
                 })
             },
-            osearch(){
+            searchAction(){
                 this.page=1
                 var that=this
                 this.getallmember('/account/Operator/getAllmembers',{
@@ -250,26 +250,31 @@
                     this.tip="请输入坐席手机号"
                     return;
                 }
-                // if(this.newlistpwd.trim()=='') {
-                //     this.tip="请输入坐席登录密码"
-                //     return;
-                // }
+                
                 var that=this; 
                 var url=''
                 if (this.oid=='') {
-                    url='/account/Operator/addOperator'
-                } else {
-                    url='/account/Operator/modifyOperator'
-                }
-                axios.get(url,{
-                    params:{
+                    if(this.newlistpwd.trim()=='') {
+                        this.tip="请输入坐席登录密码"
+                        return;
+                    }
+                    var config={
                         name:that.newlistname,
                         number:that.newlistnumber,
                         phone:that.newlistmobile,
-                        pwd:that.newlistpwd,
-                        id:that.oid
-                        }
+                        pwd:that.newlistpwd
                     }
+                    url='/account/Operator/addOperator'
+                } else {
+                    url='/account/Operator/modifyOperator'
+                    var config={
+                        name:that.newlistname,
+                        number:that.newlistnumber,
+                        phone:that.newlistmobile,
+                        id:that.oid
+                    }
+                }
+                axios.get(url,{params:config}
                 )
                 .then(function(response){
                     console.log(response)
@@ -400,11 +405,6 @@
         color: #333;
         margin-right: 8px;
         transition: color .2s linear,background-color .2s linear,border .2s linear;
-    }
-    .page{
-        position: absolute;
-        right: 0;
-        bottom: -50px;
     }
     .ivu-btn{
         border-color: none;
