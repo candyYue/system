@@ -20,7 +20,7 @@
             <a slot="close" @click="cancel"><Icon type="ios-close-empty"></Icon></a>
             <Form :label-width="110">
               <FormItem label="结果分类名称：">
-                 <Input v-for="item in newClassify" :key="item.key" v-model="item.name"  @on-keyup="keyCode($event)"/>
+                 <Input v-for="item in newClassify" :key="item.key" v-model="item.name"  @on-enter='classifyAction'/>
                  <div @click="addinput" ><Icon type="ios-plus-outline" class="add-input-btn" v-if="addBtn"></Icon></div>
                  <!-- <Button shape="circle" icon="android-add" @click="addinput" class="add-input-btn" v-if="addBtn"></Button> -->
              </FormItem>
@@ -73,12 +73,6 @@
             }
         },
         methods: {
-            keyCode(ev){
-                var ev = ev || window.event;
-                if(ev.keyCode==13){
-                    this.classifyAction()
-                }
-            },
             cancel(){
               this.classifyModal=false
               this.newClassify=[{key:0,name:""}]

@@ -8,19 +8,19 @@
                     <span style="width: 300px"  class="tel">{{tel}}</span>
                 </div>
                 <div>
-                    <Input v-model="vcode" placeholder="请输入验证码" type="password"  style="width: 300px"></Input>
+                    <Input v-model="vcode" placeholder="请输入验证码" type="password"  style="width: 300px" @on-enter='check'></Input>
                     <Button  class="getvcode" @click="getvcode">
                       <span v-if="sendMsgDisabled">{{time+'秒后获取'}}</span>
                       <span v-if="!sendMsgDisabled">获取验证码</span>
                     </Button>
                 </div>
                 <div>
-                    <Input v-model="newpwd" placeholder="请输入8-16位密码" type="password"  style="width: 300px" class="newpwd" @on-focus="eyedisable" @on-blur='eyeable'></Input>
+                    <Input v-model="newpwd" placeholder="请输入8-16位密码" type="password"  style="width: 300px" class="newpwd" @on-focus="eyedisable" @on-blur='eyeable' @on-enter='check'></Input>
                     
                     <Icon :type="pwdeye" class='pwdeye'></Icon>
                 </div>
                 <div>
-                    <Input v-model="pwdagain" placeholder="请再次输入密码" type="password"  style="width: 300px"></Input>
+                    <Input v-model="pwdagain" placeholder="请再次输入密码" type="password"  style="width: 300px" @on-enter='check'></Input>
                 </div>
                 <span class="wrong">{{checkmsg}}</span>
             </div>

@@ -3,7 +3,7 @@
         <h1>手机号登录</h1>
         <p>欢迎回来</p>
             <div class="phone">
-                <Input v-model="tel" placeholder="请输入手机号" style="width: 300px"></Input>
+                <Input v-model="tel" placeholder="请输入手机号" style="width: 300px" @on-enter='next'></Input>
                 <img src="../../../../static/img/login/cell.png" height="20" width="20" alt="">
                 <span class="wrongTel">{{wrongTip}}</span>
             </div>

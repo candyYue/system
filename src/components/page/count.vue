@@ -11,7 +11,7 @@
                 <Button @click='searchdate'>搜索</Button>
             </div>
             <div class="fr">
-                <Input v-model="sname" placeholder="请输入姓名或号码进行模糊匹配" style="width: 280px" @on-keyup="keyCode($event)"></Input>
+                <Input v-model="sname" placeholder="请输入姓名或号码进行模糊匹配" style="width: 280px" @on-enter='searchAction'></Input>
                 <Button  class="searchicon" @click="searchAction">搜索</Button>  
                 <Button @click="exportData"><Icon :type="exporticon"></Icon>{{exportcsv}}</Button>
             </div>
@@ -83,12 +83,6 @@
             }
         },
         methods:{
-             keyCode(ev){
-                console.log(ev.keyCode)
-                if(ev.keyCode==13){
-                    this.searchAction()
-                }
-            },
             time(second_time){
                 var time = parseInt(second_time) + "秒";  
                 if( parseInt(second_time )> 60){  

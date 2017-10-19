@@ -13,7 +13,7 @@
                 <Button @click='searchdate'>搜索</Button>
             </div>
             <div class="fr">
-                <Input class='search searchinput' v-model="searchvalue" placeholder="请输入姓名或号码进行模糊匹配" style="width: 280px" @on-keyup="keyCode($event)"></Input>
+                <Input class='search searchinput' v-model="searchvalue" placeholder="请输入姓名或号码进行模糊匹配" style="width: 280px" @on-enter='searchAction'></Input>
                 <Button class='search' @click='searchAction'>搜索</Button>
             </div>   
         </div>
@@ -199,12 +199,6 @@
                 }  
   
             return time;
-            },
-            keyCode(ev){
-                console.log(ev.keyCode)
-                if(ev.keyCode==13){
-                    this.searchAction()
-                }
             },
             //所有
             getCallRecord(config){

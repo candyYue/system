@@ -73,13 +73,13 @@
                     <span class='changepwd'>修改密码</span>
                 </FormItem>
                 <FormItem label="原密码">
-                    <Input v-model="oldpwd"></Input>
+                    <Input v-model="oldpwd" @on-enter='confirmpwd'></Input>
                 </FormItem>
                 <FormItem label="新密码">
-                    <Input v-model="newpassword" type='password' placeholder='新密码为8-16位且须包含字母'></Input>
+                    <Input v-model="newpassword" type='password' placeholder='新密码为8-16位且须包含字母' @on-enter='confirmpwd'></Input>
                 </FormItem>
                 <FormItem label="确认密码">
-                    <Input v-model="passwordagain" type='password'></Input>
+                    <Input v-model="passwordagain" type='password' @on-enter='confirmpwd'></Input>
                     <span class="changetip">{{tip}}</span>
                 </FormItem>
             </Form>
@@ -101,13 +101,13 @@
                     <span class='changepwd'>修改密码</span>
                 </FormItem>
                 <FormItem label="原密码">
-                    <Input v-model="oldpwd"></Input>
+                    <Input v-model="oldpwd" @on-enter='confirmpwd'></Input>
                 </FormItem>
                 <FormItem label="新密码">
-                    <Input v-model="newpassword"  type='password'  placeholder='新密码为8-16位且须包含字母'></Input>
+                    <Input v-model="newpassword"  type='password'  placeholder='新密码为8-16位且须包含字母' @on-enter='confirmpwd'></Input>
                 </FormItem>
                 <FormItem label="确认密码">
-                    <Input v-model="passwordagain"  type='password'></Input>
+                    <Input v-model="passwordagain"  type='password' @on-enter='confirmpwd'></Input>
                     <span class="changetip">{{tip}}</span>
                 </FormItem>
             </Form>
@@ -501,7 +501,7 @@
         color: #999;
         position: absolute;
         left: -60px;
-        top: 28px;
+        top: 20px;
     }
     .changepwd:after{
         content: '';
@@ -529,9 +529,9 @@
     a:hover{
         color:#bfcbd9
     }
-    .ivu-form-item{
+    /* .ivu-form-item{
         margin-bottom: 24px
-    }
+    } */
     
     .sidebar i{
         display: inline-block;
