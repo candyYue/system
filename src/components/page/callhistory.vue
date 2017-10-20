@@ -225,6 +225,7 @@
                         that.total=response.data.data.total;
                         that.list=response.data.data.content 
                     }else{
+                        console.log(response.data.data)
                         that.$Message.warning(response.data.data);
                     }
                     that.spinShow = false;

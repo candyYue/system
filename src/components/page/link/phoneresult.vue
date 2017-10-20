@@ -18,7 +18,7 @@
         <transition enter-active-class="animated fadeIn">
           <Modal v-if="classifyModal" v-model="classifyModal" :title="classifyTitle" class="classify-modal" :mask-closable="false">
             <a slot="close" @click="cancel"><Icon type="ios-close-empty"></Icon></a>
-            <Form :label-width="110">
+            <Form :label-width="110" @submit.native.prevent>
               <FormItem label="结果分类名称：">
                  <Input v-for="item in newClassify" :key="item.key" v-model="item.name"  @on-enter='classifyAction'/>
                  <div @click="addinput" ><Icon type="ios-plus-outline" class="add-input-btn" v-if="addBtn"></Icon></div>
@@ -222,6 +222,10 @@
     .phoneresult p{
         margin: 5px 0 10px;
         cursor: pointer;
+        height: 21px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     .phoneresult img{
         width: 38px;

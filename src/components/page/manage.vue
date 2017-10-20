@@ -53,7 +53,7 @@
                     <span>删除提醒</span>
                 </p>
                 <div style="text-align:center">
-                    <p>删除后，线索将无法恢复。确定删除线索？</p>
+                    <p>删除后，坐席将无法恢复。确定删除坐席？</p>
                 </div>
                 <div slot="footer">
                     <Button type="info" @click="removesingle">确认</Button>
@@ -93,10 +93,10 @@
                 newlistnumber:"",
                 newlistmobile:"",
                 newlistpwd:'',
-                oid:'',
+                oid:0,
                 seattitle:'',
                 tip:"",
-                select:0,
+                // select:0,
                 // editseat:false,
                 deleteone:false,
                 seatbox:false,
@@ -166,7 +166,8 @@
                 clearInterval(this.$store.state.getper)
             },
             cancel(){
-                this.select=0
+                this.oid==0
+                // this.select=0
                 this.seatbox=false
                 this.deleteone=false
                 this.tip=''
@@ -222,7 +223,6 @@
             //切换页数
             changepage(index){
                 this.page=index;
-                console.log(this.page)
                 var that=this;
                 this.getallmember('/account/Operator/getAllmembers',{
                 params:{
@@ -232,6 +232,7 @@
                })
             },
             seatAction(){
+                this.oid=0
                 this.seatbox=true
                 this.seattitle='新建坐席'
                 this.tip=''
@@ -253,7 +254,7 @@
                 
                 var that=this; 
                 var url=''
-                if (this.oid=='') {
+                if (this.oid==0) {
                     if(this.newlistpwd.trim()=='') {
                         this.tip="请输入坐席登录密码"
                         return;
@@ -277,12 +278,13 @@
                 axios.get(url,{params:config}
                 )
                 .then(function(response){
-                    console.log(response)
                     if(response.data.status==0){ 
                         that.cancel()
-                        if(this.select){
+                        if(that.oid==0){
                             that.$Message.success('新建坐席成功');
                         }
+                        console.log(that.oid)
+                        that.page=1
                     }else{
                         that.tip=response.data.info
                         
@@ -294,21 +296,17 @@
                 
             },
             edit (row) {
-                console.log(row)
-                this.select=row._index;
+                // this.select=row._index;
                 this.seattitle = "编辑坐席"
-                
-                // this.editseat=true
                 this.newlistname=row.name
                 this.newlistnumber=row.number
                 this.newlistmobile=row.mobile
-                // this.newlistpwd=row.pwd
                 this.oid=row.id
                 this.seatbox=true
             },
             //删除
             remove (index,row) {
-                this.select=index;
+                // this.select=index;
                 this.deleteone=true
                 this.oid=row.id
             },

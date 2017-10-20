@@ -67,7 +67,7 @@
             <p slot="header">
                 <span>修改密码</span>
             </p>
-            <Form label-position="right" :label-width="80">
+            <Form label-position="right" :label-width="69">
                 <FormItem label="用户名">
                     <span>{{username}}</span>
                     <span class='changepwd'>修改密码</span>
@@ -80,8 +80,8 @@
                 </FormItem>
                 <FormItem label="确认密码">
                     <Input v-model="passwordagain" type='password' @on-enter='confirmpwd'></Input>
-                    <span class="changetip">{{tip}}</span>
                 </FormItem>
+                <div class="error"><p>{{tip}}</p></div>
             </Form>
             <div slot="footer">
                 <Button type="info"  @click="confirmpwd">确认</Button>
@@ -95,7 +95,7 @@
             <p slot="header">
                 <span>修改密码</span>
             </p>
-            <Form label-position="right" :label-width="80">
+            <Form label-position="right" :label-width="69">
                 <FormItem label="用户名">
                     <span>{{username}}</span>
                     <span class='changepwd'>修改密码</span>
@@ -108,8 +108,8 @@
                 </FormItem>
                 <FormItem label="确认密码">
                     <Input v-model="passwordagain"  type='password' @on-enter='confirmpwd'></Input>
-                    <span class="changetip">{{tip}}</span>
                 </FormItem>
+                <div class="error"><p>{{tip}}</p></div>
             </Form>
             <div slot="footer">
                 <Button type="info"  @click="confirmpwd">确认</Button>
@@ -514,14 +514,6 @@
         z-index:1;
         left:60px;
         opacity: .8
-    }
-    
-    .changetip{
-        position: absolute;
-        left: 0;
-        top: 35px;
-        color: #ff5e5e; 
-        line-height: 20px;
     }
     .ivu-btn{
         width: 80px;

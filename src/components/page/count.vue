@@ -236,9 +236,4 @@
         .ivu-btn .ivu-icon{
             color: #fff
         }
-        .page{
-            position: absolute;
-            right: 0px;
-        }
-
 </style>
