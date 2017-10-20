@@ -4,19 +4,19 @@
         <div class="temp">
         <div class="manage">
             <div class="handle handle2">
-                <Input v-model="sname" placeholder="搜索" class="sname" @on-keyup='searchAction'></Input>
-                <i></i>
+                <Input v-model="sname" placeholder="搜索" class="sname" @on-keyup='searchAction' style="width: 196px" icon="ios-search-strong"></Input>
+                <!-- <i class='searchicon_small'></i> -->
                 <div class="fr">
-                    <Button @click="seatAction" icon="plus">新建坐席</Button>
+                    <Button @click="seatAction"><Icon type="plus"></Icon>新建坐席</Button>
                     <Button type="info" @click="$store.state.importseat=true"><Icon type="forward"></Icon>批量导入</Button>
                 </div>
             </div>
             <div class="tableContent">
                 <Table   :columns="columns7" :data="$store.state.seatlist" size="small"></Table>
                             <!-- 分页 -->
-                <div class="page">
+               <!--  <div class="page">
                     <Page :total="$store.state.seattotal" :page-size="pagesize" show-sizer @on-page-size-change="changepagesize" @on-change="changepage" :page-size-opts="[20, 50, 100]"></Page>
-                </div>
+                </div> -->
             </div>    
         </div>
         <!-- 新建坐席 -->
@@ -353,26 +353,13 @@
         }
     }
 </script>
-<style>
-    .handle2 .ivu-input-icon+.ivu-input{
-    padding-left: 30px
-}
-</style>
+
 <style scoped>
 
     .handle{
         margin-bottom: 20px;
         overflow: hidden;
         position: relative;
-    }
-    .handle>i{
-        position: absolute;
-        left: 8px; 
-        top: 10px;
-        width: 15px;
-        height: 15px;
-        background: url(../../../static/img/2.png) no-repeat 0-30px ;
-        z-index: 99
     }
     .handle .ivu-input-icon{
         position: absolute;
@@ -381,9 +368,6 @@
     .sname{
         width: 250px;
         height: 34px;
-    }
-    .fr{
-        float: right;
     }
     .handle button{
         height: 34px;

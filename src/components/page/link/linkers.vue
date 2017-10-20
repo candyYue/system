@@ -30,7 +30,7 @@
 
         <!-- 客服弹框  start -->
         <transition enter-active-class="animated fadeIn">
-          <Modal v-model="customerModal" v-if="customerModal" :title="customerTitle" width="615" :mask-closable="false" :loading="true">
+          <Modal v-model="customerModal" v-if="customerModal" :title="customerTitle" width="615" :mask-closable="false" :loading="true" class-name='handle2'>
             <a slot="close" @click="averageAllCancel"><i class="ivu-icon ivu-icon-ios-close-empty"></i></a>
             <Transfer :data="seatlist"
                       :target-keys="targetKeys"
@@ -77,10 +77,10 @@
                     </Select>
                 </FormItem>
                 <FormItem label="公司名称">
-                   <Input v-model="clientCompany" ></Input>
+                   <Input v-model="clientCompany"></Input>
                 </FormItem>
                 <FormItem label="公司地址">
-                   <Input v-model="clientAddress" ></Input>
+                   <Input v-model="clientAddress"></Input>
                 </FormItem>
               </Form>
 
@@ -108,7 +108,7 @@
             <!-- 表单 -->
             <Table :columns="columns7" :data="$store.state.clientlist" @on-selection-change="tableselect" size="small" ref="selection"></Table>
             <!-- 分页 -->
-            <div class="page clearfix">
+            <div class="page clearfix pageleft">
                 <Page :total="$store.state.clienttotal" :current="page" :page-size="pagesize" show-sizer @on-page-size-change="changepagesize" :page-size-opts="[20, 50, 100]"  @on-change="changepage"></Page>
             </div>    
         </div>
@@ -673,6 +673,7 @@
 }
 </style>
 <style scoped>
+
     .spin{
       position: absolute;
       left: 0;

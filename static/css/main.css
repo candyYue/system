@@ -3,6 +3,31 @@ html,body,#app,.wrapper{
     height:100%;
     overflow: hidden;
 }
+h3{
+    font-size: 18px;
+    line-height: 50px;
+    padding-left: 36px;
+    font-weight: 500;
+    box-shadow: 0 2px 15px #ececec
+}
+.temp{
+    margin: 40px 28px 80px 36px
+}
+.temp>div{
+    position: relative;
+}
+.fl{
+    position: relative;
+    float: left;
+    }
+.fr{
+    position: relative;
+    float: right;
+}
+
+.handle2 .ivu-input-icon+.ivu-input{
+    padding-left: 30px
+}
 .clearfix:before,.clearfix:after {
     content: "";
     display: block;
@@ -12,16 +37,32 @@ html,body,#app,.wrapper{
     zoom: 1;
 }
 
-/* .temp{
-    margin-left: 36px;
-    margin-right: 28px;
-    padding-bottom: 80px;
-} */
- 
+/* input */
+.ivu-input{
+    height: 34px
+}
+.handle2 .ivu-input-icon{
+    left: 0;
+    top: 2px;
+}
+/* button */
+.ivu-btn{
+    font-size: 14px
+}
+.ivu-btn + .ivu-btn{
+  margin-left: 8px;
+  font-size: 14px
+}
+
+/* 下拉选择框 */
 .linker-modal .ivu-select-dropdown{
   position: absolute !important;
 }
 /* modal */
+/* 修改密码头部 */
+.ivu-modal-header span{
+    font-size: 18px
+}
 .ivu-modal-header .ivu-modal-header-inner{
   font-size: 18px;
   font-weight: normal;
@@ -46,11 +87,51 @@ html,body,#app,.wrapper{
 .ivu-modal-wrap{
   height: 100%;
 }
-
-/* icon */
-.ivu-icon-ios-compose-outline,.ivu-icon-ios-trash-outline{
-  font-size: 18px;
+/* sidebar */
+.ivu-menu-dark{
+    background-color: #222c3e;
 }
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu){
+    color: #363e4f;
+    border-right: none;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active:hover{
+    background-color: #3a4f72!important;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active[data-v-0cbe70e4]:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active[data-v-0cbe70e4]:not(.ivu-menu-submenu){
+    background-color: #3a4f72;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened .ivu-menu-submenu-title{
+    background-color: #222c3e;
+}
+.ivu-menu-vertical .ivu-menu-item, .ivu-menu-vertical .ivu-menu-submenu-title{
+    background-color: #222c3e;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu):hover, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu):hover{
+    background-color: #3a4f72!important;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item:hover{
+    background-color: #283956!important;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item:hover, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title:hover{
+    background-color: #283956;
+}
+
+
+/* table */
+.ivu-table th{
+    background-color: #fafafb;
+}
+.ivu-table:after,.ivu-table:before{
+    z-index: 0
+}
+.ivu-table-fixed, .ivu-table-fixed-right{
+    z-index: 0
+}
+.ivu-table-small th{
+    height: 40px;
+}
+
 /* 报错 */
 .error p{
     /*position: absolute;*/
@@ -69,40 +150,39 @@ html,body,#app,.wrapper{
 .ivu-form-item + .ivu-form-item{
   margin-top: 12px;
 }
-.ivu-select-dropdown{
-}
+
+/* icon */
 button .ivu-icon{
   margin-right: 8px;
 }
 .ivu-icon{
-    
     vertical-align: middle;
 }
-
-.ivu-btn + .ivu-btn{
-  margin-left: 8px;
-  font-size: 14px
+.ivu-icon-ios-compose-outline,.ivu-icon-ios-trash-outline{
+  font-size: 18px;
 }
-
 
 .ivu-transfer-operation .ivu-btn + .ivu-btn{
   margin-left: 0;
 }
 
-/* h3{
-    font-size: 18px;
-    line-height: 50px;
-    font-weight: 500;
-} */
-
 .tableContent{
     position: relative;
     /* width: 1626px; */
 }
+/* page */
 .page{
     margin-top: 15px;
 }
+.ivu-page-options-sizer{
+    margin-right: 0
+}
 
+.pageleft .ivu-page-options{
+  position: absolute;
+  left: 0px;
+  margin-left: 0; 
+}
 /* 年月日表单 */
 .temp2{
     margin-top: 20px;
@@ -111,6 +191,7 @@ button .ivu-icon{
     margin-top: 20px;
     float: left;
 }
+/* page */
 .page{
     /* float: right; */
     height: 40px;
@@ -135,7 +216,7 @@ button .ivu-icon{
   background-color: rgba(255,255,255,.6);
 }
 
-/* 图标 */
+/* 自定义图标 */
 .ivu-icon-trash-a:before,.ivu-icon-android-person:before, 
 .ivu-icon-plus:before,.ivu-icon-reply:before,.ivu-icon-forward:before{
     content: "";
@@ -162,7 +243,14 @@ button .ivu-icon{
 .ivu-icon-forward:before {
     background-position: 0 -20px;
 }
- 
+.ivu-icon-ios-calendar-outline:before{
+    content: "";
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    background: url(../img/5.png) no-repeat 0 -6px;
+    transition: all .2s linear;
+}
 
 .ivu-btn:hover .ivu-icon-trash-a:before,.ivu-btn:hover .ivu-icon-android-person:before, 
 .ivu-btn:hover .ivu-icon-plus:before{

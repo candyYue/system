@@ -2,7 +2,7 @@
 <div>
     <h3>通话记录</h3>
     <div class="temp">
-        <div class="clearfix handle">
+        <div class="clearfix handle handle2">
             <div class="fl">
                 <Select class="select" @on-change="catselect" >
                     <Option v-for="item in category" :value="item.id"  :key="item.id">{{item.cm_result}}</Option>
@@ -13,7 +13,8 @@
                 <Button @click='searchdate'>搜索</Button>
             </div>
             <div class="fr">
-                <Input class='search searchinput' v-model="searchvalue" placeholder="请输入姓名或号码进行模糊匹配" style="width: 280px" @on-enter='searchAction'></Input>
+                <Input class='search searchinput' v-model="searchvalue" placeholder="请输入姓名或号码进行模糊匹配" style="width: 280px" @on-enter='searchAction' icon="ios-search-strong"></Input>
+                <!-- <i class='searchicon_small'></i> -->
                 <Button class='search' @click='searchAction'>搜索</Button>
             </div>   
         </div>
@@ -21,9 +22,9 @@
         <div  class="tableContent">
             <Table :columns="columns1" :data="list"  size="small"></Table>
 
-            <div class="page">
+            <!-- <div class="page">
                 <Page :total="total" :page-size="pagesize" show-sizer :page-size-opts="[20, 50, 100]" @on-page-size-change="changepagesize" @on-change="changepage"></Page>
-            </div>
+            </div> -->
             <div class="spin" v-if="spinShow">
                 <Spin size="large" fix></Spin>
             </div>

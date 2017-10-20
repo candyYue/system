@@ -3,7 +3,7 @@
         <h3>坐席统计</h3>
         <div class="temp">
         <!-- 选择日期 -->
-        <div class="time clearfix">
+        <div class="time clearfix handle2">
             <div class="fl">
                 <DatePicker type="date" placeholder="选择日期" @on-change='startT'></DatePicker>
                  至
@@ -11,16 +11,17 @@
                 <Button @click='searchdate'>搜索</Button>
             </div>
             <div class="fr">
-                <Input v-model="sname" placeholder="请输入姓名或号码进行模糊匹配" style="width: 280px" @on-enter='searchAction'></Input>
+                <Input v-model="sname" placeholder="请输入姓名或号码进行模糊匹配" style="width: 280px" @on-enter='searchAction' icon="ios-search-strong"></Input>
+                <!-- <i class='searchicon_small'></i> -->
                 <Button  class="searchicon" @click="searchAction">搜索</Button>  
-                <Button @click="exportData"><Icon :type="exporticon"></Icon>{{exportcsv}}</Button>
+                <Button @click="exportData"><Icon :type="exporticon"></Icon>导出</Button>
             </div>
         </div>
         <!-- 坐席管理 -->
         <div class="tableContent">
             <Table :columns="columns" border :data="list" ref="table"  size="small"></Table>
             
-            <div class="page">
+            <div class="page pageleft clearfix">
                 <Page :total="total" :page-size="pagesize" show-sizer :page-size-opts="[20, 50, 100]" @on-page-size-change="changepagesize" @on-change="changepage"></Page>
             </div>
         </div>
@@ -37,7 +38,6 @@
             return {
                 ExportOperatorhashcode:'',
                 tableheight:0,
-                exportcsv:'全部导出',
                 exporticon:'reply',
                 start_time:'',
                 end_time:'',
@@ -79,7 +79,9 @@
                         }
                     }
                 ],
-                list: []
+                list: [],
+                data1:0,
+                data2:0
             }
         },
         methods:{
@@ -111,12 +113,21 @@
             //日期搜索
             startT(a){
                 this.start_time=a
+                this.date1 = new Date(Date.parse(a.replace(/-/g, "/")));
+                this.date1 = this.date1.getTime(); 
+                console.log(this.date1)
             },
             endT(b){
                 this.end_time=b
+                this.date2 = new Date(Date.parse(b.replace(/-/g, "/")));
+                this.date2 = this.date2.getTime(); 
+                console.log(this.date2)
             },
             searchdate(){
-
+                if (this.date2-this.date1<0) {
+                    this.$Message.warning('开始时间不能高于结束时间');
+                    return;
+                };
                 this.page=1
                 var that=this
 
@@ -219,14 +230,6 @@
         }
         .fl div{
             display: inline-block;
-        }
-        .fr>i{
-            position: absolute;
-            left: 7px; 
-            top: 10px;
-            width: 15px;
-            height: 15px;
-            background: url(../../../static/img/2.png) no-repeat 0-30px ;
         }
         /* 导出按钮 */
         .ivu-btn{

@@ -42,7 +42,7 @@
         <div class="sidebar":class={smallsidebar:issmallsidebar}>
             <div class="logo"><p>云电销企业后台管理</p></div>
             <Col span="8">
-            <Menu theme="dark">
+            <Menu theme="dark" width='230px'>
                 <MenuItem name="1-0"><a href="javascript:;">菜单栏</a></MenuItem>
                 <Submenu name="1">
                     <template slot="title">

@@ -15,9 +15,10 @@
                     </Button>
                 </div>
                 <div>
-                    <Input v-model="newpwd" placeholder="请输入8-16位密码" type="password"  style="width: 300px" class="newpwd" @on-focus="eyedisable" @on-blur='eyeable' @on-enter='check'></Input>
+                    <Input v-model="newpwd" placeholder="请输入8-16位密码" type="password"  style="width: 300px" class="newpwd" @on-focus="pwdeye=false" @on-blur='pwdeye=true' @on-enter='check'></Input>
                     
-                    <Icon :type="pwdeye" class='pwdeye'></Icon>
+                    <Icon type="eye" class='pwdeye' v-if='pwdeye' ></Icon>
+                    <Icon type="eye-disabled" class='pwdeye' v-if='!pwdeye'></Icon>
                 </div>
                 <div>
                     <Input v-model="pwdagain" placeholder="请再次输入密码" type="password"  style="width: 300px" @on-enter='check'></Input>
@@ -36,6 +37,7 @@
     export default {
         data: function(){
             return {
+                password:'password',
                 tel:'',
                 newpwd:"",
                 pwdagain:"",
@@ -43,30 +45,33 @@
                 checkmsg:"",
                 time:60,
                 sendMsgDisabled:false,
-                pwdeye:'eye',
-                loading:false,
-                // <Icon type="eye-disabled"></Icon>
+                pwdeye:true,
+                loading:false
             }
         },
         methods: {
+            a(){ 
+                this.password='text'
+            },
             check(){
-                var that=this
+                if (this.vcode=='') {
+                    this.checkmsg="请输入验证码";
+                    return
+                }
+                if(this.newpwd.trim()==""){
+                    this.checkmsg="请输入新密码";
+                    return
+                }
+                if(this.pwdagain.trim()==""){
+                    this.checkmsg="请再次输入密码";
+                    return
+                }
                 if (this.newpwd!=this.pwdagain) {
                     this.checkmsg="密码输入不一致";
                     return
                 }
-                if(this.newpwd.trim()==""||this.pwdagain.trim()==""){
-                    this.checkmsg="输入不能为空";
-                    return
-                }
                 this.loginvcode()
 
-            },
-            eyedisable(){
-                this.pwdeye='eye-disabled'
-            },
-            eyeable(){
-                this.pwdeye='eye'
             },
             loginvcode(){
                 this.loading=true;
@@ -180,7 +185,7 @@
     }
     .getvcode{
         position: absolute;
-        right: 85px;
+        right: 83px;
         bottom: 1px;
         font-size: 14px;
         color: #03a9f4;
